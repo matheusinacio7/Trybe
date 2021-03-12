@@ -1,0 +1,8 @@
+Internet
+Unix
+Bash
+React
+Node
+Express
+MongoDB
+Puppeteer
