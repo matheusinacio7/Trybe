@@ -1,0 +1,38 @@
+h1 {
+  font-size: 65px;
+  color: orange;
+  font-family: sans-serif;
+  font-style: italic;
+}
+
+ul {
+  background-color: blue;
+  text-align: center;
+}
+
+p {
+  font-weight: 600;
+  font-size: 3em;
+  text-decoration: underline;
+}
+
+.green {
+  color: green;
+  line-height: 1.5;
+}
+
+li {
+  background-color: grey;
+}
+
+
+
+
+// <!-- Exercícios
+// 1 - Modifique o família do h1 para sans-serif
+// 2 - Deixe o parágrafo com o font-weight 600
+// 3 - Modifique o font-size do body para 16px
+// 4 - Coloque o tamanho do parágrafo com o tamanho de 3 vezes o padrão do body
+// 5 - Explore as propriedades font-style, line-height, text-align e text-decoration
+// 6 - Troque a cor de fundo de cada item da lista para a cor correspondente ao texto
+// -->
