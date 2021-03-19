@@ -1,0 +1,33 @@
+body div:first-of-type {
+  background-color: #924C92;
+  border: 5px solid transparent;
+  font-style: italic;
+}
+
+body div:nth-of-type(2) {
+  background-color: #725598;
+  border: 5px solid transparent;
+}
+
+body div:nth-of-type(3) {
+  background-color: #C7D970;
+  border: 5px solid transparent;
+  font-style: italic;
+  height: 80px;
+}
+
+body div:nth-of-type(4) {
+  background-color: #361E56;
+  border: 5px solid transparent;
+  color:white;
+}
+
+body div:nth-of-type(5) {
+  background-color: #D79AD7;
+  border: 5px solid transparent;
+  font-style: italic;
+}
+
+body div:hover {
+  border: 5px solid #C86885;
+}
