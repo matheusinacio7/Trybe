@@ -1,0 +1,161 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto Slab', serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-image: linear-gradient(to bottom right, #DC2424, #3F53C9);
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  text-align: center;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 40px;
+}
+
+nav ul a {
+  color: white;
+  transition: color 200ms;
+}
+
+nav ul li:hover a {
+  color: #3F53C9;
+}
+
+.hero__banner {
+  height: 640px;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.hero__banner--title {
+  padding: 36px 0;
+}
+
+.hero__banner--image {
+  width: 100%;
+}
+
+.hero__banner h1 {
+  font-size: 48px;
+}
+
+main {
+  max-width: 800px;
+  margin: 36px auto;
+}
+
+main a,
+footer a {
+  color: #DC2424;
+  transition: color 200ms;
+}
+
+main a:hover,
+footer a:hover {
+  color: #3F53C9;
+}
+
+body > aside {
+  float: right;
+  width: 360px;
+  margin-top: 36px;
+  margin-right: 36px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 36px;
+  text-align: center;
+}
+
+aside h1 {
+  font-size: 20px;
+}
+
+aside iframe {
+  width: 100%;
+  margin: 24px 0;
+}
+
+article section {
+  margin: 24px 0;
+  padding: 36px;
+  line-height: 1.7;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+article section h1 {
+  font-size: 36px;
+  text-align: center;
+  line-height: 1.3;
+  margin-bottom: 36px;
+}
+
+article section * {
+  margin-bottom: 12px;
+}
+
+article section img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+section aside {
+  float:left;
+  margin-right: 24px;
+  border: 1px solid black;
+  padding: 12px;
+}
+
+aside table tr {
+  border: 1px solid black;
+}
+
+aside table td {
+  width: 120px;
+}
+
+aside table tr td:first-child {
+  font-style: italic;
+}
+
+aside table caption {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+footer {
+  clear: both;
+  margin: auto;
+  max-width: 800px;
+  text-align: center;
+  margin-bottom: 36px;
+  color: white;
+  background-color: rgba(0,0,0,0.7);
+}
+
+footer p {
+  margin: auto;
+  padding: 16px 0;
+}
