@@ -28,6 +28,11 @@ header {
   text-align: center;
 }
 
+nav ul li {
+  display: inline-block;
+  margin-right: 40px;
+}
+
 .hero__banner {
   background-image: url('./img/hero.webp');
   background-size: cover;
@@ -133,13 +138,10 @@ footer {
   text-align: center;
   margin-bottom: 36px;
   color: white;
+  background-color: rgba(0,0,0,0.7);
 }
 
-nav ul li {
-  display: inline-block;
-  margin-right: 40px;
-}
-
-img {
-  width: 300px;
+footer p {
+  margin: auto;
+  padding: 16px 0;
 }
