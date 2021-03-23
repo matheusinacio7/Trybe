@@ -1,0 +1,3 @@
+[submodule "projects/bloco-03-lessons-learned"]
+	path = projects/bloco-03-lessons-learned
+	url = git@github.com:tryber/sd-011-project-lessons-learned.git
