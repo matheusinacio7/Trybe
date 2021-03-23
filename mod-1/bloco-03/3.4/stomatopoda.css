@@ -8,7 +8,7 @@ body {
   font-family: 'Roboto Slab', serif;
   line-height: 1.5;
   font-weight: 400;
-  background-image: linear-gradient(to bottom right, #DC2424, #4A569D);
+  background-image: linear-gradient(to bottom right, #DC2424, #3F53C9);
 }
 
 h1, h2, h3,
@@ -23,8 +23,6 @@ a {
 }
 
 header {
-  background: #00416a;
-  background: linear-gradient(to right, #00416A, #799F0C, #FFE000);
   text-align: center;
 }
 
@@ -33,18 +31,28 @@ nav ul li {
   margin-right: 40px;
 }
 
+nav ul a {
+  color: white;
+  transition: color 200ms;
+}
+
+nav ul li:hover a {
+  color: #3F53C9;
+}
+
 .hero__banner {
-  background-image: url('./img/hero.webp');
-  background-size: cover;
-  height: 500px;
+  height: 640px;
   text-align: center;
   color: white;
+  overflow: hidden;
 }
 
 .hero__banner--title {
-  background-color: rgba(0, 0, 0, 0.7);
-  background: linear-gradient(to right, rgba(0, 65, 106, 0.6), rgba(121, 159, 12, 0.6), rgba(255, 224, 0, 0.6));
-  padding-bottom: 16px;
+  padding: 36px 0;
+}
+
+.hero__banner--image {
+  width: 100%;
 }
 
 .hero__banner h1 {
@@ -59,6 +67,12 @@ main {
 main a,
 footer a {
   color: #DC2424;
+  transition: color 200ms;
+}
+
+main a:hover,
+footer a:hover {
+  color: #3F53C9;
 }
 
 body > aside {
