@@ -1,6 +1,6 @@
 
-// codigo mostrado
-// 
+// // codigo mostrado
+
 // let numbers = [5, 9, 3, 19, 70, 8, 100, 2, 35, 27];
 
 // for (let index = 1; index < numbers.length; index += 1) {
@@ -14,7 +14,6 @@
 // }
 
 // console.log(numbers);
-
 
 // exercicio 1
 
@@ -58,6 +57,6 @@ for(let i = 0; i < numbers.length - 1; i++) {
   multipliedNumbers.push(numbers[i] * numbers[i + 1]);
 }
 
-multipliedNumbers.push(numbers[numbers.length - 1]);
+multipliedNumbers.push(numbers[numbers.length - 1] * 2);
 
 console.log(multipliedNumbers);
