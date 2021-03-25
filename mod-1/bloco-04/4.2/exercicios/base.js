@@ -27,7 +27,7 @@ if(average > 20) {
 // exercicio 5
 let highest = Number.MAX_SAFE_INTEGER * -1;
 for (let number of numbers) {
-  if(number > highest) {
+  if (number > highest) {
     highest = number;
   }
 }
@@ -36,7 +36,7 @@ console.log(highest);
 // exercicio 6
 let odds = [];
 for (let number of numbers) {
-  if(number % 2 === 1) {
+  if (number % 2 === 1) {
     odds.push(number);
   }
 }
