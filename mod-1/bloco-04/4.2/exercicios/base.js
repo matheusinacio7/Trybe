@@ -56,3 +56,15 @@ for (let number of numbers) {
 }
 
 console.log(lowest);
+
+// exercicio 8
+let upTo25 = [];
+for (let i = 1; i <= 25; i++) {
+  upTo25.push(i);
+}
+console.log(upTo25);
+
+// exercicio 9
+for(let number of upTo25) {
+  console.log(number / 2);
+}
