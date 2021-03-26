@@ -30,6 +30,7 @@ let isPrime = true;
 for(let d = 2; d < numberToCheck; d++) {
   if(numberToCheck % d === 0) {
     isPrime = false;
+    break;
   }
 }
 
