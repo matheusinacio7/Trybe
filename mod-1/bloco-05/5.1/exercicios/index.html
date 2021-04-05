@@ -69,6 +69,16 @@
 
       upcaseParagraph();
 
+      function logAllTextFromParagraphs() {
+        let paragraphs = document.getElementsByTagName('p');
+
+        for (let p of paragraphs) {
+          console.log(p.innerText);
+        }
+      }
+
+      logAllTextFromParagraphs();
+
 
         /*
         Aqui você vai modificar os elementos já existentes utilizando apenas as funções:
