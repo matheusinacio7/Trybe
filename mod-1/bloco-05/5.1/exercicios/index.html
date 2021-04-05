@@ -45,13 +45,17 @@
 
       changeMainText("Daqui a 2 anos vou estar trabalhando como web dev para empresas gringas, ganhando em dólares, e estudando sobre game dev.");
 
-      function changeSideColor(rgbColorString) {
-        console.log(document.getElementsByClassName('main-content')[0]);
-
-        document.getElementsByClassName('main-content')[0].style.backgroundColor = rgbColorString;
+      function changeSideColor(colorString) {
+        document.getElementsByClassName('main-content')[0].style.backgroundColor = colorString;
       }
 
       changeSideColor("rgb(76, 164, 109)");
+
+      function changeMainColor(colorString) {
+        document.getElementsByClassName('center-content')[0].style.backgroundColor = colorString;
+      }
+
+      changeMainColor('white');
 
 
         /*
