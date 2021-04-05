@@ -39,7 +39,12 @@
       </div>
     </div>
     <script>
-      document.getElementsByTagName('p')[0].innerText = "Daqui a 2 anos vou estar trabalhando como web dev para empresas gringas, ganhando em dólares, e estudando sobre game dev.";
+      function changeMainText(text) {
+        document.getElementsByTagName('p')[0].innerText = text;
+      }
+
+      changeMainText("Daqui a 2 anos vou estar trabalhando como web dev para empresas gringas, ganhando em dólares, e estudando sobre game dev.");
+
 
         /*
         Aqui você vai modificar os elementos já existentes utilizando apenas as funções:
