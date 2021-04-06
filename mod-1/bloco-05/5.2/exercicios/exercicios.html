@@ -88,6 +88,33 @@
       rightContent.className = 'right-content';
       mainContent.appendChild(rightContent);
 
+      leftContent.insertAdjacentHTML('beforeend',
+      `<img src="https://picsum.photos/200" class="small-image">`
+      );
+
+      rightContent.insertAdjacentHTML('beforeend', 
+      `<ul>
+        <li>Um</li>
+        <li>Dois</li>
+        <li>Três</li>
+        <li>Quatro</li>
+        <li>Cinco</li>
+        <li>Seis</li>
+        <li>Sete</li>
+        <li>Oito</li>
+        <li>Nove</li>
+        <li>Dez</li>
+      </ul>`
+      );
+
+      let thirdHeaders = ['Primeiro', 'Segundo', 'Terceiro'];
+
+      for (let header of thirdHeaders) {
+        let headerElement = document.createElement('h3');
+        headerElement.innerText = header;
+        mainContent.appendChild(headerElement);
+      }
+
     </script>
   </body>
 </html>
