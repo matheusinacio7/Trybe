@@ -72,6 +72,22 @@
       centerContent.className = 'center-contet';
       mainContent.appendChild(centerContent);
 
+      centerContent.insertAdjacentHTML('beforeend', 
+      `<p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda id saepe sunt quisquam voluptatem ut perferendis libero ratione nihil dolorum culpa, praesentium quia corporis doloribus deserunt rerum voluptates molestias est.
+        Modi eum, dicta recusandae a optio molestiae aliquam dolore autem aperiam assumenda similique eos fugiat cupiditate adipisci rem. Ipsum ad omnis dicta laborum cum eligendi a vitae ea sed voluptatibus.
+        Numquam cupiditate exercitationem ullam, hic nam doloribus reiciendis nesciunt? Sapiente, eius suscipit. Ad doloremque veniam labore nihil facilis est perferendis sequi minus reiciendis, dignissimos assumenda alias quae iure. Voluptatum, laborum.
+      </p>`
+      );
+
+      let leftContent = document.createElement('div');
+      leftContent.className = 'left-content';
+      mainContent.appendChild(leftContent);
+
+      let rightContent = document.createElement('div');
+      rightContent.className = 'right-content';
+      mainContent.appendChild(rightContent);
+
     </script>
   </body>
 </html>
