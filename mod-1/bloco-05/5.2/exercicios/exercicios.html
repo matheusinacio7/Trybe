@@ -92,9 +92,11 @@
       `<img src="https://picsum.photos/200" class="small-image">`
       );
 
-      rightContent.insertAdjacentHTML('beforeend', 
-      `<ul>
-        <li>Um</li>
+      let numberListElement = document.createElement('ul');
+      rightContent.appendChild(numberListElement);
+
+      numberListElement.insertAdjacentHTML('beforeend', 
+      `<li>Um</li>
         <li>Dois</li>
         <li>Três</li>
         <li>Quatro</li>
@@ -103,8 +105,7 @@
         <li>Sete</li>
         <li>Oito</li>
         <li>Nove</li>
-        <li>Dez</li>
-      </ul>`
+        <li>Dez</li>`
       );
 
       let thirdHeaders = ['Primeiro', 'Segundo', 'Terceiro'];
@@ -126,6 +127,17 @@
       mainContent.removeChild(leftContent);
 
       rightContent.style.marginRight = 'auto';
+
+      mainContent.style.backgroundColor = 'green';
+
+      let listElements = [...numberListElement.children];
+      console.log(listElements);
+
+      for (let i = 1; i < 3; i++) {
+        let currentChild = listElements[listElements.length - i];
+        console.log(currentChild);
+        currentChild.remove();
+      }
 
     </script>
   </body>
