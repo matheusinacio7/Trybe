@@ -60,9 +60,9 @@
       // O insertAdjacentHTML é uma maneira de adicionar o HTML diretamente através do JavaScript
       //  https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
 
-      document.body.insertAdjacentHTML('beforeend',
-      `<h1>Exercicio 5.2 - JavaScript DOM</h1>`
-      );
+      let firstHeader = document.createElement('h1');
+      firstHeader.innerText = 'Exercicio 5.2 - JavaScript DOM';
+      document.body.appendChild(firstHeader);
 
       let mainContent = document.createElement('div');
       mainContent.className = 'main-content';
@@ -108,11 +108,19 @@
       );
 
       let thirdHeaders = ['Primeiro', 'Segundo', 'Terceiro'];
+      let thirdHeaderElements = [];
 
       for (let header of thirdHeaders) {
         let headerElement = document.createElement('h3');
         headerElement.innerText = header;
         mainContent.appendChild(headerElement);
+        thirdHeaderElements.push(headerElement);
+      }
+
+      firstHeader.className = 'title';
+
+      for (let headerElement of thirdHeaderElements) {
+        headerElement.className = 'description';
       }
 
     </script>
