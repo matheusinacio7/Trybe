@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parte 3</title>
+</head>
+<body>
+  
+  <div id="paiDoPai">
+    <div id="pai">
+      <div id="primeiroFilho"></div>
+      <div id="elementoOndeVoceEsta">
+        <div id="primeiroFilhoDoFilho"></div>
+        <div id="segundoEUltimoFilhoDoFilho"></div>
+      </div>
+      Atenção!
+      <div id="terceiroFilho"></div>
+      <div id="quartoEUltimoFilho"></div>
+    </div>
+  </div>
+
+  <script>
+    //codigo da parte 1
+    let currentElement = document.getElementById('elementoOndeVoceEsta');
+
+    let parentElement = currentElement.parentNode;
+    parentElement.style.color = '#7A0026';
+
+    let firstChild = currentElement.firstElementChild;
+    firstChild.innerText = 'Eu sou o primogenito';
+
+    let firstSibling = parentElement.firstElementChild;
+
+    let bodyText = currentElement.nextSibling;
+
+    let thirdSibling = currentElement.nextElementSibling;
+
+    let thirdSiblingFromParent = parentElement.firstElementChild.nextElementSibling.nextElementSibling;
+
+    // parte 2
+    let fifthSibling = document.createElement('div');
+    fifthSibling.id = 'quintoFilho'
+    parentElement.appendChild(fifthSibling);
+
+    let thirdChild = document.createElement('div');
+    thirdChild.id = 'terceiroFilhoDoFilho';
+    currentElement.appendChild(thirdChild);
+
+    let firstChildOfChild = document.createElement('div');
+    firstChildOfChild.id = 'primeiroFilhoDoPrimeiroFilhoDoFilho';
+    firstChild.appendChild(firstChildOfChild);
+
+    let firstChildOfChildInDOM = document.getElementById('primeiroFilhoDoPrimeiroFilhoDoFilho');
+
+    let thirdSiblingFromDEEPINTHETREE = firstChildOfChildInDOM.parentElement.parentElement.nextElementSibling;
+
+    // parte 3
+
+    // Abaixo, estou usando o Spread Operator para copiar o array
+    //  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+    let siblings = [...parentElement.children];
+    console.log(siblings);
+
+    for (let sibling of siblings) {
+      console.log(sibling);
+      if (sibling.id !== 'elementoOndeVoceEsta') {
+        sibling.remove();
+      }
+    }
+
+    let children = [...currentElement.children];
+
+    for (let child of children) {
+      if (child.id !== 'primeiroFilhoDoFilho') {
+        child.remove();
+      }
+    }
+  </script>
+</body>
+</html>
