@@ -165,3 +165,15 @@ function addTask(task) {
 }
 
 addTask('Comer ceia');
+
+function addTaskLabel(color) {
+  const tasksContainer = document.querySelector('.my-tasks');
+
+  const labelElement = document.createElement('div');
+  labelElement.className = 'task';
+  labelElement.style.backgroundColor = color;
+
+  tasksContainer.appendChild(labelElement);
+}
+
+addTaskLabel('#036B52');
