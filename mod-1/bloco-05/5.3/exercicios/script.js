@@ -101,3 +101,13 @@ function addHolidayHighlightListener() {
 }
 
 addHolidayHighlightListener();
+
+function generateFridayButton(innerText) {
+  const buttonsContainer = document.querySelector('.buttons-container');
+
+  buttonsContainer.insertAdjacentHTML('beforeend', 
+  `<button id="btn-friday">${innerText}</button>`
+  );
+}
+
+generateFridayButton('Sexta-feira');
