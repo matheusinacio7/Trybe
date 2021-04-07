@@ -176,10 +176,23 @@ function addTaskLabel(color) {
   tasksContainer.appendChild(labelElement);
 }
 
-addTaskLabel('#036B52');
+addTaskLabel('#006f9d');
+
+let selectedTask;
 
 function handleToggleTask(e) {
-  e.target.classList.toggle('task--selected');
+  const classList = e.target.classList;
+
+  if (classList.contains('task--selected')) {
+    selectedTask = undefined;
+    classList.remove('task--selected');
+  } else {
+    if(selectedTask) {
+      selectedTask.classList.remove('task--selected');
+    }
+    classList.add('task--selected');
+    selectedTask = e.target;
+  }
 }
 
 // Aqui eu coloquei um estilo para manter o tamanho maior
@@ -192,3 +205,25 @@ function addToggleTaskListener() {
 }
 
 addToggleTaskListener();
+
+function handleAssignTask(e) {
+  if (!selectedTask) {
+    return;
+  }
+
+  if (e.target.style.color === selectedTask.style.backgroundColor) {
+    e.target.style.color = 'rgb(119, 119, 119)';
+  } else {
+    e.target.style.color = selectedTask.style.backgroundColor;
+  }
+}
+
+function addAssignTaskListener() {
+  const days = document.getElementsByClassName('day');
+
+  for (let day of days) {
+    day.addEventListener('click', handleAssignTask);
+  }
+}
+
+addAssignTaskListener();
