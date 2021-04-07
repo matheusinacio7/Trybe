@@ -53,6 +53,7 @@ function populateDaysOfTheMonth() {
 
     if(isFriday(day)) {
       dayListItem.classList.add('friday');
+      dayListItem.dataset.day = day;
     }
 
     if(isHoliday(day)) {
@@ -111,3 +112,27 @@ function generateFridayButton(innerText) {
 }
 
 generateFridayButton('Sexta-feira');
+
+let hasSextou = false;
+
+function handleToggleSEXTOU(e) {
+  const fridays = document.getElementsByClassName('friday');
+
+  for (let friday of fridays) {
+    if (hasSextou) {
+      friday.innerText = friday.dataset.day;
+    } else {
+      friday.innerText = 'SEXTOU';
+    }
+  }
+
+  hasSextou = !hasSextou;
+}
+
+function addSEXTOUEventListener() {
+  const fridayButton = document.getElementById('btn-friday');
+
+  fridayButton.addEventListener('click', handleToggleSEXTOU);
+}
+
+addSEXTOUEventListener();
