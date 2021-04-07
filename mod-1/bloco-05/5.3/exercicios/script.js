@@ -136,3 +136,22 @@ function addSEXTOUEventListener() {
 }
 
 addSEXTOUEventListener();
+
+function handleToggleZoom(e) {
+  if (e.type === 'mouseover') {
+    e.target.style.transform = 'scale(1.5)';
+  } else if (e.type === 'mouseleave') {
+    e.target.style.transform = 'scale(1.0)';
+  }
+}
+
+function addZoomListener() {
+  const days = document.getElementsByClassName('day');
+
+  for (let day of days) {
+    day.addEventListener('mouseover', handleToggleZoom);
+    day.addEventListener('mouseleave', handleToggleZoom);
+  }
+}
+
+addZoomListener();
