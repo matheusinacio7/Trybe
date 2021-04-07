@@ -64,3 +64,13 @@ function populateDaysOfTheMonth() {
 }
 
 populateDaysOfTheMonth();
+
+function generateHolidayButton(innerText) {
+  const buttonsContainer = document.querySelector('.buttons-container');
+
+  buttonsContainer.insertAdjacentHTML('beforeend',
+  `<button id="btn-holiday">${innerText}</button>`
+  );
+}
+
+generateHolidayButton('Feriados');
