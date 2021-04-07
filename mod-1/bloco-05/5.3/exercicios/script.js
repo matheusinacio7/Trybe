@@ -155,3 +155,13 @@ function addZoomListener() {
 }
 
 addZoomListener();
+
+function addTask(task) {
+  const tasksContainer = document.querySelector('.my-tasks');
+
+  tasksContainer.insertAdjacentHTML('beforeend', 
+  `<span>${task}</span>`
+  );
+}
+
+addTask('Comer ceia');
