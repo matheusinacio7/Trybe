@@ -177,3 +177,18 @@ function addTaskLabel(color) {
 }
 
 addTaskLabel('#036B52');
+
+function handleToggleTask(e) {
+  e.target.classList.toggle('task--selected');
+}
+
+// Aqui eu coloquei um estilo para manter o tamanho maior
+function addToggleTaskListener() {
+  const taskLabels = document.getElementsByClassName('task');
+
+  for (let task of taskLabels) {
+    task.addEventListener('click', handleToggleTask);
+  }
+}
+
+addToggleTaskListener();

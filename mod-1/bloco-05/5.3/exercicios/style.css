@@ -89,8 +89,11 @@ label {
 }
 
 .my-tasks div:hover {
-  height: 45px;
-  width: 45px;
+  transform: scale(1.25);
+}
+
+.task--selected {
+  transform: scale(1.25);
 }
 
 .my-tasks span {
