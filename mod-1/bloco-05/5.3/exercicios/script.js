@@ -74,3 +74,30 @@ function generateHolidayButton(innerText) {
 }
 
 generateHolidayButton('Feriados');
+
+let areHolidaysHighlighted = false;
+
+function handleToggleHolidaysHighlight() {
+  const holidays = document.getElementsByClassName('holiday');
+  let newColor;
+
+  if (areHolidaysHighlighted) {
+    newColor = 'rgb(238, 238, 238)';
+  } else {
+    newColor = 'rgb(200, 238, 215)';
+  }
+
+  for (let holiday of holidays) {
+    holiday.style.backgroundColor = newColor;
+  }
+
+  areHolidaysHighlighted = !areHolidaysHighlighted;
+}
+
+function addHolidayHighlightListener() {
+  const holidayButton = document.getElementById('btn-holiday');
+
+  holidayButton.addEventListener('click', handleToggleHolidaysHighlight);
+}
+
+addHolidayHighlightListener();
