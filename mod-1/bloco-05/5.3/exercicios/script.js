@@ -165,6 +165,7 @@ function addTask(task) {
 }
 
 addTask('Comer ceia');
+addTask('Dormir');
 
 function addTaskLabel(color) {
   const tasksContainer = document.querySelector('.my-tasks');
@@ -177,6 +178,7 @@ function addTaskLabel(color) {
 }
 
 addTaskLabel('#006f9d');
+addTaskLabel('#008000');
 
 let selectedTask;
 
@@ -227,3 +229,38 @@ function addAssignTaskListener() {
 }
 
 addAssignTaskListener();
+
+function handleAddTask() {
+  const inputField = document.getElementById('task-input');
+
+  if (!inputField.value) {
+    return alert('Por favor, insira um compromisso!');
+  }
+
+  const taskListElement = document.querySelector('.task-list');
+
+  const taskElement = document.createElement('li');
+  taskElement.innerText = inputField.value;
+
+  taskListElement.appendChild(taskElement);
+
+  inputField.value = '';
+
+  inputField.focus();
+}
+
+function addAddTaskListeners() {
+  const inputField = document.getElementById('task-input');
+
+  inputField.addEventListener('keydown', function(e) {
+    if (e.key === "Enter") {
+      handleAddTask();
+    }
+  });
+
+  const addButton = document.getElementById('btn-add');
+
+  addButton.addEventListener('click', handleAddTask);
+}
+
+addAddTaskListeners();
