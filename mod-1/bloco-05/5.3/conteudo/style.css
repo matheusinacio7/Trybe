@@ -37,6 +37,33 @@ h1 {
   color: #2fc18c;
   user-select: none;
   cursor: pointer;
+  transition: all 0.5s;
+}
+
+.pulsing-gradient {
+  background: repeating-linear-gradient(to right, #2fc18c 16%, #006dfb 50%, #41197f 86%, #2fc18c 116%);
+  background-clip: text;
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: glow 3s linear infinite, pulse 1.5s linear infinite;
+}
+
+@keyframes glow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1.00) }
+  25% { transform: scale(1.25) }
+  45% { transform: scale(1.05) }
+  58% { transform: scale(1.25) }
+  71% { transform: scale(1.05) }
+  84% { transform: scale(1.25) }
+  100% { transform: scale(1.00) }
 }
 
 h3 {

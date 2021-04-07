@@ -3,6 +3,7 @@ const divDois = document.getElementById('divDois');
 const divTres = document.getElementById('divTres');
 const input = document.getElementById('input');
 const myWebpage = document.getElementById('mySpotrybefy');
+const mainHeader = document.getElementById('main-header');
 
 /*
  Copie esse arquivo e edite apenas ele;
@@ -70,3 +71,14 @@ function redirectToTrybeHome() {
 }
 
 myWebpage.addEventListener('dblclick', redirectToTrybeHome);
+
+function togglePulsingGradient(e) {
+  if (e.type === 'mouseover') {
+    mainHeader.classList.add('pulsing-gradient');
+  } else {
+    mainHeader.classList.remove('pulsing-gradient');
+  }
+}
+
+mainHeader.addEventListener('mouseover', togglePulsingGradient);
+mainHeader.addEventListener('mouseleave', togglePulsingGradient);
