@@ -37,13 +37,13 @@ h1 {
   color: #2fc18c;
   user-select: none;
   cursor: pointer;
-  transition: all 0.5s;
 }
 
 .pulsing-gradient {
   background: repeating-linear-gradient(to right, #2fc18c 16%, #006dfb 50%, #41197f 86%, #2fc18c 116%);
   background-clip: text;
   background-size: 200% auto;
+  transition: all 0.4s ease-in-out;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
