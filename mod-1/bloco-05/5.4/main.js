@@ -50,6 +50,12 @@ function changeFontColor(colorTag) {
   document.body.style.color = fontColor;
 }
 
+function changeFontSize(sizeTag) {
+  let fontSize = sizeTag;
+
+  document.body.style.fontSize = fontSize;
+}
+
 function changeLineHeight(heightTag) {
   let lineHeight;
 
@@ -76,6 +82,9 @@ function handleSelect(e) {
       break;
     case "pref-fontColor":
       changeFontColor(selectedOption.value);
+      break;
+    case "pref-fontSize":
+      changeFontSize(selectedOption.value);
       break;
     case "pref-lineHeight":
       changeLineHeight(selectedOption.value);
