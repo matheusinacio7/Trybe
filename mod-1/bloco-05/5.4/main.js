@@ -82,27 +82,96 @@ function changeLineHeight(heightTag) {
 
 function handleSelect(e) {
   let selectedOption = e.target.selectedOptions[0];
+  let prefValue = selectedOption.value;
   switch (e.target.id) {
     case "pref-bgColor":
-      changeBgColors(selectedOption.value);
+      changeBgColors(prefValue);
       break;
     case "pref-fontColor":
-      changeFontColor(selectedOption.value);
+      changeFontColor(prefValue);
       break;
     case "pref-fontSize":
-      changeFontSize(selectedOption.value);
+      changeFontSize(prefValue);
       break;
     case "pref-fontStyle":
-      changeFontStyle(selectedOption.value);
+      changeFontStyle(prefValue);
       break;
     case "pref-lineHeight":
-      changeLineHeight(selectedOption.value);
+      changeLineHeight(prefValue);
       break;
   }
+
+  let prefName = e.target.id.replace('pref-', '');
+  savePreference(prefName, prefValue);
 }
 
 const selectorElements = document.getElementById('pref-menu').getElementsByTagName('select');
 
 for (let selector of selectorElements) {
   selector.addEventListener('change', handleSelect);
+}
+
+function loadPreferences() {
+  const defaultPreferences = {
+    bgColor: 'white',
+    fontColor: 'black',
+    fontSize: 'medium',
+    lineHeight: 'standard',
+    fontStyle: 'serif',
+  };
+
+  if (!Storage) {
+    return defaultPreferences;
+  }
+
+  if (!localStorage.preferences) {
+    return defaultPreferences;
+  }
+
+  let loaded = JSON.parse(localStorage.preferences);
+  let preferences = { ... defaultPreferences }
+
+  if (loaded.bgColor) {
+    preferences.bgColor = loaded.bgColor;
+  }
+
+  if (loaded.fontColor) {
+    preferences.fontColor = loaded.fontColor;
+  }
+
+  if (loaded.fontSize) {
+    preferences.fontSize = loaded.fontSize;
+  }
+
+  if (loaded.lineHeight) {
+    preferences.lineHeight = loaded.lineHeight;
+  }
+
+  if (loaded.fontStyle) {
+    preferences.fontStyle = loaded.fontStyle;
+  }
+
+  return preferences;
+}
+
+function applyPreferences(preferences) {
+  changeBgColors(preferences.bgColor);
+  changeFontColor(preferences.fontColor);
+  changeFontSize(preferences.fontSize);
+  changeFontStyle(preferences.fontStyle);
+  changeLineHeight(preferences.lineHeight);
+}
+
+function savePreference(preference, value) {
+  let preferences = loadPreferences();
+  preferences[preference] = value;
+
+  let preferenceString = JSON.stringify(preferences);
+  localStorage.preferences = preferenceString;
+}
+
+window.onload = function() {
+  let preferences = loadPreferences();
+  applyPreferences(preferences);
+  console.log(preferences);
 }
