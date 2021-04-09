@@ -56,6 +56,12 @@ function changeFontSize(sizeTag) {
   document.body.style.fontSize = fontSize;
 }
 
+function changeFontStyle(styleTag) {
+  let fontStyle = styleTag;
+
+  document.body.style.fontFamily = fontStyle;
+}
+
 function changeLineHeight(heightTag) {
   let lineHeight;
 
@@ -85,6 +91,9 @@ function handleSelect(e) {
       break;
     case "pref-fontSize":
       changeFontSize(selectedOption.value);
+      break;
+    case "pref-fontStyle":
+      changeFontStyle(selectedOption.value);
       break;
     case "pref-lineHeight":
       changeLineHeight(selectedOption.value);
