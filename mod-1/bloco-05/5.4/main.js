@@ -32,12 +32,33 @@ function changeBgColors(colorTag) {
 
 }
 
+function changeFontColor(colorTag) {
+  let fontColor;
+
+  switch (colorTag) {
+    case "black":
+      fontColor = 'black';
+      break;
+    case "white":
+      fontColor = 'white';
+      break;
+    case "green":
+      fontColor = "#036B52";
+      break;
+  }
+
+  document.body.style.color = fontColor;
+}
+
 function handleSelect(e) {
   let selectedOption = e.target.selectedOptions[0];
 
   switch (e.target.id) {
     case "pref-bgColor":
       changeBgColors(selectedOption.value);
+      break;
+    case "pref-fontColor":
+      changeFontColor(selectedOption.value);
       break;
   }
 }
