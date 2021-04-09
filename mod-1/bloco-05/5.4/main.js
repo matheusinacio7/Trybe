@@ -156,10 +156,31 @@ function loadPreferences() {
 
 function applyPreferences(preferences) {
   changeBgColors(preferences.bgColor);
+  setDefaultButton('bgColor', preferences.bgColor);
+
   changeFontColor(preferences.fontColor);
+  setDefaultButton('fontColor', preferences.fontColor);
+
   changeFontSize(preferences.fontSize);
+  setDefaultButton('fontSize', preferences.fontSize);
+
   changeFontStyle(preferences.fontStyle);
+  setDefaultButton('fontStyle', preferences.fontStyle);
+
   changeLineHeight(preferences.lineHeight);
+  setDefaultButton('lineHeight', preferences.lineHeight);
+}
+
+function setDefaultButton(preference, value) {
+  const container = document.getElementById('pref-menu');
+
+  const prefQuery = '#pref-' + preference;
+
+  const prefSelect = container.querySelector(prefQuery);
+
+  const prefOption = prefSelect.querySelector('#' + value);
+
+  prefSelect.selectedIndex = prefOption.index;
 }
 
 function savePreference(preference, value) {
