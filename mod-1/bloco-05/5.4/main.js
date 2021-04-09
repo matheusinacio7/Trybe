@@ -50,15 +50,35 @@ function changeFontColor(colorTag) {
   document.body.style.color = fontColor;
 }
 
+function changeLineHeight(heightTag) {
+  let lineHeight;
+
+  switch(heightTag) {
+    case "standard":
+      lineHeight = '1.5';
+      break;
+    case "large":
+      lineHeight = '2.0';
+      break;
+    case "small":
+      lineHeight = '1.0';
+      break;
+  }
+
+  document.querySelector('.main-content').style.lineHeight = lineHeight;
+}
+
 function handleSelect(e) {
   let selectedOption = e.target.selectedOptions[0];
-
   switch (e.target.id) {
     case "pref-bgColor":
       changeBgColors(selectedOption.value);
       break;
     case "pref-fontColor":
       changeFontColor(selectedOption.value);
+      break;
+    case "pref-lineHeight":
+      changeLineHeight(selectedOption.value);
       break;
   }
 }

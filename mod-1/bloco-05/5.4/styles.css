@@ -2,7 +2,6 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  line-height: 1.5;
 }
 
 body {
@@ -48,6 +47,7 @@ main {
   margin-right: auto;
   background-color: white;
   padding: 64px;
+  line-height: 1.5;
 }
 
 .main-content > h1 {
