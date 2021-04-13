@@ -10,3 +10,6 @@
 [submodule "projects/bloco-05-todo-list"]
 	path = projects/bloco-05-todo-list
 	url = git@github.com:tryber/sd-011-project-todo-list.git
+[submodule "projects/bloco-05-color-guess"]
+	path = projects/bloco-05-color-guess
+	url = git@github.com:tryber/sd-011-project-color-guess.git
