@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Exercício 5.1</title>
+
+    <style>
+      div {
+        border-color: black;
+        border-style: solid;
+      }
+      .title {
+        text-align: center;
+      }
+
+      .main-content {
+        background-color: yellow;
+      }
+
+      .main-content .center-content {
+        background-color: red;
+        width: 50%;
+        margin: 0 auto;
+      }
+
+      .main-content .center-content p {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Exercício 5.1 - JavaEscripito </h1>
+    <div class="main-content">
+      <div class="center-content">
+        <p>Texto padrão do nosso site</p>
+        <p>-----</p>
+        <p>Trybe</p>
+      </div>
+    </div>
+    <script>
+      function changeMainText(text) {
+        document.getElementsByTagName('p')[0].innerText = text;
+      }
+
+      changeMainText("Daqui a 2 anos vou estar trabalhando como web dev para empresas gringas, ganhando em dólares, e estudando sobre game dev.");
+
+      function changeSideColor(colorString) {
+        document.getElementsByClassName('main-content')[0].style.backgroundColor = colorString;
+      }
+
+      changeSideColor("rgb(76, 164, 109)");
+
+      function changeMainColor(colorString) {
+        document.getElementsByClassName('center-content')[0].style.backgroundColor = colorString;
+      }
+
+      changeMainColor('white');
+
+      function changePageTitle(title) {
+        document.getElementsByClassName('title')[0].innerText = title;
+      }
+
+      changePageTitle('Exercício 5.1 - JavaScript');
+
+      function upcaseParagraph() {
+        document.getElementsByTagName('p')[0].style.textTransform = 'uppercase';
+      }
+
+      upcaseParagraph();
+
+      function logAllTextFromParagraphs() {
+        let paragraphs = document.getElementsByTagName('p');
+
+        for (let p of paragraphs) {
+          console.log(p.innerText);
+        }
+      }
+
+      logAllTextFromParagraphs();
+    </script>
+  </body>
+</html>

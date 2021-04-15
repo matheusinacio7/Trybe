@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2 id="page-title">Título</h2>
+    <p id="first-paragraph" class="paragraph">Dê uma cor para este parágrafo!</p>
+    <h4 id="subtitle">Subtítulo</h4>
+    <p id="second-paragraph" class="paragraph">Segundo parágrafo!</p>
+
+    <script>
+      document.getElementById('page-title').innerText = 'Um titulo sem criatividade';
+      document.getElementById('first-paragraph').style.color = 'rgb(100, 0, 30)';
+      document.getElementById('second-paragraph').innerHTML = 'Sem criatividade hoje.';
+      document.getElementById('subtitle').innerHTML = 'hmm..';
+
+      document.getElementsByClassName('paragraph')[0].style.fontSize = '24px';
+
+      document.getElementsByTagName('h4')[0].style.fontStyle = 'italic';
+    </script>
+  </body>
+</html>
