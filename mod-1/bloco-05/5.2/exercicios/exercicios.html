@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Exercício 5.2</title>
+    <style>
+      div {
+        border-color: black;
+        border-style: solid;
+      }
+
+      .title {
+        text-align: center;
+      }
+
+      .main-content {
+        background-color: yellow;
+      }
+
+      .main-content .center-content {
+        background-color: red;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .main-content .center-content p {
+        font-style: italic;
+      }
+
+      .main-content .left-content {
+        background-color: green;
+        width: 60%;
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .main-content .left-content .small-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 100%;
+      }
+
+      .main-content .right-content {
+        background-color: blue;
+        width: 60%;
+        margin-left: auto;
+        margin-right: 0;
+      }
+
+      .main-content .description {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // O insertAdjacentHTML é uma maneira de adicionar o HTML diretamente através do JavaScript
+      //  https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML
+
+      let firstHeader = document.createElement('h1');
+      firstHeader.innerText = 'Exercicio 5.2 - JavaScript DOM';
+      document.body.appendChild(firstHeader);
+
+      let mainContent = document.createElement('div');
+      mainContent.className = 'main-content';
+      document.body.appendChild(mainContent);
+
+      let centerContent = document.createElement('div');
+      centerContent.className = 'center-contet';
+      mainContent.appendChild(centerContent);
+
+      centerContent.insertAdjacentHTML('beforeend', 
+      `<p>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda id saepe sunt quisquam voluptatem ut perferendis libero ratione nihil dolorum culpa, praesentium quia corporis doloribus deserunt rerum voluptates molestias est.
+        Modi eum, dicta recusandae a optio molestiae aliquam dolore autem aperiam assumenda similique eos fugiat cupiditate adipisci rem. Ipsum ad omnis dicta laborum cum eligendi a vitae ea sed voluptatibus.
+        Numquam cupiditate exercitationem ullam, hic nam doloribus reiciendis nesciunt? Sapiente, eius suscipit. Ad doloremque veniam labore nihil facilis est perferendis sequi minus reiciendis, dignissimos assumenda alias quae iure. Voluptatum, laborum.
+      </p>`
+      );
+
+      let leftContent = document.createElement('div');
+      leftContent.className = 'left-content';
+      mainContent.appendChild(leftContent);
+
+      let rightContent = document.createElement('div');
+      rightContent.className = 'right-content';
+      mainContent.appendChild(rightContent);
+
+      leftContent.insertAdjacentHTML('beforeend',
+      `<img src="https://picsum.photos/200" class="small-image">`
+      );
+
+      let numberListElement = document.createElement('ul');
+      rightContent.appendChild(numberListElement);
+
+      numberListElement.insertAdjacentHTML('beforeend', 
+      `<li>Um</li>
+        <li>Dois</li>
+        <li>Três</li>
+        <li>Quatro</li>
+        <li>Cinco</li>
+        <li>Seis</li>
+        <li>Sete</li>
+        <li>Oito</li>
+        <li>Nove</li>
+        <li>Dez</li>`
+      );
+
+      let thirdHeaders = ['Primeiro', 'Segundo', 'Terceiro'];
+      let thirdHeaderElements = [];
+
+      for (let header of thirdHeaders) {
+        let headerElement = document.createElement('h3');
+        headerElement.innerText = header;
+        mainContent.appendChild(headerElement);
+        thirdHeaderElements.push(headerElement);
+      }
+
+      firstHeader.className = 'title';
+
+      for (let headerElement of thirdHeaderElements) {
+        headerElement.className = 'description';
+      }
+
+      mainContent.removeChild(leftContent);
+
+      rightContent.style.marginRight = 'auto';
+
+      mainContent.style.backgroundColor = 'green';
+
+      let listElements = [...numberListElement.children];
+      console.log(listElements);
+
+      for (let i = 1; i < 3; i++) {
+        let currentChild = listElements[listElements.length - i];
+        console.log(currentChild);
+        currentChild.remove();
+      }
+
+    </script>
+  </body>
+</html>

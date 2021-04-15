@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parte 2</title>
+</head>
+<body>
+  
+  <div id="paiDoPai">
+    <div id="pai">
+      <div id="primeiroFilho"></div>
+      <div id="elementoOndeVoceEsta">
+        <div id="primeiroFilhoDoFilho"></div>
+        <div id="segundoEUltimoFilhoDoFilho"></div>
+      </div>
+      Atenção!
+      <div id="terceiroFilho"></div>
+      <div id="quartoEUltimoFilho"></div>
+    </div>
+  </div>
+
+  <script>
+    //codigo da parte 1
+    let currentElement = document.getElementById('elementoOndeVoceEsta');
+    console.log(currentElement);
+
+    let parentElement = currentElement.parentNode;
+    parentElement.style.color = '#7A0026';
+    console.log(parentElement);
+
+    let firstChild = currentElement.firstElementChild;
+    firstChild.innerText = 'Eu sou o primogenito';
+    console.log(firstChild);
+
+    let firstSibling = parentElement.firstElementChild;
+    console.log(firstSibling);
+
+    let bodyText = currentElement.nextSibling;
+    console.log(bodyText);
+
+    let thirdSibling = currentElement.nextElementSibling;
+    console.log(thirdSibling);
+
+    let thirdSiblingFromParent = parentElement.firstElementChild.nextElementSibling.nextElementSibling;
+    console.log(thirdSiblingFromParent);
+
+    // parte 2
+    let fifthSibling = document.createElement('div');
+    fifthSibling.id = 'quintoFilho'
+    parentElement.appendChild(fifthSibling);
+
+    console.log(fifthSibling);
+
+    let thirdChild = document.createElement('div');
+    thirdChild.id = 'terceiroFilhoDoFilho';
+    currentElement.appendChild(thirdChild);
+
+    console.log(thirdChild);
+
+    let firstChildOfChild = document.createElement('div');
+    firstChildOfChild.id = 'primeiroFilhoDoPrimeiroFilhoDoFilho';
+    firstChild.appendChild(firstChildOfChild);
+
+    console.log(firstChildOfChild);
+
+    let firstChildOfChildInDOM = document.getElementById('primeiroFilhoDoPrimeiroFilhoDoFilho');
+
+    let thirdSiblingFromDEEPINTHETREE = firstChildOfChildInDOM.parentElement.parentElement.nextElementSibling;
+
+    console.log(thirdSiblingFromDEEPINTHETREE);
+  </script>
+</body>
+</html>
