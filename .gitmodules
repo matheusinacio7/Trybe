@@ -4,3 +4,12 @@
 [submodule "projects/bloco-03-lessons-learned"]
 	path = projects/bloco-03-lessons-learned
 	url = https://github.com/tryber/sd-011-project-lessons-learned
+[submodule "projects/bloco-05-pixel-art"]
+	path = projects/bloco-05-pixel-art
+	url = git@github.com:tryber/sd-011-project-pixels-art.git
+[submodule "projects/bloco-05-todo-list"]
+	path = projects/bloco-05-todo-list
+	url = git@github.com:tryber/sd-011-project-todo-list.git
+[submodule "projects/bloco-05-color-guess"]
+	path = projects/bloco-05-color-guess
+	url = git@github.com:tryber/sd-011-project-color-guess.git
