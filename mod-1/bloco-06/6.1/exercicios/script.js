@@ -67,5 +67,15 @@ function generateDisplayedResults(e) {
   }
 }
 
+function clearResults(e) {
+  // default é limpar o formulário. Eu não quero previnir este comportamento
+  const infoCount = resultsElement.children.length;
+
+  for (let i = 0; i < infoCount; i += 1) {
+    resultsElement.lastChild.remove();
+  }
+}
+
 formElement.addEventListener('submit', generateDisplayedResults);
+formElement.addEventListener('reset', clearResults);
   
