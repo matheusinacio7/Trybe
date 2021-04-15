@@ -13,3 +13,6 @@
 [submodule "projects/bloco-05-color-guess"]
 	path = projects/bloco-05-color-guess
 	url = git@github.com:tryber/sd-011-project-color-guess.git
+[submodule "projects/bloco-05-meme-generator"]
+	path = projects/bloco-05-meme-generator
+	url = git@github.com:tryber/sd-011-project-meme-generator.git
