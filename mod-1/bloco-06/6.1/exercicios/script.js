@@ -1,4 +1,5 @@
 const formElement = document.getElementById('resume');
+const resultsElement = document.getElementById('results');
 
 const brazilianStates = [
   { name: 'Acre', acronym: 'AC',},
@@ -43,3 +44,28 @@ function fillStateOptions() {
 }
 
 fillStateOptions();
+
+function getFormAnswer(formElement) {
+  const formData = new FormData(formElement);
+  const answer = {};
+
+  for (let pair of formData.entries()) {
+    answer[pair[0]] = pair[1];
+  }
+  return answer;
+}
+
+function generateDisplayedResults(e) {
+  e.preventDefault();
+  const answer = getFormAnswer(e.target);
+
+  for (let property in answer) {
+    const newInfo = document.createElement('p');
+    newInfo.innerText = `${property}: ${answer[property]}`;
+
+    resultsElement.appendChild(newInfo);
+  }
+}
+
+formElement.addEventListener('submit', generateDisplayedResults);
+  
