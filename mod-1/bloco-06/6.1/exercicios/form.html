@@ -8,7 +8,7 @@
   <title>Form Currículo</title>
 </head>
 <body>
-  <form action="/" id="resume" method="POST">
+  <form action="/" id="resume" method="POST" enctype="multipart/form-data">
     <fieldset id="personal-info" name="personal-info">
       <legend>Informações Pessoais</legend>
       <input type="text" id="pi-name" name="fullname" placeholder="Nome" maxlength="40" required>
@@ -39,7 +39,7 @@
     </fieldset>
 
     <input type="submit" value="Gerar Currículo">
-    <button>Limpar</button>
+    <input type="reset" value="Limpar">
   </form>
   <script src="script.js"></script>
 </body>
