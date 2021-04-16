@@ -59,12 +59,48 @@ function generateDisplayedResults(e) {
   e.preventDefault();
   const answer = getFormAnswer(e.target);
 
+  if (!validateDate(answer["start-date"])) {
+    return;
+  }
+
   for (let property in answer) {
     const newInfo = document.createElement('p');
     newInfo.innerText = `${property}: ${answer[property]}`;
 
     resultsElement.appendChild(newInfo);
   }
+}
+
+function validateDate(dateString) {
+  const splitDate = dateString.split('/');
+  const [ day, month, year ] = splitDate;
+
+  if (!splitDate || splitDate.length !== 3
+    || day.length !== 2 || month.length !== 2 || year.length !== 4
+    ) {
+    alert('A data precisa estar no formato dd/mm/aaaa');
+    return false;
+  }
+
+  const dayNumber = parseInt(day, 10);
+  if (dayNumber < 1 || dayNumber > 31) {
+    alert('O dia deve estar entre 1 e 31');
+    return false;
+  }
+
+  const monthNumber = parseInt(month, 10);
+  if (monthNumber < 1 || monthNumber > 12) {
+    alert('O mês precisa estar entre 1 e 12');
+    return false;
+  }
+
+  const yearNumber = parseInt(year, 10);
+  if (yearNumber < 0) {
+    alert('O ano não pode ser negativo');
+    return false;
+  }
+
+  return true;
 }
 
 function clearResults(e) {
