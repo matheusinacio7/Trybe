@@ -28,3 +28,4 @@
 [submodule "mod-1/bloco-06/6.3"]
 	path = mod-1/bloco-06/6.3
 	url = https://github.com/heyset/exercise-tech-gallery.git
+	branch = master
