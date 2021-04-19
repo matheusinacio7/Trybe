@@ -25,3 +25,7 @@
 	path = projects/bloco-05-mistery-letter
 	url = https://github.com/tryber/sd-011-project-mistery-letter.git
 	branch = heyset-mistery-letter-project
+[submodule "mod-1/bloco-06/6.3"]
+	path = mod-1/bloco-06/6.3
+	url = https://github.com/heyset/exercise-tech-gallery.git
+	branch = master
