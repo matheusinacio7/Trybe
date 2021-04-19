@@ -16,3 +16,6 @@
 [submodule "projects/bloco-05-meme-generator"]
 	path = projects/bloco-05-meme-generator
 	url = git@github.com:tryber/sd-011-project-meme-generator.git
+[submodule "projects/bloco-05-mistery-letter"]
+	path = projects/bloco-05-mistery-letter
+	url = git@github.com:tryber/sd-011-project-mistery-letter.git
