@@ -8,38 +8,46 @@
   <title>Form Currículo</title>
 </head>
 <body>
-  <form action="/" id="resume" method="POST" enctype="multipart/form-data">
-    <fieldset id="personal-info" name="personal-info">
+  <form class="container" action="/" id="resume" method="POST" enctype="multipart/form-data">
+    <fieldset class="mb-4" id="personal-info" name="personal-info">
       <legend>Informações Pessoais</legend>
-      <input type="text" id="pi-name" name="fullname" placeholder="Nome" maxlength="40" required>
-      <input type="email" name="email" id="pi-email" placeholder="E-mail" maxlength="50" required>
-      <input type="text" id="pi-cpf" name="cpf" placeholder="CPF" minlength="11" maxlength="11" required>
+      <input class="form-control mb-3" type="text" id="pi-name" name="fullname" placeholder="Nome" maxlength="40" required>
+      <input class="form-control mb-3" type="email" name="email" id="pi-email" placeholder="E-mail" maxlength="50" required>
+      <input class="form-control mb-3" type="text" id="pi-cpf" name="cpf" placeholder="CPF" minlength="11" maxlength="11" required>
 
-      <input type="text" id="pi-city" name="city" placeholder="Cidade" maxlength="28" required>
-      <select name="state" id="pi-state" required></select>
+      <select class="form-select mb-3" name="state" id="pi-state" required></select>
+
+      <input class="form-control mb-3"  type="text" id="pi-city" name="city" placeholder="Cidade" maxlength="28" required>
+      
 
       <fieldset id="home-type">
         <legend>Tipo de Moradia</legend>
-        <input type="radio" name="home-type" id="pi-ht-house" value="house" required>
-        <label for="pi-ht-house">Casa</label>
-        <input type="radio" name="home-type" id="pi-ht-appartment" value="appartment" required>
-        <label for="pi-ht-appartment">Apartamento</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="home-type" id="pi-ht-house" value="house" required>
+          <label class="form-check-label" for="pi-ht-house">Casa</label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="home-type" id="pi-ht-appartment" value="appartment" required>
+          <label class="form-check-label" for="pi-ht-appartment">Apartamento</label>
+        </div>
+        
       </fieldset>
     </fieldset>
 
     <fieldset name="previous-job" id="previous-job">
       <legend>Último Emprego</legend>
-      <textarea name="summary" id="pj-summary" cols="70" rows="10" placeholder="Fale um pouco sobre você." maxlength="1000" required></textarea>
+      <textarea class="form-control mb-3" name="summary" id="pj-summary" cols="70" rows="10" placeholder="Fale um pouco sobre você." maxlength="1000" required></textarea>
 
-      <input type="text" id="pj-role" name="role" placeholder="Cargo" maxlength="40" required>
+      <input class="form-control mb-3" type="text" id="pj-role" name="role" placeholder="Cargo" maxlength="40" required>
 
-      <textarea name="description" id="pj-descritpion" cols=70" rows="10" placeholder="Descreva seu cargo." maxlength="500" required></textarea>
+      <textarea class="form-control mb-3" name="description" id="pj-descritpion" cols=70" rows="10" placeholder="Descreva seu cargo." maxlength="500" required></textarea>
 
-      <input type="text" id="pj-start-date" name="start-date" placeholder="Data de começo" pattern="\d{2}\/\d{2}\/\d{4}" required>
+      <input class="form-control mb-3" type="text" id="pj-start-date" name="start-date" placeholder="Data de começo" pattern="\d{2}\/\d{2}\/\d{4}" required>
     </fieldset>
 
-    <input type="submit" value="Gerar Currículo">
-    <input type="reset" value="Limpar">
+    <input class="btn btn-primary btn-lg" type="submit" value="Gerar Currículo">
+    <input class="btn btn-danger" type="reset" value="Limpar">
   </form>
 
   <div id="results"></div>
