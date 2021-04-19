@@ -7,17 +7,21 @@
 	branch = inacio-project-lessons-learned
 [submodule "projects/bloco-05-pixel-art"]
 	path = projects/bloco-05-pixel-art
-	url = git@github.com:tryber/sd-011-project-pixels-art.git
+	url = https://github.com/tryber/sd-011-project-pixels-art.git
+	branch = heyset-pixel-art-project
 [submodule "projects/bloco-05-todo-list"]
 	path = projects/bloco-05-todo-list
-	url = git@github.com:tryber/sd-011-project-todo-list.git
+	url = https://github.com/tryber/sd-011-project-todo-list.git
+	branch = heyset-todo-list-project
 [submodule "projects/bloco-05-color-guess"]
 	path = projects/bloco-05-color-guess
-	url = git@github.com:tryber/sd-011-project-color-guess.git
+	url = https://github.com/tryber/sd-011-project-color-guess.git
 	branch = heyset-color-guess-project
 [submodule "projects/bloco-05-meme-generator"]
 	path = projects/bloco-05-meme-generator
-	url = git@github.com:tryber/sd-011-project-meme-generator.git
+	url = https://github.com/tryber/sd-011-project-meme-generator.git
+	branch = heyset-meme-generator-project
 [submodule "projects/bloco-05-mistery-letter"]
 	path = projects/bloco-05-mistery-letter
-	url = git@github.com:tryber/sd-011-project-mistery-letter.git
+	url = https://github.com/tryber/sd-011-project-mistery-letter.git
+	branch = heyset-mistery-letter-project
