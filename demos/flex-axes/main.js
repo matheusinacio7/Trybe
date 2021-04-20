@@ -1,4 +1,5 @@
 const flexContainer = document.getElementById('flex-box');
+let previousFlexDirection;
 
 function adjustUnitsVisibilityAndGap(direction) {
   if (direction === 'row') {
@@ -10,6 +11,24 @@ function adjustUnitsVisibilityAndGap(direction) {
   }
 }
 
-const currentFlexDirection = getComputedStyle(flexContainer).flexDirection;
+function checkForChanges() {
+  const currentStyles = getComputedStyle(flexContainer);
+  const currentFlexDirection = currentStyles.flexDirection;
+  const currentAlignContent = currentStyles.alignContent;
 
-adjustUnitsVisibilityAndGap(currentFlexDirection);
+  if (currentAlignContent === 'stretch') {
+    flexContainer.classList.remove('flex-box-not-stretched');   
+  } else {
+    flexContainer.classList.add('flex-box-not-stretched');
+  }
+
+  if (previousFlexDirection !== currentFlexDirection) {
+    adjustUnitsVisibilityAndGap(currentFlexDirection);
+    previousFlexDirection = currentFlexDirection;
+  }
+
+}
+
+setInterval(() => {
+  checkForChanges();
+}, 1000);

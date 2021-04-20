@@ -3,16 +3,21 @@
   display: flex;
   background-color: rgb(120, 20, 90);
   width: 400px;
-  height: 900px;
+  height: 700px;
   flex-wrap: wrap;
   padding: 20px;
   margin: 0 auto;
   border: 5px solid black;
   z-index: -1;
 
+  /*
+    Mude as quatro propriedades abaixo
+  */
+
   flex-direction: row;
   align-content: stretch;
   align-items: center;
+  justify-content: flex-end;
 }
 
 #flex-box > div {
@@ -25,8 +30,17 @@
 
 #flex-box > .diferentao {
   background-color: rgb(80, 180, 120);
+
+  /*
+    Mude a propriedade abaixo
+  */
+
   align-self: flex-end;
 }
+
+/*
+  Não se preocupe com o código abaixo daqui.
+*/
 
 body {
   background-color: rgb(220, 220, 220);
@@ -61,11 +75,10 @@ body {
   display: block;
   position: absolute;
   border: 2px solid grey;
-  z-index: -2;
 }
 
 .row {
-  height: 225px;
+  height: 175px;
   width: 100%;
   left: 0;
 }
@@ -75,15 +88,15 @@ body {
 }
 
 .row:nth-of-type(2) {
-  top: 245px;
+  top: 195px;
 }
 
 .row:nth-of-type(3) {
-  top: 470px;
+  top: 370px;
 }
 
 .row:nth-of-type(4) {
-  top: 695px;
+  top: 545px;
 }
 
 .column {
@@ -98,4 +111,9 @@ body {
 
 .column:nth-of-type(6) {
   left: 220px;
+}
+
+.flex-box-not-stretched .column,
+.flex-box-not-stretched .row {
+  visibility: hidden;
 }
