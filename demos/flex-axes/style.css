@@ -1,0 +1,101 @@
+#flex-box {
+  position: relative;
+  display: flex;
+  background-color: rgb(120, 20, 90);
+  width: 400px;
+  height: 900px;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 0 auto;
+  border: 5px solid black;
+  z-index: -1;
+
+  flex-direction: row;
+  align-content: stretch;
+  align-items: center;
+}
+
+#flex-box > div {
+  box-sizing: border-box;
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  border: 3px solid black;
+}
+
+#flex-box > .diferentao {
+  background-color: rgb(80, 180, 120);
+  align-self: flex-end;
+}
+
+body {
+  background-color: rgb(220, 220, 220);
+}
+
+.flex-box-row {
+  column-gap: 20px;
+}
+
+.flex-box-row > .column {
+  visibility: hidden;
+}
+
+.flex-box-row > .row {
+  visibility: visible;
+}
+
+.flex-box-column {
+  row-gap: 20px;
+}
+
+.flex-box-column > .column {
+  visibility: visible;
+}
+
+.flex-box-column > .row {
+  visibility: hidden;
+}
+
+.axis-unit {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  border: 2px solid grey;
+  z-index: -2;
+}
+
+.row {
+  height: 225px;
+  width: 100%;
+  left: 0;
+}
+
+.row:nth-of-type(1) {
+  top: 20px;
+}
+
+.row:nth-of-type(2) {
+  top: 245px;
+}
+
+.row:nth-of-type(3) {
+  top: 470px;
+}
+
+.row:nth-of-type(4) {
+  top: 695px;
+}
+
+.column {
+  height: 100%;
+  width: 200px;
+  top: 0;
+}
+
+.column:nth-of-type(5) {
+  left: 20px;
+}
+
+.column:nth-of-type(6) {
+  left: 220px;
+}
