@@ -2,11 +2,11 @@
   position: relative;
   display: flex;
   background-color: rgb(120, 20, 90);
-  width: 400px;
+  width: 420px;
   height: 700px;
   flex-wrap: wrap;
   padding: 20px;
-  margin: 0 auto;
+  margin: 60px auto;
   border: 5px solid black;
   z-index: -1;
 
@@ -14,7 +14,7 @@
     Mude as quatro propriedades abaixo
   */
 
-  flex-direction: row;
+  flex-direction: column;
   align-content: stretch;
   align-items: center;
   justify-content: flex-end;
@@ -101,7 +101,7 @@ body {
 
 .column {
   height: 100%;
-  width: 200px;
+  width: 140px;
   top: 0;
 }
 
@@ -110,10 +110,109 @@ body {
 }
 
 .column:nth-of-type(6) {
-  left: 220px;
+  left: 160px;
+}
+
+.column:nth-of-type(7) {
+  left: 300px;
 }
 
 .flex-box-not-stretched .column,
 .flex-box-not-stretched .row {
+  visibility: hidden;
+}
+
+#axes {
+  display: flex;
+  position: absolute;
+  top: 0;
+  align-items: center;
+  width: 100%;
+}
+
+#horizontal-axis {
+  position: absolute;
+  width: 440px;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-55%);
+}
+
+#horizontal-axis .arrow-body {
+  display: block;
+  height: 5px;
+  background-color: black;
+}
+
+#horizontal-axis .arrow-head {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 20px solid black;
+
+  transform: translate(50%, -35%);
+}
+
+#horizontal-axis .axis-label {
+  position: absolute;
+  transform: translateY(-120%);
+}
+
+#vertical-axis {
+  position: absolute;
+  height: 740px;
+  top: 35px;
+  left: 22%;
+  transform: translateX(-55%);
+}
+
+#vertical-axis .arrow-body {
+  display: block;
+  width: 5px;
+  height: 100%;
+  background-color: black;
+}
+
+#vertical-axis .arrow-head {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 20px solid black;
+
+  transform: translate(50%, -35%);
+}
+
+#vertical-axis .axis-label {
+  position: absolute;
+  width: max-content;
+  top: 50px;
+  left: 35px;
+  transform: translateX(-100%) rotateZ(-90deg);
+}
+
+#hide-axes {
+  position: absolute;
+  top: 50%;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 20px 30px;
+}
+
+#hide-axes:hover {
+  background-color: rgb(50, 50, 50);
+}
+
+.axes--hidden {
   visibility: hidden;
 }

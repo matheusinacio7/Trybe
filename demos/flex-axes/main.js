@@ -1,13 +1,20 @@
 const flexContainer = document.getElementById('flex-box');
 let previousFlexDirection;
 
-function adjustUnitsVisibilityAndGap(direction) {
+const horizontalAxisLabel = document.querySelector('#horizontal-axis .axis-label');
+const verticalAxisLabel = document.querySelector('#vertical-axis .axis-label');
+
+function handleDirectionChange(direction) {
   if (direction === 'row') {
     flexContainer.classList.remove('flex-box-column');
     flexContainer.classList.add('flex-box-row');
+    horizontalAxisLabel.innerText = 'Eixo Principal';
+    verticalAxisLabel.innerText = 'Eixo Cruzado';
   } else {
     flexContainer.classList.add('flex-box-column');
     flexContainer.classList.remove('flex-box-row');
+    horizontalAxisLabel.innerText = 'Eixo Cruzado';
+    verticalAxisLabel.innerText = 'Eixo Principal';
   }
 }
 
@@ -23,7 +30,7 @@ function checkForChanges() {
   }
 
   if (previousFlexDirection !== currentFlexDirection) {
-    adjustUnitsVisibilityAndGap(currentFlexDirection);
+    handleDirectionChange(currentFlexDirection);
     previousFlexDirection = currentFlexDirection;
   }
 
@@ -32,3 +39,11 @@ function checkForChanges() {
 setInterval(() => {
   checkForChanges();
 }, 1000);
+
+const axes = document.getElementById('axes');
+
+function toggleAxes() {
+  axes.classList.toggle('axes--hidden');
+}
+
+document.getElementById('hide-axes').addEventListener('click', toggleAxes);
