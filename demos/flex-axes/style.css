@@ -17,7 +17,7 @@
   flex-direction: column;
   align-content: stretch;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-around;
 }
 
 #flex-box > div {
