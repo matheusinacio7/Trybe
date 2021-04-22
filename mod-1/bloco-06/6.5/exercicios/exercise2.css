@@ -38,6 +38,11 @@ ul li {
   margin: 0 12px;
 }
 
+#asides {
+  display: flex;
+  flex-direction: column;
+}
+
 .aside {
   position: relative;
   margin: 8px 0;
@@ -93,4 +98,21 @@ footer h1 {
 footer {
   margin-top: 36px;
   font-size: 0.85rem;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #asides {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  #asides .aside {
+    flex-basis: calc(50% - 6px);
+  }
 }
