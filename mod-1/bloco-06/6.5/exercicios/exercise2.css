@@ -3,15 +3,39 @@ html {
   font-family: sans-serif;
 }
 
-p {
-  font-family: serif;
-  line-height: 1.5;
-}
-
 *, *:before, *:after {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+}
+
+p {
+  font-family: serif;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 1.65rem;
+  text-align: center;
+  margin: 24px 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+.container {
+  margin: 0 12px;
 }
 
 .aside {
@@ -54,4 +78,19 @@ p {
 
 .aside input[type='checkbox']:checked ~ label .arrow {
   transform: rotateZ(180deg) translateY(-30%);
+}
+
+article h1 {
+  border: 4px double black;
+  padding: 12px 8px;
+  font-size: 1.35rem;
+}
+
+footer h1 {
+  font-size: 1.35rem;
+}
+
+footer {
+  margin-top: 36px;
+  font-size: 0.85rem;
 }
