@@ -1,0 +1,162 @@
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-family: serif;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 1.65rem;
+  text-align: center;
+  margin: 24px 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+ul li {
+  margin: 10px 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  margin: 0 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+#asides {
+  display: flex;
+  flex-direction: column;
+}
+
+.aside {
+  position: relative;
+  margin: 8px 0;
+}
+
+.aside > label {
+  font-size: 1.35rem;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #969696;
+  padding: 12px 0;
+}
+
+.aside input[type='checkbox'] {
+  display: none;
+}
+
+.aside ul {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease-out;
+}
+
+.aside input[type='checkbox']:checked ~ ul {
+  max-height: 400px;
+  transition: max-height 0.15s ease-in;
+}
+
+.aside .arrow {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid black;
+  transform: translateY(70%);
+  transition: transform 0.15s ease-in-out;
+  position: absolute;
+  right: 10%;
+}
+
+.aside input[type='checkbox']:checked ~ label .arrow {
+  transform: rotateZ(180deg) translateY(-30%);
+}
+
+article h1 {
+  border: 4px double black;
+  padding: 12px 8px;
+  font-size: 1.35rem;
+}
+
+footer h1 {
+  font-size: 1.35rem;
+}
+
+footer {
+  margin-top: 36px;
+  font-size: 0.85rem;
+}
+
+@media screen and (min-width: 768px) {
+  article, footer, #asides {
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #asides {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  #asides .aside {
+    flex-basis: calc(50% - 6px);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  main {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  article {
+    margin: 0;
+  }
+
+  article h1 {
+    margin-top: 0;
+  }
+
+  main > div {
+    flex: 1;
+    min-width: 240px;
+    max-width: 360px;
+  }
+
+  #asides {
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 240px;
+    max-width: 360px;
+    margin: 0;
+  }
+
+  #asides aside {
+    margin-top: 0;
+    width: 100%;
+  }
+}
