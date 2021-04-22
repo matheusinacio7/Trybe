@@ -1,0 +1,57 @@
+html {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+p {
+  font-family: serif;
+  line-height: 1.5;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.aside {
+  position: relative;
+  margin: 8px 0;
+}
+
+.aside > label {
+  font-size: 1.35rem;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #969696;
+  padding: 12px 0;
+}
+
+.aside input[type='checkbox'] {
+  display: none;
+}
+
+.aside ul {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease-out;
+}
+
+.aside input[type='checkbox']:checked ~ ul {
+  max-height: 400px;
+  transition: max-height 0.15s ease-in;
+}
+
+.aside .arrow {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid black;
+  transform: translateY(70%);
+  transition: transform 0.15s ease-in-out;
+  position: absolute;
+  right: 10%;
+}
+
+.aside input[type='checkbox']:checked ~ label .arrow {
+  transform: rotateZ(180deg) translateY(-30%);
+}
