@@ -29,3 +29,7 @@
 	path = mod-1/bloco-06/6.3
 	url = https://github.com/heyset/exercise-tech-gallery.git
 	branch = master
+[submodule "projects/bloco-06-trybewarts"]
+	path = projects/bloco-06-trybewarts
+	url = https://github.com/tryber/sd-011-project-trybewarts.git
+	branch = kikutii-trybewarts-project
