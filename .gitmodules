@@ -33,3 +33,6 @@
 	path = projects/bloco-06-trybewarts
 	url = https://github.com/tryber/sd-011-project-trybewarts.git
 	branch = kikutii-trybewarts-project
+[submodule "projects/bloco-07-unit-tests"]
+	path = projects/bloco-07-unit-tests
+	url = git@github.com:tryber/sd-011-project-js-unit-tests.git
