@@ -2,20 +2,20 @@ const mage = {
   healthPoints: 130,
   intelligence: 45,
   mana: 125,
-  damage: undefined,
+  damage: 0,
 };
 
 const warrior = {
   healthPoints: 200,
   strength: 30,
   weaponDmg: 2,
-  damage: undefined,
+  damage: 0,
 };
 
 const dragon = {
   healthPoints: 350,
   strength: 50,
-  damage: undefined,
+  damage: 0,
 };
 
 const battleMembers = { mage, warrior, dragon };
@@ -41,3 +41,13 @@ function getSpellDamage(spellCaster) {
 
   return getRandomInt(spellCaster.intelligence, spellCaster.intelligence * 2);
 }
+
+module.exports = {
+  mage,
+  warrior,
+  dragon,
+  battleMembers,
+  getMonsterDamage,
+  getWeaponDamage,
+  getSpellDamage,
+};
