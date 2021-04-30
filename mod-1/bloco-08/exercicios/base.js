@@ -17,3 +17,15 @@ function generateEmployees(employFunction) {
 }
 
 console.log(generateEmployees(getNewEmployee));
+
+function lotteryDraw(bet, compareFunction) {
+  const draw = Math.floor(Math.random() * 5 + 1);
+
+  if (compareFunction(bet, draw)) {
+    return 'Parabéns, você ganhou!';
+  } else {
+    return 'Tente novamente.';
+  }
+}
+
+console.log(lotteryDraw(3, (a, b) => a === b));
