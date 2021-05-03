@@ -65,9 +65,22 @@ const books = [
 
 const expectedResult = false;
 
-function authorUnique() {
-  return !books.sort((a, b) => a.author.birthYear - b.author.birthYear).
+// solucao em uma linha
+
+const authorUniqueOneLiner = () => !books.sort((a, b) => a.author.birthYear - b.author.birthYear).
     some((book, index, bookArray) => bookArray[index + 1] && book.author.birthYear === bookArray[index + 1].author.birthYear);
+
+
+// a mesma solucao acima, porem em mais linhas para melhor entendimento;
+
+function properAuthorUnique() {
+  const sortedBooks = books.sort((a, b) => a.author.birthYear - b.author.birthYear);
+
+  return !sortedBooks.some((book, index, bookArray) => {
+    const nextBook = bookArray[index + 1];
+
+    return nextBook && book.author.birthYear === nextBook.author.birthYear;
+  })
 }
 
-assert.strictEqual(authorUnique(), expectedResult);
+assert.strictEqual(properAuthorUnique(), expectedResult);
