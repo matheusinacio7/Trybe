@@ -39,3 +39,6 @@
 [submodule "projects/bloco-08-zoo-functions"]
 	path = projects/bloco-08-zoo-functions
 	url = https://github.com/tryber/sd-011-project-zoo-functions.git
+[submodule "projects/bloco-09-shopping-cart"]
+	path = projects/bloco-09-shopping-cart
+	url = https://github.com/tryber/sd-011-project-shopping-cart.git
