@@ -11,11 +11,12 @@ function getPowerLevel() {
     }
 
     const sum = powerIndexes.reduce((acc, curr) => acc + curr, 0);
+    const humanLevels = [sum / 2, sum / 3, sum / 5, sum / 10].map((level) => Math.round(level));
 
     if (sum > 8000) {
       reject();
     } else {
-      resolve();
+      resolve(humanLevels);
     }
   });
 }
