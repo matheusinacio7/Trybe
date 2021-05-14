@@ -21,6 +21,13 @@ function getPowerLevel() {
   });
 }
 
+function sumPowerLevels(powerLevels) {
+  return new Promise((resolve, reject) => {
+    resolve(powerLevels.reduce((acc, curr) => acc + curr, 0));
+  })
+}
+
 getPowerLevel()
-.then(() => console.log('Promise resolvida.'))
+.then((powerLevels) => sumPowerLevels(powerLevels))
+.then((powerTotal) => console.log(`O poder é menos de ${powerTotal}`))
 .catch((reason) => console.log(`${reason} Essa promise deve estar quebrada!`));
