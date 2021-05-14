@@ -14,7 +14,7 @@ function getPowerLevel() {
     const humanLevels = [sum / 2, sum / 3, sum / 5, sum / 10].map((level) => Math.round(level));
 
     if (sum > 8000) {
-      reject();
+      reject('É mais de oito mil!');
     } else {
       resolve(humanLevels);
     }
@@ -23,4 +23,4 @@ function getPowerLevel() {
 
 getPowerLevel()
 .then(() => console.log('Promise resolvida.'))
-.catch(() => console.log('Promise rejeitada.'));
+.catch((reason) => console.log(`${reason} Essa promise deve estar quebrada!`));
