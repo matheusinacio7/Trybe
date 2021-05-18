@@ -29,3 +29,16 @@
 	path = mod-1/bloco-06/6.3
 	url = https://github.com/heyset/exercise-tech-gallery.git
 	branch = master
+[submodule "projects/bloco-06-trybewarts"]
+	path = projects/bloco-06-trybewarts
+	url = https://github.com/tryber/sd-011-project-trybewarts.git
+	branch = kikutii-trybewarts-project
+[submodule "projects/bloco-07-unit-tests"]
+	path = projects/bloco-07-unit-tests
+	url = git@github.com:tryber/sd-011-project-js-unit-tests.git
+[submodule "projects/bloco-08-zoo-functions"]
+	path = projects/bloco-08-zoo-functions
+	url = https://github.com/tryber/sd-011-project-zoo-functions.git
+[submodule "projects/bloco-09-shopping-cart"]
+	path = projects/bloco-09-shopping-cart
+	url = https://github.com/tryber/sd-011-project-shopping-cart.git
