@@ -39,7 +39,10 @@ const professionalBoard = [
 ];
 
 const searchEmployee = (id, detail) => {
-
+  throw new Error('ID não encontrada.');
 };
 
-module.exports = searchEmployee;
+module.exports = {
+  searchEmployee,
+  professionalBoard,
+}
