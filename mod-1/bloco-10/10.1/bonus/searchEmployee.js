@@ -38,12 +38,20 @@ const professionalBoard = [
   },
 ];
 
-const searchEmployee = (id, detail) => {
+const searchEmployee = (id, ...details) => {
   const foundEmployee = professionalBoard.find((employee) => employee.id === id);
 
   if(!foundEmployee) {
     throw new Error('ID não encontrada.');
-  }
+  };
+
+  const info = {};
+
+  details.forEach((detail) => {
+    info[detail] = foundEmployee[detail];
+  });
+
+  return info;
 };
 
 module.exports = {
