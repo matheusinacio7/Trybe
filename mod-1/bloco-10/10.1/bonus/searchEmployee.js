@@ -45,8 +45,8 @@ const searchEmployee = (id, ...details) => {
     throw new Error('ID não encontrada.');
   };
 
-  if(details.length) {
-    
+  if(!details.length) {
+    return foundEmployee;
   }
 
   const info = {};

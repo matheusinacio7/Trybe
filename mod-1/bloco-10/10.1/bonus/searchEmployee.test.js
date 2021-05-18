@@ -20,4 +20,14 @@ describe('Retorna as informações corretas quando encontra um match.', () => {
   test('Retorna todas as informações quando os detalhes não são especificados.', () => {
     expect(searchEmployee(employee.id)).toEqual(employee);
   });
+
+  test('Retorna apenas as informações requisitadas quando especificadas.', () => {
+    expect(searchEmployee(employee.id, 'firstName')).toEqual({firstName: employee.firstName});
+    expect(searchEmployee(employee.id, 'lastName', 'specialities')).toEqual({
+      lastName: employee.lastName,
+      specialities: employee.specialities,
+    });
+  });
+
+  
 });
