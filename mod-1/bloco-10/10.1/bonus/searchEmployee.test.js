@@ -27,7 +27,21 @@ describe('Retorna as informações corretas quando encontra um match.', () => {
       lastName: employee.lastName,
       specialities: employee.specialities,
     });
+    expect(searchEmployee(employee.id, 'lastName', 'specialities', 'address')).toEqual({
+      lastName: employee.lastName,
+      specialities: employee.specialities,
+    });
   });
-
-  
 });
+
+test('Retorna erro quando nenhuma informação especificada existe', () => {
+  const employee = {
+    id: '9852-2-2',
+    firstName: 'Jeff',
+    lastName: 'Cook',
+    specialities: ['Ruby', 'SQL'],
+  };
+
+  expect(() => searchEmployee(employee.id, 'address', 'phoneNumber'))
+  .toThrowError(new Error('Informação não disponível.'));
+})
