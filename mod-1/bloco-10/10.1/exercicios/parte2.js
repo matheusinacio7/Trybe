@@ -1,9 +1,25 @@
+let decodeDictionary = {
+  1: 'a',
+  2: 'e',
+  3: 'i',
+  4: 'o',
+  5: 'u',
+};
+
+let encodeDictionary = {
+  a: 1,
+  e: 2,
+  i: 3,
+  o: 4,
+  u: 5,
+}
+
 function encode(sentence) {
   let encodedSentence = '';
 
   for (let char of sentence) {
-    if (cryptoDictionary[char]) {
-      encodedSentence += cryptoDictionary[char];
+    if (encodeDictionary[char]) {
+      encodedSentence += encodeDictionary[char];
     } else {
       encodedSentence += char;
     }
@@ -17,7 +33,7 @@ function decode(sentence) {
 
   for (let char of sentence) {
     if (parseInt(char, 10) < 6 && parseInt(char, 10) > 0) {
-      decodedSentence += cryptoDictionary[parseInt(char, 10)];
+      decodedSentence += decodeDictionary[parseInt(char, 10)];
     } else {
       decodedSentence += char;
     }
@@ -38,4 +54,10 @@ function hydrate(orderString) {
   }
 
   return `${totalCount} copos de água`;
+}
+
+module.exports = {
+  encode,
+  decode,
+  hydrate,
 }
