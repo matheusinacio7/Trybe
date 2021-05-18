@@ -1,5 +1,5 @@
-const { expect, test } = require('@jest/globals');
-const { sum, myRemove, myRemoveWithoutCopy, myFizzBuzz } = require('./parte1');
+const { describe, expect, test } = require('@jest/globals');
+const { sum, myRemove, myRemoveWithoutCopy, myFizzBuzz, obj1, obj2, obj3 } = require('./parte1');
 
 test('Realiza somas corretamente.', () => {
   expect(sum(4, 5)).toBe(9);
@@ -30,3 +30,12 @@ test('Retorna fizzbuzz corretamente', () => {
   expect(myFizzBuzz('drown the king HAHAHAHAHA')).toBe(false);
 })
 
+describe('Testa se objetos são iguais', () => {
+  test('obj1 é igual a obj2', () => {
+    expect(obj1).toEqual(obj2)
+  });
+
+  test('obj1 é diferente de obj3', () => {
+    expect(obj1).not.toEqual(obj3)
+  });
+})
