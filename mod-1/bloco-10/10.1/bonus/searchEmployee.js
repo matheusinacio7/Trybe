@@ -52,8 +52,14 @@ const searchEmployee = (id, ...details) => {
   const info = {};
 
   details.forEach((detail) => {
-    info[detail] = foundEmployee[detail];
+    if (foundEmployee[detail]) {
+      info[detail] = foundEmployee[detail];
+    }
   });
+
+  if (!Object.keys(info).length) {
+    throw new Error('Informação não disponível.');
+  }
 
   return info;
 };
