@@ -6,5 +6,5 @@ test('Função existe', () => {
 });
 
 test('Retorna erro quando o id não é encontrado', () => {
-  expect(() => searchEmployee('8491-8')).toThrowError(new Error('ID não encontrada.'));
+  expect(() => searchEmployee('8491-9')).toThrowError(new Error('ID não encontrada.'));
 });

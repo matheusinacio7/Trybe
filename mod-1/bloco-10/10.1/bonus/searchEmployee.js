@@ -39,7 +39,11 @@ const professionalBoard = [
 ];
 
 const searchEmployee = (id, detail) => {
-  throw new Error('ID não encontrada.');
+  const foundEmployee = professionalBoard.find((employee) => employee.id === id);
+
+  if(!foundEmployee) {
+    throw new Error('ID não encontrada.');
+  }
 };
 
 module.exports = {
