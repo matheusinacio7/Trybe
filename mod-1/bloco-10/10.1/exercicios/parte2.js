@@ -56,8 +56,15 @@ function hydrate(orderString) {
   return `${totalCount} copos de água`;
 }
 
+function techList(list, name) {
+  if (!list || !list.length) return 'Vazio!';
+
+  return list.sort().map((tech) => ({tech, name}));
+}
+
 module.exports = {
   encode,
   decode,
   hydrate,
+  techList
 }
