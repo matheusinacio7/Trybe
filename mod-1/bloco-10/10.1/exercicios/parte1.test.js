@@ -1,5 +1,5 @@
 const { expect, test } = require('@jest/globals');
-const { sum, myRemove, myRemoveWithoutCopy } = require('./parte1');
+const { sum, myRemove, myRemoveWithoutCopy, myFizzBuzz } = require('./parte1');
 
 test('Realiza somas corretamente.', () => {
   expect(sum(4, 5)).toBe(9);
@@ -21,3 +21,12 @@ test('Remove elemento do array inplace corretamente', () => {
   expect(originalArray).toEqual([1, 2, 4]);
   expect(myRemoveWithoutCopy([1, 2, 3, 4], 5)).toEqual([1, 2, 3, 4]);
 });
+
+test('Retorna fizzbuzz corretamente', () => {
+  expect(myFizzBuzz(30)).toBe('fizzbuzz');
+  expect(myFizzBuzz(9)).toBe('fizz');
+  expect(myFizzBuzz(20)).toBe('buzz');
+  expect(myFizzBuzz(14)).toBe(14);
+  expect(myFizzBuzz('drown the king HAHAHAHAHA')).toBe(false);
+})
+
