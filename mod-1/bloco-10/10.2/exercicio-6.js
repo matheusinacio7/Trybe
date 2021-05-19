@@ -1,5 +1,6 @@
 const Animals = [
   { name: 'Dorminhoco', age: 1, type: 'Dog' },
+  { name: 'Amimir', age: 1, type: 'Cat '},
   { name: 'Soneca', age: 2, type: 'Dog' },
   { name: 'Preguiça', age: 5, type: 'Cat' },
 ];
@@ -39,6 +40,20 @@ const getListAnimals = (type) => (
   findAnimalsByType(type).then(list => list)
 );
 
+const getAnimalsByAge = (age) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const foundAnimals = Animals.filter((animal) => animal.age === age);
+
+      if(!foundAnimals.length) {
+        return reject({ error: 'Nenhum animla tem essa idade.' });
+      }
+      return resolve(foundAnimals);
+    }, 100);
+  })
+}
+
 module.exports = {
   getAnimal,
+  getAnimalsByAge,
 }
