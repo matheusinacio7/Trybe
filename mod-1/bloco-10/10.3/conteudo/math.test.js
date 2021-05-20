@@ -1,6 +1,7 @@
 const { describe, it, expect  } = require('@jest/globals');
 
-let { dividir, multiplicar, somar, subtrair } = require('./math');
+const math = require('./math');
+let { dividir, multiplicar, somar, subtrair } = math;
 
 //1. Faça o mock da funcão subtrair e teste sua chamada.
 describe('fn subtrair', () => {
@@ -55,3 +56,19 @@ describe('fn dividr', () => {
 });
 
 //5. Faça o mock da função subtrair de maneira que seja possível restaurar sua implementação original. Defina como retorno padrão o valor '20'. Teste o número de chamadas e o retorno. Restaure a implementação original da função e teste sua execução.
+describe('fn subtrair', () => {
+  math.subtrair = jest.spyOn(math, 'subtrair');
+  
+  it('Retorna 20 quando mockada', () => {
+    math.subtrair.mockReturnValue('20');
+
+    expect(math.subtrair(10, 3)).toBe('20');
+    expect(math.subtrair).toHaveBeenCalled();
+  });
+
+  it('Retorna o que deveria quando resetada', () => {
+    math.subtrair.mockRestore();
+
+    expect(math.subtrair(10, 3)).toBe(7);
+  })
+})
