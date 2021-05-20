@@ -115,9 +115,9 @@ function testesComRegEx() {
 // testesComRegEx();
 
 module.exports = {
-  findOne,
   getAll,
-  updateOne,
-  removeOne,
+  findOne,
   insertOne,
+  removeOne,
+  updateOne,
 }
