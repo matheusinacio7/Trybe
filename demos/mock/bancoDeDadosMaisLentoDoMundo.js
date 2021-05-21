@@ -56,7 +56,7 @@ const removeOne = colocarLenha((filter) => {
   const userIndex = users.findIndex(filter);
 
   if (userIndex === -1) {
-    return 'Usuário não encontrado.';
+    throw new Error('Usuário não encontrado.');
   }
   
   const userId = users[userIndex].id;
@@ -74,7 +74,7 @@ const updateOne = colocarLenha((filter, updates) => {
   const user = users.find(filter);
 
   if (!user) {
-    return 'Usuário não encontrado.';
+    throw new Error('Usuário não encontrado.');
   }
 
   Object.entries(updates).forEach(([key, value]) => {

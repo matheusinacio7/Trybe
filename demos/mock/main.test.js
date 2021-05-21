@@ -5,11 +5,11 @@ const { getAll, findOne, insertOne, removeOne, updateOne } = require('./bancoDeD
 
 describe('A função getGreetingString', () => {
   describe('Quando o usuário é encontrado', () => {
-    const expectedString = `Olá! Meu nome é Xuxa e minha comida favorita é Algodão Doce!
+    const expectedString = `Olá! Meu nome é Janete Corça e minha comida favorita é Sushi!
 Qual a sua??`
 
     it('Retorna a frase correta', () => {
-      return findOne((user) => user.name === 'Xuxa')
+      return findOne((user) => user.name === 'Janete Corça')
         .then((user) => {
           expect(getGreetingString('Olá', user)).toBe(expectedString);
         });
