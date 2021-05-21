@@ -8,4 +8,10 @@ describe('A função getRandomIntUpTo100', () => {
     expect(getRandomIntUpTo100()).toBe(10);
     expect(getRandomIntUpTo100).toHaveBeenCalledTimes(1);
   });
+
+  it('Retorna a divisão de dois valores um pelo outro', () => {
+    getRandomIntUpTo100 = getRandomIntUpTo100.mockImplementationOnce((a, b) => a / b);
+    expect(getRandomIntUpTo100(28, 7)).toBe(4);
+    expect(getRandomIntUpTo100()).toBe(10);
+  });
 });
