@@ -42,3 +42,6 @@
 [submodule "projects/bloco-09-shopping-cart"]
 	path = projects/bloco-09-shopping-cart
 	url = https://github.com/tryber/sd-011-project-shopping-cart.git
+[submodule "projects/bloco-10-jest"]
+	path = projects/bloco-10-jest
+	url = https://github.com/tryber/sd-011-project-jest.git
