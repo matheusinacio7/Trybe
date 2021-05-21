@@ -1,4 +1,5 @@
 const { describe, it, expect } = require('@jest/globals');
+const main = require('./main.js');
 let { getRandomIntUpTo100, concatTwoStrings, getFirstChar, uppercaseString } = require('./main');
 
 describe('A função getRandomIntUpTo100', () => {
@@ -30,12 +31,17 @@ describe('A função getRandomIntUpTo100', () => {
 });
 
 describe('A função uppercaseString', () => {
-  uppercaseString = jest.fn((str) => str.toLowerCase());
+  main.uppercaseString = jest.spyOn(main, 'uppercaseString').mockImplementation((str) => str.toLowerCase());
 
   it('Transforma uma string em lower case', () => {
-    expect(uppercaseString('DESTRUA A COROA')).toBe('destrua a coroa');
-    expect(uppercaseString('o rEi estÁ mORTo')).toBe('o rei está morto');
+    expect(main.uppercaseString('DESTRUA A COROA')).toBe('destrua a coroa');
+    expect(main.uppercaseString('o rEi estÁ mORTo')).toBe('o rei está morto');
   });
+
+  it('Transforma a string em uppercase', () => {
+    main.uppercaseString.mockRestore();
+    expect(main.uppercaseString('tudo queima hahaha')).toBe('TUDO QUEIMA HAHAHA');
+  })
 });
 
 describe('A função getFirstChar', () => {
