@@ -13,7 +13,8 @@ Qual a sua??`
         .then((user) => {
           expect(getGreetingString('Olá', user)).toBe(expectedString);
         });
-    })
-  })
-})
+    });
+  });
+});
+
 
