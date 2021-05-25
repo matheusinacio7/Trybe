@@ -1,6 +1,6 @@
 const POKEMONS = [
   {
-      id: 25,
+      id: "VINTE E CINCO",
       name: "Pikachu",
       type: 'Electric',
       averageWeight: {
