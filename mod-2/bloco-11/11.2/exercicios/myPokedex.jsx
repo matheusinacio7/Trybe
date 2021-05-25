@@ -106,7 +106,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <div>{this.props.children}</div>
+    return <div className="app">{this.props.children}</div>
   }
 }
 
@@ -115,13 +115,15 @@ class Pokemon extends React.Component {
     const { id, name, type, averageWeight, image, moreInfo } = this.props.pokemonData;
     
     return (
-      <li className='pokemon'>
-        <img src={image} alt={`Pokémon n${id}: ${name}`} />
-        <p className='pokemon__number'>#{id.toString(10).padStart(3, '0')}</p>
-        <p className='pokemon__name'>{name}</p>
-        <p className='pokemon__details'>
+      <li className="pokemon">
+        <picture className="pokemon__picture" >
+          <img src={image} alt={`Pokémon n${id}: ${name}`} />
+        </picture>
+        <h2 className="pokemon__number">#{id.toString(10).padStart(3, '0')}</h2>
+        <h1 className="pokemon__name">{name}</h1>
+        <p className="pokemon__details">
           <span>Type: {type}</span>
-          <span>Average Weight: {averageWeight.value} {averageWeight.measurementUnit}</span>
+          <span>Avg. Weight: {averageWeight.value} {averageWeight.measurementUnit}</span>
           <span><a target="_blank" href={moreInfo}>Read more</a></span>
         </p>
       </li>
@@ -132,15 +134,24 @@ class Pokemon extends React.Component {
 function Pokedex(props) {
   return (
     <section className="pokedex">
-      <h1>My Pokedex</h1>
-      {props.pokemonList.map((pokemon) => <Pokemon pokemonData={pokemon} />)}
+      <h1 className="pokedex__heading">My Pokedex</h1>
+      <ul className="pokedex__list">
+        {props.pokemonList.map((pokemon) => <Pokemon pokemonData={pokemon} key={pokemon.id} />)}
+      </ul>
     </section>
   )
 }
 
 ReactDOM.render(
   <App>
+    <header>
+      <h1>Dia 11.2 - Pokedex</h1>
+    </header>
     <Pokedex pokemonList={POKEMONS} />
+    <footer>
+      <p>Feito por <a target="_blank" href="https://github.com/heyset">Matheus "Set" Inacio</a>, 2021.</p>
+      <p>Todos os direitos de imagem e nome da marca Pokémon&copy; são de autoria da Nintendo&reg;.</p>
+    </footer>
   </App>,
   document.getElementById('root'),
 );
