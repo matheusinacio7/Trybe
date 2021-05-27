@@ -12,9 +12,11 @@ class App extends React.Component {
     const name = e.target.innerText;
     const index = parseInt(e.target.dataset.position);
     this.setState((previous) => {
-      previous.counters[index] += 1;
+      const counters = [...previous.counters];
+
+      counters[index] += 1;
       return {
-        counters: previous.counters,
+        counters,
       };
     });
     
