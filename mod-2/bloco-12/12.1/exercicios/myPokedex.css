@@ -96,3 +96,31 @@ header, footer {
   flex-direction: column;
   font-size: 0.85rem;
 }
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.controls button {
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #343434;
+  border: none;
+  color: #efefef;
+  cursor: pointer;
+}
+
+.controls button:disabled {
+  color: #bebebe;
+  cursor: not-allowed;
+}
+
+.controls__filters {
+  list-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 12px
+}
