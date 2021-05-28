@@ -10,6 +10,7 @@ class App extends React.Component {
   }
 
   handleClick(e) {
+    console.log(this);
     const name = e.target.innerText;
     const index = parseInt(e.target.dataset.position);
     this.setState((previous) => {
@@ -41,7 +42,6 @@ class App extends React.Component {
     </div>)
   }
 }
-
 
 ReactDOM.render(
   <App></App>,
