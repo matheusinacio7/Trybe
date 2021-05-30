@@ -38,27 +38,6 @@ const ESTADOS = [
   { name: 'Tocantins', acronym: 'TO',},
 ]
 
-class Input extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return(
-      <input 
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        maxLength={this.props.maxLength}
-        type="text"
-        value={this.props.value}
-        onChange={this.props.onChange}
-        type={this.props.type}
-        required
-      />
-    );
-  }
-}
-
 class StateDropdown extends React.Component {
   constructor(props) {
     super(props);
@@ -81,6 +60,48 @@ class StateDropdown extends React.Component {
   }
 }
 
+class Input extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return(
+      <input 
+        name={this.props.name}
+        placeholder={this.props.placeholder}
+        maxLength={this.props.maxLength}
+        type="text"
+        value={this.props.value}
+        onChange={this.props.onChange}
+        type={this.props.type}
+        required
+      />
+    );
+  }
+}
+
+class TextArea extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <textarea 
+        name="resumo"
+        cols="30"
+        rows="10"
+        onChange={this.props.onChange}
+        maxLength={this.props.maxLength}
+        value={this.props.value}
+        placeholder={this.props.placeholder}
+        required
+      ></textarea>
+    );
+  }
+}
+
 class Form extends React.Component {
   constructor() {
     super();
@@ -92,6 +113,9 @@ class Form extends React.Component {
       cidade: '',
       estado: 'AC',
       tipo: '',
+      resumo: '',
+      cargo: '',
+      desc: '',
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -123,7 +147,7 @@ class Form extends React.Component {
             maxLength="50"
             value={this.state.email}
             onChange={this.handleChange}
-            type="text"
+            type="email"
           />
           <Input
             name="cpf"
@@ -177,6 +201,28 @@ class Form extends React.Component {
 
         <fieldset>
           <legend>Último Emprego</legend>
+          <TextArea 
+            name="resumo"
+            maxLength="1000"
+            value={this.state.resumo}
+            onChange={this.handleChange}
+            placeholder="Resuma o seu curriculo aqui."
+          />
+          <TextArea
+            name="cargo"
+            maxLength="40"
+            value={this.state.cargo}
+            onChange={this.handleChange}
+            placeholder="Descreva o cargo"
+          />
+          <Input
+            name="descricao-cargo"
+            placeholder="Descrição do Cargo"
+            maxLength="500"
+            value={this.state.desc}
+            onChange={this.handleChange}
+            type="text"
+          />
         </fieldset>
 
         <input type="submit" value="Montar curriculo" />
