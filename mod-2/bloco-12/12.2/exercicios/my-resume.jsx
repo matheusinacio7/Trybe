@@ -95,6 +95,7 @@ class TextArea extends React.Component {
         cols="30"
         rows="10"
         onChange={this.props.onChange}
+        onMouseOver={this.props.onMouseOver}
         maxLength={this.props.maxLength}
         value={this.props.value}
         placeholder={this.props.placeholder}
@@ -118,9 +119,11 @@ class Form extends React.Component {
       resumo: '',
       cargo: '',
       desc: '',
+      hasAlertShowedUp: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this)
   }
 
   validators = {
@@ -130,6 +133,14 @@ class Form extends React.Component {
     removeSpecialChars(str) {
       const filteredString = str.match(/[(\w|.|,|\s)]/gi);
       return filteredString ? filteredString.join('') : '';
+    }
+  }
+
+  handleBlur(e) {
+    const { name, value } = e.target;
+
+    if (/^\d+/.test(value)) {
+      this.setState({[name]: ''});
     }
   }
 
@@ -147,11 +158,10 @@ class Form extends React.Component {
     this.setState({[name]: value});
   }
 
-  handleBlur(e) {
-    const { name, value } = e.target;
-
-    if (/^\d+/.test(value)) {
-      this.setState({[name]: ''});
+  handleMouseOver() {
+    if (!this.state.hasAlertShowedUp) {
+      alert('Preencha com cuidado esta informação.');
+      this.setState({hasAlertShowedUp: true});
     }
   }
 
@@ -241,6 +251,7 @@ class Form extends React.Component {
             maxLength="40"
             value={this.state.cargo}
             onChange={this.handleChange}
+            onMouseOver={this.handleMouseOver}
             placeholder="Qual seu cargo?"
           />
           <Input
