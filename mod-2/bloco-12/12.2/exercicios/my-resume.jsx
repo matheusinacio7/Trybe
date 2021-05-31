@@ -149,14 +149,30 @@ class Form extends React.Component {
     removeSpecialChars(str) {
       const filteredString = str.match(/[(\w|.|,|\s)]/gi);
       return filteredString ? filteredString.join('') : '';
+    },
+    checkIfStartsWithNum(str) {
+      if(/^\d+/.test(str)) {
+        return '';
+      } else {
+        return str;
+      }
+    },
+    alertIfItsNotTrybe(str) {
+      if(!/trybe@gmail.com/.test(str)) {
+        alert('O email precisa ser "trybe@gmail.com"');
+        return '';
+      } else {
+        return str;
+      }
     }
   }
 
-  handleBlur(e) {
+  handleBlur(e, options) {
     const { name, value } = e.target;
 
-    if (/^\d+/.test(value)) {
-      this.setState({[name]: ''});
+    if(options && options.validator) {
+      const validatedValue = options.validator(value);
+      this.setState({[name]: validatedValue});
     }
   }
 
@@ -216,6 +232,7 @@ class Form extends React.Component {
             placeholder="Email"
             maxLength="50"
             value={this.state.email}
+            onBlur={(e) => this.handleBlur(e, {validator: this.validators.alertIfItsNotTrybe})}
             onChange={this.handleChange}
             type="email"
           />
@@ -240,7 +257,7 @@ class Form extends React.Component {
             placeholder="Cidade"
             maxLength="28"
             value={this.state.cidade}
-            onBlur={this.handleBlur}
+            onBlur={(e) => this.handleBlur(e, {validator: this.validators.checkIfStartsWithNum})}
             onChange={this.handleChange}
             type="text"
           />
