@@ -1,13 +1,3 @@
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return <div>{this.props.children}</div>
-  }
-}
-
 const ESTADOS = [
   { name: 'Acre', acronym: 'AC',},
   { name: 'Alagoas', acronym: 'AL',},
@@ -91,7 +81,7 @@ class TextArea extends React.Component {
   render() {
     return (
       <textarea 
-        name="resumo"
+        name={this.props.name}
         cols="30"
         rows="10"
         onChange={this.props.onChange}
@@ -105,9 +95,34 @@ class TextArea extends React.Component {
   }
 }
 
+class Resume extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { nome, email, cpf, endereco, cidade, estado, tipo, resumo, cargo, desc } = this.props.info;
+
+    return (
+      <div>
+        <p>Nome: {nome}</p>
+        <p>Email: {email}</p>
+        <p>CPF: {cpf}</p>
+        <p>Estado: {estado}</p>
+        <p>Cidade: {cidade}</p>
+        <p>Endereco: {endereco}, {tipo}</p>
+        <p>Resumo do Curriculo: {resumo}</p>
+        Ultimo emprego:
+        <p>Cargo: {cargo}</p>
+        <p>Descrição: {desc}</p>
+      </div>
+    );
+  }
+}
+
 class Form extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       nome: '',
       email: '',
@@ -167,7 +182,7 @@ class Form extends React.Component {
 
   render() {
     return(
-      <form>
+      <form onSubmit={(e) => this.props.handleSubmit(e, this.state)}>
         <fieldset>
           <legend>Dados Pessoais</legend>
           <Input
@@ -255,7 +270,7 @@ class Form extends React.Component {
             placeholder="Qual seu cargo?"
           />
           <Input
-            name="descricao-cargo"
+            name="desc"
             placeholder="Descreva o cargo detalhadamente"
             maxLength="500"
             value={this.state.desc}
@@ -270,9 +285,31 @@ class Form extends React.Component {
   }
 }
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.state = {
+      currentInfo: {},
+      hasInfo: false,
+    }
+  }
+
+  handleSubmit(e, info) {
+    e.preventDefault();
+    this.setState({currentInfo: info, hasInfo: true});
+  }
+
+  render() {
+    return (
+    <div>
+      <Form handleSubmit={this.handleSubmit} />
+      {this.state.hasInfo && <Resume info={this.state.currentInfo} />}
+    </div>)
+  }
+}
+
 ReactDOM.render(
-  <App>
-    <Form />
-  </App>,
+  <App />,
   document.getElementById('root'),
 );
