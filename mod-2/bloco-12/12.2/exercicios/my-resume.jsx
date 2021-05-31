@@ -138,7 +138,8 @@ class Form extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.handleMouseOver = this.handleMouseOver.bind(this)
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   validators = {
@@ -180,9 +181,26 @@ class Form extends React.Component {
     }
   }
 
+  handleReset() {
+    this.setState({
+      nome: '',
+      email: '',
+      cpf: '',
+      endereco: '',
+      cidade: '',
+      estado: 'AC',
+      tipo: '',
+      resumo: '',
+      cargo: '',
+      desc: ''
+    });
+
+    this.props.handleReset();
+  }
+
   render() {
     return(
-      <form onSubmit={(e) => this.props.handleSubmit(e, this.state)}>
+      <form onSubmit={(e) => this.props.handleSubmit(e, this.state)} onReset={this.handleReset}>
         <fieldset>
           <legend>Dados Pessoais</legend>
           <Input
@@ -280,6 +298,7 @@ class Form extends React.Component {
         </fieldset>
 
         <input type="submit" value="Montar curriculo" />
+        <input type="reset" value="Limpar" />
       </form>
     );
   }
@@ -288,11 +307,18 @@ class Form extends React.Component {
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = {
       currentInfo: {},
       hasInfo: false,
     }
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleReset = this.handleReset.bind(this);
+  }
+
+  handleReset() {
+    console.log('eita');
+    this.setState({currentInfo: {}, hasInfo: false});
   }
 
   handleSubmit(e, info) {
@@ -303,7 +329,7 @@ class App extends React.Component {
   render() {
     return (
     <div>
-      <Form handleSubmit={this.handleSubmit} />
+      <Form handleSubmit={this.handleSubmit} handleReset={this.handleReset} />
       {this.state.hasInfo && <Resume info={this.state.currentInfo} />}
     </div>)
   }
