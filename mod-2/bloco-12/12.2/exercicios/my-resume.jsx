@@ -75,6 +75,7 @@ class Input extends React.Component {
         value={this.props.value}
         onChange={this.props.onChange}
         type={this.props.type}
+        validator={this.props.validator}
         required
       />
     );
@@ -120,12 +121,20 @@ class Form extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange({ target }) {
-    const { name, value, maxLength } = target;
+  validators = {
+    uppercaseValues(e) {
+      return e.toUpperCase();
+    }
+  }
 
+  handleChange({ target }, { validator }) {
+    const { name, value, maxLength } = target;
+    const validatedValue = validator(value);
+
+    if (validatedValue === undefined) return;
     if (maxLength > 0 && value.length >= maxLength) return;
 
-    this.setState({[name]: value});
+    this.setState({[name]: validatedValue});
   }
 
   render() {
@@ -138,7 +147,7 @@ class Form extends React.Component {
             placeholder="Nome"
             maxLength="40"
             value={this.state.nome}
-            onChange={this.handleChange}
+            onChange={(e) => this.handleChange(e, {validator: this.validators.uppercaseValues})}
             type="text"
           />
           <Input
@@ -213,11 +222,11 @@ class Form extends React.Component {
             maxLength="40"
             value={this.state.cargo}
             onChange={this.handleChange}
-            placeholder="Descreva o cargo"
+            placeholder="Qual seu cargo?"
           />
           <Input
             name="descricao-cargo"
-            placeholder="Descrição do Cargo"
+            placeholder="Descreva o cargo detalhadamente"
             maxLength="500"
             value={this.state.desc}
             onChange={this.handleChange}
