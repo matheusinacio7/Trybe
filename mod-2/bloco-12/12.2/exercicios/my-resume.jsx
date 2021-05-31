@@ -73,6 +73,7 @@ class Input extends React.Component {
         maxLength={this.props.maxLength}
         type="text"
         value={this.props.value}
+        onBlur={this.props.onBlur}
         onChange={this.props.onChange}
         type={this.props.type}
         validator={this.props.validator}
@@ -119,6 +120,7 @@ class Form extends React.Component {
       desc: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   validators = {
@@ -143,6 +145,14 @@ class Form extends React.Component {
     }
 
     this.setState({[name]: value});
+  }
+
+  handleBlur(e) {
+    const { name, value } = e.target;
+
+    if (/^\d+/.test(value)) {
+      this.setState({[name]: ''});
+    }
   }
 
   render() {
@@ -187,6 +197,7 @@ class Form extends React.Component {
             placeholder="Cidade"
             maxLength="28"
             value={this.state.cidade}
+            onBlur={this.handleBlur}
             onChange={this.handleChange}
             type="text"
           />
