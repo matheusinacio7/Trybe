@@ -122,19 +122,27 @@ class Form extends React.Component {
   }
 
   validators = {
-    uppercaseValues(e) {
-      return e.toUpperCase();
+    uppercaseValues(str) {
+      return str.toUpperCase();
+    },
+    removeSpecialChars(str) {
+      const filteredString = str.match(/[(\w|.|,|\s)]/gi);
+      return filteredString ? filteredString.join('') : '';
     }
   }
 
-  handleChange({ target }, { validator }) {
-    const { name, value, maxLength } = target;
-    const validatedValue = validator(value);
+  handleChange(e, options) {
+    const { name, value, maxLength } = e.target;
 
-    if (validatedValue === undefined) return;
     if (maxLength > 0 && value.length >= maxLength) return;
 
-    this.setState({[name]: validatedValue});
+    if(options && options.validator) {
+      const validatedValue = options.validator(value);
+      this.setState({[name]: validatedValue});
+      return;
+    }
+
+    this.setState({[name]: value});
   }
 
   render() {
@@ -171,7 +179,7 @@ class Form extends React.Component {
             placeholder="Endereço"
             maxLength="200"
             value={this.state.endereco}
-            onChange={this.handleChange}
+            onChange={(e) => this.handleChange(e, {validator: this.validators.removeSpecialChars})}
             type="text"
           />
           <Input
