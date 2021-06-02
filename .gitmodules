@@ -54,3 +54,6 @@
 [submodule "mod-2/bloco-13/13.1/conteudo/lifecycle"]
 	path = mod-2/bloco-13/13.1/conteudo/lifecycle
 	url = git@github.com:heyset/exercises-lifecycle-step-by-step.git
+[submodule "mod-2/bloco-13/13.1/exercicios/dog-image"]
+	path = mod-2/bloco-13/13.1/exercicios/dog-image
+	url = git@github.com:heyset/exercise-dog-image.git
