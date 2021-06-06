@@ -54,3 +54,6 @@
 [submodule "mod-2/bloco-13/13.2/conteudo/comprehension-exercises-router"]
 	path = mod-2/bloco-13/13.2/conteudo/comprehension-exercises-router
 	url = https://github.com/heyset/comprehension-exercises-router.git
+[submodule "mod-2/bloco-13/13.2/exercicios/exercise-pokedex-router"]
+	path = mod-2/bloco-13/13.2/exercicios/exercise-pokedex-router
+	url = https://github.com/heyset/exercise-pokedex-router.git
