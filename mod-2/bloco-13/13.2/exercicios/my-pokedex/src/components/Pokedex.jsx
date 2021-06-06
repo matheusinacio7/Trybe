@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import Controls from './Controls';
 import Pokemon from './Pokemon';
 
@@ -7,15 +9,22 @@ export default class Pokedex extends Component {
     super(props);
 
     this.state = {
-      style: props.style,
+      listStyle: props.listStyle,
       filteredList: this.getFilteredList('any'),
       typeList: this.getTypeList(),
       currentPokemonIndex: 0,
+      redirecting: null
     }
 
     this.handleGetNextPokemon = this.handleGetNextPokemon.bind(this);
     this.handleFilterList = this.handleFilterList.bind(this);
-    console.log(this.props);
+    this.handleCardClick = this.handleCardClick.bind(this);
+  }
+
+  handleCardClick(id) {
+    this.setState({
+      redirecting: id,
+    });
   }
 
   handleFilterList(type) {
@@ -56,12 +65,21 @@ export default class Pokedex extends Component {
 
   render() {
     let currentRender = null;
-
-    if (this.state.style === 'list') {
+    let currentPokemon = null;
+    
+    if (this.state.listStyle === 'list') {
       currentRender = this.state.filteredList.map((pokemon) => <Pokemon pokemonData={pokemon} key={pokemon.id}/>);
     } else {
-      const currentPokemon = this.state.filteredList[this.state.currentPokemonIndex];
-      currentRender = <Pokemon pokemonData={currentPokemon} key={currentPokemon.id} />;
+      currentPokemon = this.state.filteredList[this.state.currentPokemonIndex];
+      currentPokemon.favorite = this.props.favorites[currentPokemon.id] ? true : false;
+      currentRender = <Pokemon pokemonData={currentPokemon} key={currentPokemon.id} onClick={this.handleCardClick} toggleFavorite={this.props.handleToggleFavorite} />;
+    }
+    
+    if (this.state.redirecting) {
+      return <Redirect push to={{
+        pathname: `/pokemons/${this.state.redirecting}`,
+        props: {pokemon: currentPokemon},
+      }} />
     }
 
     return (
@@ -70,7 +88,7 @@ export default class Pokedex extends Component {
         <ul className="pokedex__list">
           {currentRender}
         </ul>
-        {this.state.style === 'single'
+        {this.state.listStyle === 'single'
          ? <Controls
          handlers={{next: this.handleGetNextPokemon, filter: this.handleFilterList}}
          hasNext={this.state.filteredList.length > 1}

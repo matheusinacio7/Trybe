@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import Button from './Button';
 
-export default class Controls extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+export default class Controls extends Component {render() {
     return (
       <section className='controls'>
         <div>

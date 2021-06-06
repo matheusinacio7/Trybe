@@ -76,6 +76,16 @@ header, footer {
   }
 }
 
+.pokemon__link {
+  cursor: pointer;
+  color: blue;
+}
+
+.pokemon__favorite {
+  width: 40px;
+  cursor: pointer;
+}
+
 .pokemon__number {
   font-weight: 400;
   font-size: 1.25rem;
