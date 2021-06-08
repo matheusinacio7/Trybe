@@ -51,3 +51,6 @@
 [submodule "projects/bloco-12-movie-cards-library-stateful"]
 	path = projects/bloco-12-movie-cards-library-stateful
 	url = https://github.com/tryber/sd-011-project-movie-cards-library-stateful.git
+[submodule "projects/bloco-13-movie-cards-library-crud"]
+	path = projects/bloco-13-movie-cards-library-crud
+	url = https://github.com/tryber/sd-011-project-movie-card-library-crud.git
