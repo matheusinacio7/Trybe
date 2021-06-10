@@ -54,3 +54,9 @@
 [submodule "projects/bloco-13-movie-cards-library-crud"]
 	path = projects/bloco-13-movie-cards-library-crud
 	url = https://github.com/tryber/sd-011-project-movie-card-library-crud.git
+[submodule "projects/bloco-13-dojo-countries-react"]
+	path = projects/bloco-13-dojo-countries-react
+	url = https://github.com/tryber/sd-011-dojo-countries-react.git
+[submodule "projects/bloco-13-clone-slido"]
+	path = projects/bloco-13-clone-slido
+	url = https://github.com/heyset/sd-011-desafio-clone-slido.git
