@@ -60,3 +60,6 @@
 [submodule "projects/bloco-13-clone-slido"]
 	path = projects/bloco-13-clone-slido
 	url = https://github.com/heyset/sd-011-desafio-clone-slido.git
+[submodule "projects/bloco-14-frontend-online-store"]
+	path = projects/bloco-14-frontend-online-store
+	url = https://github.com/tryber/sd-011-project-frontend-online-store
