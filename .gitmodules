@@ -51,6 +51,9 @@
 [submodule "projects/bloco-12-movie-cards-library-stateful"]
 	path = projects/bloco-12-movie-cards-library-stateful
 	url = https://github.com/tryber/sd-011-project-movie-cards-library-stateful.git
+[submodule "mod-2/bloco-13/13.2/conteudo/comprehension-exercises-router"]
+	path = mod-2/bloco-13/13.2/conteudo/comprehension-exercises-router
+	url = https://github.com/heyset/comprehension-exercises-router.git
 [submodule "mod-2/bloco-13/13.1/conteudo/lifecycle"]
 	path = mod-2/bloco-13/13.1/conteudo/lifecycle
 	url = git@github.com:heyset/exercises-lifecycle-step-by-step.git
