@@ -75,3 +75,6 @@
 [submodule "mod-2/bloco-14/14.1/exercicios/exercise-todo-list"]
 	path = mod-2/bloco-14/14.1/exercicios/exercise-todo-list
 	url = https://github.com/heyset/exercise-todo-list.git
+[submodule "mod-2/bloco-14/14.1/exercicios/exercise-tic-tac-toe"]
+	path = mod-2/bloco-14/14.1/exercicios/exercise-tic-tac-toe
+	url = https://github.com/heyset/exercise-tic-tac-toe
