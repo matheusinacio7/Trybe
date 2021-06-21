@@ -60,3 +60,15 @@
 [submodule "mod-2/bloco-13/13.1/exercicios/dog-image"]
 	path = mod-2/bloco-13/13.1/exercicios/dog-image
 	url = git@github.com:heyset/exercise-dog-image.git
+[submodule "projects/bloco-13-movie-cards-library-crud"]
+	path = projects/bloco-13-movie-cards-library-crud
+	url = https://github.com/tryber/sd-011-project-movie-card-library-crud.git
+[submodule "projects/bloco-13-dojo-countries-react"]
+	path = projects/bloco-13-dojo-countries-react
+	url = https://github.com/tryber/sd-011-dojo-countries-react.git
+[submodule "projects/bloco-13-clone-slido"]
+	path = projects/bloco-13-clone-slido
+	url = https://github.com/heyset/sd-011-desafio-clone-slido.git
+[submodule "projects/bloco-14-frontend-online-store"]
+	path = projects/bloco-14-frontend-online-store
+	url = https://github.com/tryber/sd-011-project-frontend-online-store
