@@ -72,3 +72,6 @@
 [submodule "projects/bloco-14-frontend-online-store"]
 	path = projects/bloco-14-frontend-online-store
 	url = https://github.com/tryber/sd-011-project-frontend-online-store
+[submodule "mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web"]
+	path = mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web
+	url = https://github.com/heyset/exercise-portfolio-web.git
