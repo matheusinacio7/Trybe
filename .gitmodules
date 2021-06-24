@@ -63,3 +63,6 @@
 [submodule "projects/bloco-14-frontend-online-store"]
 	path = projects/bloco-14-frontend-online-store
 	url = https://github.com/tryber/sd-011-project-frontend-online-store
+[submodule "projects/bloco-15-react-testing-library"]
+	path = projects/bloco-15-react-testing-library
+	url = https://github.com/tryber/sd-011-project-react-testing-library.git
