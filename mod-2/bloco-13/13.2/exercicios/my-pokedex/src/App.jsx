@@ -23,13 +23,13 @@ class App extends React.Component {
 
   handleToggleFavorite(id) {
     this.setState((prev) => {
-      const newState = {...prev};
-      newState.favorites = {...newState.favorites, [id]: newState.favorites[id] ? false : true};
-      this.saveFavorites(newState.favorites);
-      return newState;
+      const newFavorites = {...prev.favorites};
+      newFavorites[id] = newFavorites[id] ? false : true;
+      this.saveFavorites(newFavorites);
+      return {favorites: newFavorites};
     });
   }
-
+  
   loadFavorites() {
     if (!Storage || !localStorage) return;
 
