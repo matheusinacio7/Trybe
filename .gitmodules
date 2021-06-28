@@ -78,3 +78,6 @@
 [submodule "mod-2/bloco-15/15.1/exercicios/exercise-tic-tac-toe"]
 	path = mod-2/bloco-15/15.1/exercicios/exercise-tic-tac-toe
 	url = https://github.com/heyset/exercise-tic-tac-toe
+[submodule "mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web"]
+	path = mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web
+	url = https://github.com/heyset/exercise-portfolio-web.git
