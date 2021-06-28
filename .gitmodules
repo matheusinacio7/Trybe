@@ -81,3 +81,6 @@
 [submodule "mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web"]
 	path = mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web
 	url = https://github.com/heyset/exercise-portfolio-web.git
+[submodule "mod-2/bloco-15/15.2/exercicios/exercise-digimon-finders"]
+	path = mod-2/bloco-15/15.2/exercicios/exercise-digimon-finders
+	url = https://github.com/heyset/exercise-digimon-finders
