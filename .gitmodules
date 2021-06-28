@@ -72,6 +72,7 @@
 [submodule "projects/bloco-14-frontend-online-store"]
 	path = projects/bloco-14-frontend-online-store
 	url = https://github.com/tryber/sd-011-project-frontend-online-store
+<<<<<<< HEAD
 [submodule "mod-2/bloco-15/15.1/exercicios/exercise-todo-list"]
 	path = mod-2/bloco-15/15.1/exercicios/exercise-todo-list
 	url = https://github.com/heyset/exercise-todo-list
@@ -84,3 +85,8 @@
 [submodule "mod-2/bloco-15/15.2/exercicios/exercise-digimon-finders"]
 	path = mod-2/bloco-15/15.2/exercicios/exercise-digimon-finders
 	url = https://github.com/heyset/exercise-digimon-finders
+=======
+[submodule "projects/bloco-15-react-testing-library"]
+	path = projects/bloco-15-react-testing-library
+	url = https://github.com/tryber/sd-011-project-react-testing-library.git
+>>>>>>> projects
