@@ -88,5 +88,5 @@
 	path = projects/bloco-15-react-testing-library
 	url = https://github.com/tryber/sd-011-project-react-testing-library.git
 [submodule "mod-2/bloco-16/16.2"]
-	path = mod-2/bloco-16/16.2
+	path = mod-2/bloco-16/16.2/fixacao
 	url = https://github.com/heyset/exercises-redux-step-by-step.git
