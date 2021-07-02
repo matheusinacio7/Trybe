@@ -1,5 +1,5 @@
-export default function TodoItem() {
+export default function TodoItem({ content }) {
   return (
-    <li>Comprar materia prima</li>
+    <li>{ content }</li>
   );
 }
