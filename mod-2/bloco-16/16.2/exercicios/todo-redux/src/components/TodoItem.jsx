@@ -1,21 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faEllipsisV, faTimes, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { markTodoAsCompleted, deleteTodo, editTodo } from '../actions';
+import { faCheck, faEllipsisV, faTimes, faEdit, faRedo } from '@fortawesome/free-solid-svg-icons';
+import { markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo } from '../actions';
 import { useStore } from '../hooks/useStore';
 import { useState, useRef } from 'react';
 import './TodoItem.css';
 
-function TodoItem({ content, id, markTodoAsCompleted, deleteTodo, editTodo }) {
+function TodoItem({ content, id, isCompleted, markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentContent, setCurrentContent] = useState(content);
   const contentField = useRef(null);
 
   function handleDelete() {
-    deleteTodo({ id, isCompleted: false });
+    deleteTodo({ id, isCompleted });
   }
 
-  function handleMarkAsCompleted() {
-    markTodoAsCompleted({ id });
+  function handleToggleCompleted() {
+    isCompleted 
+      ? markTodoAsNotCompleted({ id })
+      : markTodoAsCompleted({ id });
   }
 
   function handleKeyDown(e) {
@@ -41,7 +43,8 @@ function TodoItem({ content, id, markTodoAsCompleted, deleteTodo, editTodo }) {
   return (
     <li className="todo-item">
       <section className="todo-item__grab-section">
-        <FontAwesomeIcon icon={ faEllipsisV } className="todo-item__icon todo-item__drag" />
+        { isCompleted ? null :
+          <FontAwesomeIcon icon={ faEllipsisV } className="todo-item__icon todo-item__drag" /> }
       </section>
       <section className="todo-item__content">
         <input
@@ -57,20 +60,22 @@ function TodoItem({ content, id, markTodoAsCompleted, deleteTodo, editTodo }) {
       <section className="todo-item__controls">
         <div className="todo-item__controls__complete">
           <FontAwesomeIcon
-            icon={ faCheck }
+            icon={ !isCompleted ? faCheck : faRedo }
             className="todo-item__icon todo-item__complete"
-            onClick={ handleMarkAsCompleted }  
+            onClick={ handleToggleCompleted }  
           />
         </div>
         <div className="todo-item__controls__separator" />
         <div className="todo-item__controls__modify">
+          {
+            isCompleted ? null :
           <div>
             <FontAwesomeIcon
               icon={ faEdit }
               className="todo-item__icon"
               onClick={ toggleEditing }
             />
-          </div>
+          </div>}
           <div>
             <FontAwesomeIcon
               icon={ faTimes }
@@ -85,4 +90,4 @@ function TodoItem({ content, id, markTodoAsCompleted, deleteTodo, editTodo }) {
 }
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-export default useStore(TodoItem, ['todo'], [markTodoAsCompleted, deleteTodo, editTodo]);
+export default useStore(TodoItem, ['todo'], [markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo]);

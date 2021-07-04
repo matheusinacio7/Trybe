@@ -18,6 +18,14 @@ const ACTIONS = {
       completed: [...completed, todo[index]],
     };
   },
+  MARK_TODO_AS_NOT_COMPLETED: ({ todo, completed }, { id }) => {
+    const index = completed.findIndex((completedItem) => completedItem.id === id);
+
+    return {
+      todo: [...todo, completed[index]],
+      completed: completed.filter((completedItem) => completedItem.id !== id),
+    };
+  },
   DELETE_TODO: ({ todo, completed }, { id, isCompleted }) => ({
     todo: isCompleted ? [...todo] : todo.filter((todoItem) => todoItem.id !== id),
     completed: isCompleted ? completed.filter((todoItem) => todoItem.id !== id) : [...completed],
