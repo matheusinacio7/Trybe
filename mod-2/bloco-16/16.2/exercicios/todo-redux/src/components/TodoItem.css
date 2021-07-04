@@ -26,9 +26,17 @@
   margin: 0 24px;
 }
 
+.todo-item__content__field {
+  height: 100%;
+  padding: 12px 24px;
+}
+
+.todo-item__content__field:read-only {
+  border: none;
+}
+
 .todo-item__controls, .todo-item__grab-section {
   display: flex;
-  justify-content: center;
   width: 60px;
 }
 
