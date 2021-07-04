@@ -2,15 +2,16 @@
 
 import { useStore } from '../hooks/useStore';
 import TodoItem from './TodoItem';
+import './TodoList.css';
 
 function TodoList({ todo }) {
   const { todo: todoList } = todo;
 
   return (
-    <section>
-      <h1>Tarefas</h1>
-      <ol>
-        { todoList.map(({ content }) => <TodoItem content={ content } />) }
+    <section className="todo-section">
+      <h1 className="h-section">Tarefas</h1>
+      <ol className="todo-list">
+        { todoList.map(({ content, id }) => <TodoItem key={ id } content={ content } id={ id } />) }
       </ol>
     </section>
   )

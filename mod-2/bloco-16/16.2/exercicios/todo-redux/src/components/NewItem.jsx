@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 
 import { useStore } from '../hooks/useStore';
 import { createNewTodo } from '../actions';
+import './NewItem.css';
 
 function NewItem({ createNewTodo }) {
   const [input, setInput] = useState('');
@@ -18,8 +19,8 @@ function NewItem({ createNewTodo }) {
   }
 
   return (
-    <section onSubmit={ handleSubmit } >
-      <h1>Adicionar nova tarefa</h1>
+    <section className="new-item-section" onSubmit={ handleSubmit } >
+      <h1 className="h-new">Adicionar nova tarefa</h1>
       <form >
         <input
           type="text" 

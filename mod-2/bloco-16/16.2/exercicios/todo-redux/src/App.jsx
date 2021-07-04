@@ -10,7 +10,7 @@ function App() {
   return (
     <Provider store={ store }>
       <header>
-        <h1>Todo App - Redux</h1>
+        <h1 className="h-main">Todo App - Redux</h1>
       </header>
         <main>
           <NewItem />

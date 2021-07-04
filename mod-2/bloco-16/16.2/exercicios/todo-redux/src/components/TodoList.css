@@ -1,0 +1,21 @@
+.h-section {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.todo-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list {
+  list-style: none;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
