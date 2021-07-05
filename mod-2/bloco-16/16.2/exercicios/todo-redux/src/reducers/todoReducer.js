@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 const INITIAL_STATE = {
   todo: [],
   completed: [],
-}
+};
 
 const ACTIONS = {
   CREATE_NEW_TODO: ({ todo, completed }, { content }) => ({

@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 
-import { store } from './hooks/useStore';
+import { store } from './utils/withStore';
 
 import './App.css';
 import NewItem from './components/NewItem';

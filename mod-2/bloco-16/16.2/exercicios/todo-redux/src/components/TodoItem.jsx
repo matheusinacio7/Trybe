@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV, faTimes, faEdit, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo } from '../actions';
-import { useStore } from '../hooks/useStore';
+import { withStore } from '../utils/withStore';
 import { useState, useRef } from 'react';
 import './TodoItem.css';
 
@@ -67,7 +67,7 @@ function TodoItem({
           <>
             <section
               className="todo-item__grab-section"
-              onMouseDown={ ({ target }) => handleStartDrag(id, target) }
+              onMouseDown={ (e) => handleStartDrag(id, e) }
             >
               {isCompleted ? null :
                 <FontAwesomeIcon
@@ -119,5 +119,4 @@ function TodoItem({
   );
 }
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-export default useStore(TodoItem, ['todo'], [markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo]);
+export default withStore(TodoItem, ['todo'], [markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo]);

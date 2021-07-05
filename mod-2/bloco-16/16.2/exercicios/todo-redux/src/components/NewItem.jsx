@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useRef } from 'react';
 
-import { useStore } from '../hooks/useStore';
+import { withStore } from '../utils/withStore';
 import { createNewTodo } from '../actions';
 import './NewItem.css';
 
@@ -35,4 +34,4 @@ function NewItem({ createNewTodo }) {
   );
 }
 
-export default useStore(NewItem, ['todo'], [createNewTodo]);
+export default withStore(NewItem, ['todo'], [createNewTodo]);

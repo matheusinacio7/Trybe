@@ -1,7 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
-import { useState, useRef } from 'react';
-import { useStore } from '../hooks/useStore';
+import { useState, useRef, useEffect } from 'react';
+import { withStore } from '../utils/withStore';
 import TodoItem from './TodoItem';
 import throttle from '../utils/throttle';
 import './TodoList.css';
@@ -19,42 +17,53 @@ function TodoList({ todo }) {
   const getParentTodoItem = (element) => element.parentElement.classList.contains('todo-item')
       ? element.parentElement
       : getParentTodoItem(element.parentElement);
-  
-  function handleDragMove (e) {
-    console.log(beingDragged);
+
+  useEffect(() => {
     if (!beingDragged) return;
-    
-    console.log(e);
-    console.log(beingDragged.relativePosition);
-  };
-  
-  function handleEndDrag() {
-    console.log(beingDragged);
-    console.log('ending');
-    setBeingDragged(null);
-    document.removeEventListener('mouseup', handleEndDrag);
-    document.removeEventListener('mousemove', handleDragMove);
-  }
 
-  function handleStartDrag(id, target) {
-    setBeingDragged(() => {
-      const itemBeingDragged = todoList.find((todoItem) => todoItem.id === id);
-      const originalItem = getParentTodoItem(target);
-      const itemRect = originalItem.getBoundingClientRect();
-      const todoSectionRect = todoSectionElement.current.getBoundingClientRect();
+    const handleDragMove = throttle(function (e) {
+      if (!beingDragged) return;
 
-      const relativePosition = {
-        top: itemRect.top - todoSectionRect.top - 20,
-        left: itemRect.left - todoSectionRect.left - 20,
-      };
+      setBeingDragged((previous) => {
+        const newPosition = {...previous.relativePosition};
 
-      itemBeingDragged.relativePosition = relativePosition;
+        newPosition.top += e.movementY;
+        newPosition.left += e.movementX;
 
-      return itemBeingDragged;
-    });
+        return Object.assign({}, previous, { relativePosition: newPosition });
+      });
+    }, 16);
+
+    function handleEndDrag() {
+      setBeingDragged(null);
+    }
 
     document.addEventListener('mousemove', handleDragMove);
-    document.addEventListener('mouseup', handleEndDrag);  
+    document.addEventListener('mouseup', handleEndDrag); 
+
+    return () => {
+      document.removeEventListener('mouseup', handleEndDrag);
+      document.removeEventListener('mousemove', handleDragMove);
+    };
+
+  }, [beingDragged]);
+
+  function handleStartDrag(id, e) {
+    const { target } = e;
+
+    const itemBeingDragged = todoList.find((todoItem) => todoItem.id === id);
+    const originalItem = getParentTodoItem(target);
+    const itemRect = originalItem.getBoundingClientRect();
+    const todoSectionRect = todoSectionElement.current.getBoundingClientRect();
+
+    const relativePosition = {
+      top: itemRect.top - todoSectionRect.top,
+      left: itemRect.left - todoSectionRect.left,
+    };
+
+    itemBeingDragged.relativePosition = relativePosition;
+
+    setBeingDragged(itemBeingDragged);
   }
 
   return (
@@ -96,4 +105,4 @@ function TodoList({ todo }) {
   )
 }
 
-export default useStore(TodoList, ['todo', 'completed']);
+export default withStore(TodoList, ['todo', 'completed']);

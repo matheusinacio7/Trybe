@@ -7,7 +7,7 @@ export const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION_
 
 const getMutualEntries = (arr1, arr2) => arr1.filter((key) => arr2.indexOf(key) > -1);
 
-export const useStore = (component, stateKeys, actionArray) => {
+export const withStore = (component, stateKeys, actionArray) => {
   const mapStateToProps = (storeState) => {
     if (!stateKeys) return null;
 
