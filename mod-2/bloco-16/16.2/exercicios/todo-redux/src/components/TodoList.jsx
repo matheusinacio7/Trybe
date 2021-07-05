@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { withStore } from '../utils/withStore';
+import areRectsIntersecting from '../utils/areRectsIntersecting';
 import TodoItem from './TodoItem';
 import throttle from '../utils/throttle';
 import './TodoList.css';
@@ -8,6 +9,8 @@ function TodoList({ todo }) {
   const { todo: todoList, completed } = todo;
   const [showingCompleted, setShowingCompleted] = useState(false);
   const [beingDragged, setBeingDragged] = useState(null);
+  const [itemRefs, setItemRefs] = useState([]);
+  const [itemRects, setItemRects] = useState([]);
   const todoSectionElement = useRef(null);
 
   function handleToggleShowMode() {
@@ -25,17 +28,28 @@ function TodoList({ todo }) {
       if (!beingDragged) return;
 
       setBeingDragged((previous) => {
-        const newPosition = {...previous.relativePosition};
+        const newRelativePosition = {...previous.relativePosition};
+        const newAbsolutePosition = {...previous.absolutePosition};
 
-        newPosition.top += e.movementY;
-        newPosition.left += e.movementX;
+        newRelativePosition.top += e.movementY;
+        newRelativePosition.left += e.movementX;
 
-        return Object.assign({}, previous, { relativePosition: newPosition });
+        newAbsolutePosition.top += e.movementY;
+        newAbsolutePosition.left += e.movementX;
+
+        itemRects.forEach((rect, index) => {
+          if (areRectsIntersecting(rect, newAbsolutePosition)) {
+            console.log(`estou abaixo do item ${index}`);
+          };
+        })
+
+        return Object.assign({}, previous, { relativePosition: newRelativePosition, absolutePosition: newAbsolutePosition });
       });
     }, 16);
 
     function handleEndDrag() {
       setBeingDragged(null);
+      console.log(itemRects);
     }
 
     document.addEventListener('mousemove', handleDragMove);
@@ -47,6 +61,32 @@ function TodoList({ todo }) {
     };
 
   }, [beingDragged]);
+  
+  const insertNewItemRef = useCallback((newRef) => {
+    setItemRefs((itemRefs) => {
+      const newItemRefArray = [...itemRefs, newRef];
+
+      const newRectArray = newItemRefArray.map((ref) => {
+        const newRect = ref.getBoundingClientRect();
+
+        const rectObj = {
+          left: newRect.left,
+          top: newRect.top,
+          height: newRect.height,
+          width: newRect.width,
+        };
+
+        rectObj.height = rectObj.height / 2;
+        rectObj.top = rectObj.top + rectObj.height;
+
+        return rectObj;
+      });
+
+      setItemRects(newRectArray);
+
+      return newItemRefArray;
+    });
+  }, []);
 
   function handleStartDrag(id, e) {
     const { target } = e;
@@ -59,6 +99,13 @@ function TodoList({ todo }) {
     const relativePosition = {
       top: itemRect.top - todoSectionRect.top,
       left: itemRect.left - todoSectionRect.left,
+    };
+
+    itemBeingDragged.absolutePosition = {
+      top: itemRect.top,
+      left: itemRect.left,
+      width: itemRect.width,
+      height: itemRect.height,
     };
 
     itemBeingDragged.relativePosition = relativePosition;
@@ -96,6 +143,7 @@ function TodoList({ todo }) {
                 id={id}
                 dragFinalPosition={beingDragged?.id === id}
                 handleStartDrag={handleStartDrag}
+                insertNewItemRef={ insertNewItemRef }
               />)
             : completed.map(({ content, id }) => <TodoItem key={id} content={content} id={id} isCompleted />)
           }

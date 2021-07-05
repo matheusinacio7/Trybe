@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsisV, faTimes, faEdit, faRedo } from '@fortawesome/free-solid-svg-icons';
 import { markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo } from '../actions';
 import { withStore } from '../utils/withStore';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './TodoItem.css';
 
 function TodoItem({
@@ -12,6 +12,7 @@ function TodoItem({
     handleStartDrag,
     dragFinalPosition,
     beingDragged,
+    insertNewItemRef,
     relativePosition,
     markTodoAsCompleted,
     markTodoAsNotCompleted,
@@ -21,6 +22,7 @@ function TodoItem({
   const [isEditing, setIsEditing] = useState(false);
   const [currentContent, setCurrentContent] = useState(content);
   const contentField = useRef(null);
+  const todoItemRef = useRef(null);
 
   function handleDelete() {
     deleteTodo({ id, isCompleted });
@@ -38,6 +40,11 @@ function TodoItem({
       return;
     }
   }
+  
+  useEffect(() => {
+    if (beingDragged) return;
+    insertNewItemRef(todoItemRef.current);
+  }, [insertNewItemRef, beingDragged]);
 
   function toggleEditing() {
     setIsEditing((previouslyEditing) => {
@@ -59,10 +66,11 @@ function TodoItem({
         top: beingDragged ? relativePosition.top : null,
         left: beingDragged ? relativePosition.left : null,
       }}
+      ref={ todoItemRef }
     >
       {
         dragFinalPosition
-        ? <p className="todo-item__status-text">The item will occupy this position.</p>
+        ? <p className="todo-item__status-text">O item vai ocupar esta posição.</p>
         :
           <>
             <section
