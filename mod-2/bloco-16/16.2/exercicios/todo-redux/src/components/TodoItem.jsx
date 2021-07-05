@@ -8,6 +8,7 @@ import './TodoItem.css';
 function TodoItem({
     content,
     id,
+    order = null,
     isCompleted,
     handleStartDrag,
     dragFinalPosition,
@@ -43,8 +44,8 @@ function TodoItem({
   
   useEffect(() => {
     if (beingDragged) return;
-    insertNewItemRef(todoItemRef.current);
-  }, [insertNewItemRef, beingDragged]);
+    insertNewItemRef(todoItemRef.current, order);
+  }, [insertNewItemRef, beingDragged, order]);
 
   function toggleEditing() {
     setIsEditing((previouslyEditing) => {
@@ -65,6 +66,7 @@ function TodoItem({
       style={{
         top: beingDragged ? relativePosition.top : null,
         left: beingDragged ? relativePosition.left : null,
+        order: order,
       }}
       ref={ todoItemRef }
     >

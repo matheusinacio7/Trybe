@@ -37,9 +37,11 @@ function TodoList({ todo }) {
         newAbsolutePosition.top += e.movementY;
         newAbsolutePosition.left += e.movementX;
 
+        console.log(newAbsolutePosition);
+
         itemRects.forEach((rect, index) => {
           if (areRectsIntersecting(rect, newAbsolutePosition)) {
-            console.log(`estou abaixo do item ${index}`);
+            console.log(`estou abaixo do item de posição ${rect.order}`);
           };
         })
 
@@ -62,8 +64,9 @@ function TodoList({ todo }) {
 
   }, [beingDragged]);
   
-  const insertNewItemRef = useCallback((newRef) => {
+  const insertNewItemRef = useCallback((newRef, order) => {
     setItemRefs((itemRefs) => {
+      newRef.order = order;
       const newItemRefArray = [...itemRefs, newRef];
 
       const newRectArray = newItemRefArray.map((ref) => {
@@ -74,6 +77,7 @@ function TodoList({ todo }) {
           top: newRect.top,
           height: newRect.height,
           width: newRect.width,
+          order: ref.order,
         };
 
         rectObj.height = rectObj.height / 2;
@@ -136,9 +140,10 @@ function TodoList({ todo }) {
         </header>
         <ol className="todo-list">
           {!showingCompleted
-            ? todoList.map(({ content, id }) =>
+            ? todoList.map(({ content, id, order }) =>
               <TodoItem
                 key={id}
+                order={ order }
                 content={content}
                 id={id}
                 dragFinalPosition={beingDragged?.id === id}
