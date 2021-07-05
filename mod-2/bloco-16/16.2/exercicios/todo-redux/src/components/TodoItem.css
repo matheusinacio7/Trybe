@@ -1,5 +1,7 @@
 .todo-item {
-  width: 80%;
+  width: 650px;
+  box-sizing: border-box;
+  height: 70px;
   display: flex;
   font-size: 1rem;
   justify-content: space-between;
@@ -7,6 +9,23 @@
   border: 2px solid #cecace;
   border-radius: 6px;
   padding: 12px 24px;
+  background-color: #fff;
+}
+
+.todo-item.drag-final-position {
+  justify-content: center;
+  border-style: dashed;
+  background-color: #dadfde;
+}
+
+.todo-item.being-dragged {
+  position: absolute;
+  z-index: 1;
+  cursor: grabbing;
+}
+
+.todo-item__status-text {
+  color: #434943;
 }
 
 .todo-item__icon {
@@ -18,8 +37,20 @@
   color: #131913;
 }
 
+.todo-item__grab-section {
+  cursor: grab;
+  display: flex;
+  justify-content: center;
+}
+
 .todo-item__drag {
   cursor: grab;
+}
+
+.todo-item.being-dragged .todo-item__drag,
+.todo-item.being-dragged .todo-item__grab-section
+{
+  cursor: grabbing;
 }
 
 .todo-item__content {
@@ -29,6 +60,7 @@
 .todo-item__content__field {
   height: 100%;
   padding: 12px 24px;
+  text-align: center;
 }
 
 .todo-item__content__field:read-only {

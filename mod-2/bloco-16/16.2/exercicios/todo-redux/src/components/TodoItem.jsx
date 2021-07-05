@@ -5,7 +5,19 @@ import { useStore } from '../hooks/useStore';
 import { useState, useRef } from 'react';
 import './TodoItem.css';
 
-function TodoItem({ content, id, isCompleted, markTodoAsCompleted, markTodoAsNotCompleted, deleteTodo, editTodo }) {
+function TodoItem({
+    content,
+    id,
+    isCompleted,
+    handleStartDrag,
+    dragFinalPosition,
+    beingDragged,
+    relativePosition,
+    markTodoAsCompleted,
+    markTodoAsNotCompleted,
+    deleteTodo,
+    editTodo,
+  }) {
   const [isEditing, setIsEditing] = useState(false);
   const [currentContent, setCurrentContent] = useState(content);
   const contentField = useRef(null);
@@ -41,50 +53,68 @@ function TodoItem({ content, id, isCompleted, markTodoAsCompleted, markTodoAsNot
   }
 
   return (
-    <li className="todo-item">
-      <section className="todo-item__grab-section">
-        { isCompleted ? null :
-          <FontAwesomeIcon icon={ faEllipsisV } className="todo-item__icon todo-item__drag" /> }
-      </section>
-      <section className="todo-item__content">
-        <input
-          ref={ contentField }
-          type="text"
-          value={ currentContent }
-          className="todo-item__content__field"
-          onChange={ ({ target }) => setCurrentContent(target.value) }
-          onKeyDown={ handleKeyDown }
-          readOnly={ !isEditing }
-        />
-      </section>
-      <section className="todo-item__controls">
-        <div className="todo-item__controls__complete">
-          <FontAwesomeIcon
-            icon={ !isCompleted ? faCheck : faRedo }
-            className="todo-item__icon todo-item__complete"
-            onClick={ handleToggleCompleted }  
-          />
-        </div>
-        <div className="todo-item__controls__separator" />
-        <div className="todo-item__controls__modify">
-          {
-            isCompleted ? null :
-          <div>
-            <FontAwesomeIcon
-              icon={ faEdit }
-              className="todo-item__icon"
-              onClick={ toggleEditing }
-            />
-          </div>}
-          <div>
-            <FontAwesomeIcon
-              icon={ faTimes }
-              className="todo-item__icon"
-              onClick={ handleDelete }
-            />
-          </div>
-        </div>
-      </section>
+    <li
+      className={`todo-item${dragFinalPosition ? ' drag-final-position' : ''}${beingDragged ? ' being-dragged' : ''}`}
+      style={{
+        top: beingDragged ? relativePosition.top : null,
+        left: beingDragged ? relativePosition.left : null,
+      }}
+    >
+      {
+        dragFinalPosition
+        ? <p className="todo-item__status-text">The item will occupy this position.</p>
+        :
+          <>
+            <section
+              className="todo-item__grab-section"
+              onMouseDown={ ({ target }) => handleStartDrag(id, target) }
+            >
+              {isCompleted ? null :
+                <FontAwesomeIcon
+                  icon={faEllipsisV}
+                  className="todo-item__icon todo-item__drag"
+                />}
+            </section>
+            <section className="todo-item__content">
+              <input
+                ref={contentField}
+                type="text"
+                value={currentContent}
+                className="todo-item__content__field"
+                onChange={({ target }) => setCurrentContent(target.value)}
+                onKeyDown={handleKeyDown}
+                readOnly={!isEditing}
+              />
+            </section>
+            <section className="todo-item__controls">
+              <div className="todo-item__controls__complete">
+                <FontAwesomeIcon
+                  icon={!isCompleted ? faCheck : faRedo}
+                  className="todo-item__icon todo-item__complete"
+                  onClick={handleToggleCompleted}
+                />
+              </div>
+              <div className="todo-item__controls__separator" />
+              <div className="todo-item__controls__modify">
+                {
+                  isCompleted ? null :
+                    <div>
+                      <FontAwesomeIcon
+                        icon={faEdit}
+                        className="todo-item__icon"
+                        onClick={toggleEditing}
+                      />
+                    </div>}
+                <div>
+                  <FontAwesomeIcon
+                    icon={faTimes}
+                    className="todo-item__icon"
+                    onClick={handleDelete}
+                  />
+                </div>
+              </div>
+            </section>
+          </>}
     </li>
   );
 }
