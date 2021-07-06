@@ -12,6 +12,7 @@ function TodoList({ todo }) {
   const [itemRefs, setItemRefs] = useState([]);
   const [itemRects, setItemRects] = useState([]);
   const todoSectionElement = useRef(null);
+  const [debugRects, setDebugRects] = useState(false);
 
   function handleToggleShowMode() {
     setShowingCompleted(previous => !previous);
@@ -116,6 +117,29 @@ function TodoList({ todo }) {
 
     setBeingDragged(itemBeingDragged);
   }
+
+  useEffect(() => {
+    if (!debugRects) return;
+
+    itemRects.forEach((itemRect) => {
+      const rect = document.createElement('div');
+
+      rect.style.position = 'absolute';
+      rect.style.display = 'flex';
+      rect.style.justifyContent = 'center';
+      rect.style.alignItems = 'center';
+      rect.style.top = itemRect.top + 'px';
+      rect.style.left = itemRect.left + 'px';
+      rect.style.width = itemRect.width + 'px';
+      rect.style.height = itemRect.height + 'px';
+      rect.style.zIndex = 3;
+      rect.style.backgroundColor = 'red';
+
+      rect.innerText = 'a';
+
+      document.getElementById('root').appendChild(rect);
+    });
+  }, [itemRects, debugRects]);
 
   return (
     <>
