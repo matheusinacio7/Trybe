@@ -1,124 +1,7 @@
-const ESTADOS = [
-  { name: 'Acre', acronym: 'AC',},
-  { name: 'Alagoas', acronym: 'AL',},
-  { name: 'Amapá', acronym: 'AP',},
-  { name: 'Amazonas', acronym: 'AM',},
-  { name: 'Bahia', acronym: 'BA',},
-  { name: 'Ceará', acronym: 'CE',},
-  { name: 'Distrito Federal', acronym: 'DF',},
-  { name: 'Espírito Santo', acronym: 'ES',},
-  { name: 'Goiás', acronym: 'GO',},
-  { name: 'Maranhão', acronym: 'MA',},
-  { name: 'Mato Grosso', acronym: 'MT',},
-  { name: 'Mato Grosso do Sul', acronym: 'MS',},
-  { name: 'Minas Gerais', acronym: 'MG',},
-  { name: 'Pará', acronym: 'PA',},
-  { name: 'Paraíba ', acronym: 'PB',},
-  { name: 'Paraná', acronym: 'PR',},
-  { name: 'Pernambuco', acronym: 'PE',},
-  { name: 'Piauí', acronym: 'PI',},
-  { name: 'Rio de Janeiro', acronym: 'RJ',},
-  { name: 'Rio Grande do Norte', acronym: 'RN',},
-  { name: 'Rio Grande do Sul ', acronym: 'RS',},
-  { name: 'Rondônia', acronym: 'RO',},
-  { name: 'Roraima', acronym: 'RR',},
-  { name: 'Santa Catarina ', acronym: 'SC',},
-  { name: 'São Paulo ', acronym: 'SP',},
-  { name: 'Sergipe', acronym: 'SE',},
-  { name: 'Tocantins', acronym: 'TO',},
-]
-
-class StateDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <label htmlFor="form__estado">Estado</label>
-        <select
-          name="estado"
-          id="form__estado" 
-          value={this.props.value}
-          onChange={this.props.onChange}
-          required>
-          {ESTADOS.map(({name, acronym}) => <option key={acronym} value={acronym}>{name}</option>)}
-        </select>
-      </React.Fragment>
-    );
-  }
-}
-
-class Input extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return(
-      <input 
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        maxLength={this.props.maxLength}
-        type="text"
-        value={this.props.value}
-        onBlur={this.props.onBlur}
-        onChange={this.props.onChange}
-        type={this.props.type}
-        validator={this.props.validator}
-        required
-      />
-    );
-  }
-}
-
-class TextArea extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <textarea 
-        name={this.props.name}
-        cols="30"
-        rows="10"
-        onChange={this.props.onChange}
-        onMouseOver={this.props.onMouseOver}
-        maxLength={this.props.maxLength}
-        value={this.props.value}
-        placeholder={this.props.placeholder}
-        required
-      ></textarea>
-    );
-  }
-}
-
-class Resume extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { nome, email, cpf, endereco, cidade, estado, tipo, resumo, cargo, desc } = this.props.info;
-
-    return (
-      <div>
-        <p>Nome: {nome}</p>
-        <p>Email: {email}</p>
-        <p>CPF: {cpf}</p>
-        <p>Estado: {estado}</p>
-        <p>Cidade: {cidade}</p>
-        <p>Endereco: {endereco}, {tipo}</p>
-        <p>Resumo do Curriculo: {resumo}</p>
-        Ultimo emprego:
-        <p>Cargo: {cargo}</p>
-        <p>Descrição: {desc}</p>
-      </div>
-    );
-  }
-}
+import React from 'react';
+import TextInput from './TextInput';
+import TextArea from './TextArea';
+import StateDropdown from './StateDropdown';
 
 class Form extends React.Component {
   constructor(props) {
@@ -215,11 +98,13 @@ class Form extends React.Component {
   }
 
   render() {
+    const { handleSubmit } = this.props;
+
     return(
-      <form onSubmit={(e) => this.props.handleSubmit(e, this.state)} onReset={this.handleReset}>
+      <form onSubmit={(e) => handleSubmit(e, this.state)} onReset={this.handleReset}>
         <fieldset>
           <legend>Dados Pessoais</legend>
-          <Input
+          <TextInput
             name="nome"
             placeholder="Nome"
             maxLength="40"
@@ -227,7 +112,7 @@ class Form extends React.Component {
             onChange={(e) => this.handleChange(e, {validator: this.validators.uppercaseValues})}
             type="text"
           />
-          <Input
+          <TextInput
             name="email"
             placeholder="Email"
             maxLength="50"
@@ -236,7 +121,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
             type="email"
           />
-          <Input
+          <TextInput
             name="cpf"
             placeholder="CPF"
             maxLength="11"
@@ -244,7 +129,7 @@ class Form extends React.Component {
             onChange={this.handleChange}
             type="text"
           />
-          <Input
+          <TextInput
             name="endereco"
             placeholder="Endereço"
             maxLength="200"
@@ -252,7 +137,7 @@ class Form extends React.Component {
             onChange={(e) => this.handleChange(e, {validator: this.validators.removeSpecialChars})}
             type="text"
           />
-          <Input
+          <TextInput
             name="cidade"
             placeholder="Cidade"
             maxLength="28"
@@ -267,7 +152,7 @@ class Form extends React.Component {
           />
           <label>
             Apartamento
-            <input
+            <TextInput
               type="radio"
               name="tipo"
               value="apartamento"
@@ -277,7 +162,7 @@ class Form extends React.Component {
           </label>
           <label>
             Casa
-            <input
+            <TextInput
               type="radio"
               name="tipo"
               value="casa"
@@ -304,7 +189,7 @@ class Form extends React.Component {
             onMouseOver={this.handleMouseOver}
             placeholder="Qual seu cargo?"
           />
-          <Input
+          <TextInput
             name="desc"
             placeholder="Descreva o cargo detalhadamente"
             maxLength="500"
@@ -314,45 +199,11 @@ class Form extends React.Component {
           />
         </fieldset>
 
-        <input type="submit" value="Montar curriculo" />
-        <input type="reset" value="Limpar" />
+        <TextInput type="submit" value="Montar curriculo" />
+        <TextInput type="reset" value="Limpar" />
       </form>
     );
   }
 }
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currentInfo: {},
-      hasInfo: false,
-    }
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleReset = this.handleReset.bind(this);
-  }
-
-  handleReset() {
-    console.log('eita');
-    this.setState({currentInfo: {}, hasInfo: false});
-  }
-
-  handleSubmit(e, info) {
-    e.preventDefault();
-    this.setState({currentInfo: info, hasInfo: true});
-  }
-
-  render() {
-    return (
-    <div>
-      <Form handleSubmit={this.handleSubmit} handleReset={this.handleReset} />
-      {this.state.hasInfo && <Resume info={this.state.currentInfo} />}
-    </div>)
-  }
-}
-
-ReactDOM.render(
-  <App />,
-  document.getElementById('root'),
-);
+export default Form;
