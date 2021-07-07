@@ -3,6 +3,9 @@ import TextInput from './TextInput';
 import TextArea from './TextArea';
 import StateDropdown from './StateDropdown';
 
+import { withStore } from '../utils/withStore';
+import { resetInfo, updateInfo } from '../actions';
+
 class Form extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +25,7 @@ class Form extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
   }
 
@@ -80,6 +84,12 @@ class Form extends React.Component {
     }
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.props.updateInfo(this.state);
+  }
+
   handleReset() {
     this.setState({
       nome: '',
@@ -94,14 +104,12 @@ class Form extends React.Component {
       desc: ''
     });
 
-    this.props.handleReset();
+    this.props.resetInfo();
   }
 
   render() {
-    const { handleSubmit } = this.props;
-
     return(
-      <form onSubmit={(e) => handleSubmit(e, this.state)} onReset={this.handleReset}>
+      <form onSubmit={ this.handleSubmit } onReset={this.handleReset}>
         <fieldset>
           <legend>Dados Pessoais</legend>
           <TextInput
@@ -206,4 +214,4 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+export default withStore(Form, null, [updateInfo, resetInfo]);

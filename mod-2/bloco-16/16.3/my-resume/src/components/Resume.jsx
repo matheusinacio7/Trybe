@@ -1,8 +1,9 @@
 import React from 'react';
+import { withStore } from '../utils/withStore';
 
 class Resume extends React.Component {
   render() {
-    const { nome, email, cpf, endereco, cidade, estado, tipo, resumo, cargo, desc } = this.props.info;
+    const { nome, email, cpf, endereco, cidade, estado, tipo, resumo, cargo, desc } = this.props.resume.currentInfo;
 
     return (
       <div>
@@ -21,4 +22,4 @@ class Resume extends React.Component {
   }
 }
 
-export default Resume;
+export default withStore(Resume, ['resume']);
