@@ -3,6 +3,7 @@ import './App.css';
 import { Form, Resume } from './components';
 import { withStore } from './utils/withStore';
 
+
 class App extends React.Component {
   render() {
     const { resume } = this.props;

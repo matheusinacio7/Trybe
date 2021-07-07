@@ -4,7 +4,7 @@ import TextArea from './TextArea';
 import StateDropdown from './StateDropdown';
 
 import { withStore } from '../utils/withStore';
-import { resetInfo, updateInfo } from '../actions';
+import { resetInfo, updateInfo, changeFirstName } from '../actions';
 
 class Form extends React.Component {
   constructor(props) {
@@ -108,7 +108,11 @@ class Form extends React.Component {
   }
 
   render() {
+    const { nome, email, cpf, endereco, cidade, estado, tipo, resumo, cargo, desc } = this.state;
+
     return(
+      <>
+      <button onClick={() => this.props.changeFirstName(nome)}>Mudar meu nome para { nome }</button>
       <form onSubmit={ this.handleSubmit } onReset={this.handleReset}>
         <fieldset>
           <legend>Dados Pessoais</legend>
@@ -116,7 +120,7 @@ class Form extends React.Component {
             name="nome"
             placeholder="Nome"
             maxLength="40"
-            value={this.state.nome}
+            value={nome}
             onChange={(e) => this.handleChange(e, {validator: this.validators.uppercaseValues})}
             type="text"
           />
@@ -124,7 +128,7 @@ class Form extends React.Component {
             name="email"
             placeholder="Email"
             maxLength="50"
-            value={this.state.email}
+            value={email}
             onBlur={(e) => this.handleBlur(e, {validator: this.validators.alertIfItsNotTrybe})}
             onChange={this.handleChange}
             type="email"
@@ -133,7 +137,7 @@ class Form extends React.Component {
             name="cpf"
             placeholder="CPF"
             maxLength="11"
-            value={this.state.cpf}
+            value={cpf}
             onChange={this.handleChange}
             type="text"
           />
@@ -141,7 +145,7 @@ class Form extends React.Component {
             name="endereco"
             placeholder="Endereço"
             maxLength="200"
-            value={this.state.endereco}
+            value={endereco}
             onChange={(e) => this.handleChange(e, {validator: this.validators.removeSpecialChars})}
             type="text"
           />
@@ -149,13 +153,13 @@ class Form extends React.Component {
             name="cidade"
             placeholder="Cidade"
             maxLength="28"
-            value={this.state.cidade}
+            value={cidade}
             onBlur={(e) => this.handleBlur(e, {validator: this.validators.checkIfStartsWithNum})}
             onChange={this.handleChange}
             type="text"
           />
           <StateDropdown
-            value={this.state.estado}
+            value={estado}
             onChange={this.handleChange}
           />
           <label>
@@ -165,7 +169,7 @@ class Form extends React.Component {
               name="tipo"
               value="apartamento"
               onChange={this.handleChange}
-              checked={this.state.tipo === 'apartamento'}
+              checked={tipo === 'apartamento'}
             />
           </label>
           <label>
@@ -175,7 +179,7 @@ class Form extends React.Component {
               name="tipo"
               value="casa"
               onChange={this.handleChange}
-              checked={this.state.tipo === 'casa'}
+              checked={tipo === 'casa'}
             />
           </label>
         </fieldset>
@@ -185,14 +189,14 @@ class Form extends React.Component {
           <TextArea 
             name="resumo"
             maxLength="1000"
-            value={this.state.resumo}
+            value={resumo}
             onChange={this.handleChange}
             placeholder="Resuma o seu curriculo aqui."
           />
           <TextArea
             name="cargo"
             maxLength="40"
-            value={this.state.cargo}
+            value={cargo}
             onChange={this.handleChange}
             onMouseOver={this.handleMouseOver}
             placeholder="Qual seu cargo?"
@@ -201,7 +205,7 @@ class Form extends React.Component {
             name="desc"
             placeholder="Descreva o cargo detalhadamente"
             maxLength="500"
-            value={this.state.desc}
+            value={desc}
             onChange={this.handleChange}
             type="text"
           />
@@ -210,8 +214,9 @@ class Form extends React.Component {
         <TextInput type="submit" value="Montar curriculo" />
         <TextInput type="reset" value="Limpar" />
       </form>
+      </>
     );
   }
 }
 
-export default withStore(Form, null, [updateInfo, resetInfo]);
+export default withStore(Form, null, [updateInfo, resetInfo, changeFirstName]);
