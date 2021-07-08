@@ -1,14 +1,31 @@
 import React from 'react';
-import { Layout } from '../components';
+import { useHistory } from 'react-router';
 
-function Clients() {
+import withStore from '../utils/withStore';
+import { NoAuth, Layout } from '../components';
+
+function Clients({ clients, user }) {
+  const history = useHistory();
+
   return(
     <Layout title="Clientes">
       <main>
-        Clientes.
+        <h1>Clientes</h1>
+
+        { user.email 
+            ? <section>
+                <button onClick={ () => history.push('/register-client') }>Cadastrar novo cliente</button>
+
+                { clients.length
+                    ? <NoAuth />
+                    : <p>Sem clientes cadastrados.</p>
+                }
+              </section>
+            : null
+        }
       </main>
     </Layout>
   );
 }
 
-export default Clients;
+export default withStore(Clients, ['clients', 'user'])

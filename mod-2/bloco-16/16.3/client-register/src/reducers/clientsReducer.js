@@ -1,12 +1,10 @@
 import createReducer from '../utils/createReducer';
 
-const INITIAL_STATE = {
-  clients: [],
-};
+const INITIAL_STATE = [];
 
 const ACTIONS = {
   INSERT_NEW_CLIENT: (state, { clientData }) => {
-    state.clients.push(clientData);
+    state.push(clientData);
 
     return state;
   }
