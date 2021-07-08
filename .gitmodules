@@ -93,3 +93,6 @@
 [submodule "mod-2/bloco-16/16.2/exercicios/exercise-react-with-redux-intro"]
 	path = mod-2/bloco-16/16.2/exercicios/exercise-react-with-redux-intro
 	url = https://github.com/heyset/exercise-react-with-redux-intro.git
+[submodule "mod-2/bloco-16/16.4/exercicios/exercise-redux-thunk-gatinhos"]
+	path = mod-2/bloco-16/16.4/exercicios/exercise-redux-thunk-gatinhos
+	url = https://github.com/heyset/exercise-redux-thunk
