@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 function Layout({ children, title }) {
   useEffect(() => {
@@ -8,7 +9,7 @@ function Layout({ children, title }) {
 
   return (
     <>
-      <header> Cadastro de Clientes </header>
+      <header> <Link to="/">Registhor!</Link> </header>
       { children }
       <footer> App aleatorio </footer>
     </>

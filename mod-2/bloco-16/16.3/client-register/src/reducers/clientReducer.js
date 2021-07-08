@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 };
 
 const ACTIONS = {
-  INSERT_NEW_CLIENT: (state, clientData) => {
+  INSERT_NEW_CLIENT: (state, { clientData }) => {
     state.clients.push(clientData);
 
     return state;
