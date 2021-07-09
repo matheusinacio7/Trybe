@@ -66,3 +66,6 @@
 [submodule "projects/bloco-15-react-testing-library"]
 	path = projects/bloco-15-react-testing-library
 	url = https://github.com/tryber/sd-011-project-react-testing-library.git
+[submodule "projects/bloco-16-trybewallet"]
+	path = projects/bloco-16-trybewallet
+	url = https://github.com/tryber/sd-011-project-trybewallet.git
