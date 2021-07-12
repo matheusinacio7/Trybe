@@ -96,3 +96,9 @@
 [submodule "mod-2/bloco-16/16.9/sd-011-extra-activities-redux-grupo2"]
 	path = mod-2/bloco-16/16.9/sd-011-extra-activities-redux-grupo2
 	url = https://github.com/heyset/hubbusters
+[submodule "mod-2/bloco-16/16.4/exercicios/exercise-redux-thunk-gatinhos"]
+	path = mod-2/bloco-16/16.4/exercicios/exercise-redux-thunk-gatinhos
+	url = https://github.com/heyset/exercise-redux-thunk
+[submodule "mod-2/bloco-16/16.4/exercicios/exercise-game-of-thrones-characters"]
+	path = mod-2/bloco-16/16.4/exercicios/exercise-game-of-thrones-characters
+	url = https://github.com/heyset/exercise-game-of-thrones-characters

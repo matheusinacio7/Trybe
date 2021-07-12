@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redux sem React</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.0/redux.min.js"></script>
+
+  <style>
+    section {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .info {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+    }
+
+    .controls div {
+      display: flex;
+      flex-direction: column;
+      width: 48px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="info">
+      <p>O somatório é <span id="count">0</span>.</p>
+      <p>Clicou um total de <span id="absolute-count">0</span> vezes.</p>
+    </section>
+    <br />
+    <section class="controls">
+      <div>
+        <input type="text" id="increment-input" value="1" >
+        <button id="increment-button">+ <span id="increment-count">1</span></button>
+      </div>
+      <div>
+        <input type="text" id="decrement-input" value="1" >
+        <button id="decrement-button">- <span id="decrement-count">1</span></button>
+      </div>
+    </section>
+
+    <section class="controls">
+      <button id="undo-button">
+        <img src="./arrow-redo.svg" alt="Redo last update">
+      </button>
+    </section>
+  </main>
+  <script src="bonus.js"></script>
+</body>
+</html>

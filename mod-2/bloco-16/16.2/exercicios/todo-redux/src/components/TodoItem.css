@@ -1,0 +1,93 @@
+.todo-item {
+  width: 650px;
+  box-sizing: border-box;
+  height: 70px;
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #cecace;
+  border-radius: 6px;
+  padding: 12px 24px;
+  background-color: #fff;
+}
+
+.todo-item.drag-final-position {
+  justify-content: center;
+  border-style: dashed;
+  background-color: #dadfde;
+}
+
+.todo-item.being-dragged {
+  position: absolute;
+  z-index: 1;
+  cursor: grabbing;
+}
+
+.todo-item__status-text {
+  color: #434943;
+}
+
+.todo-item__icon {
+  color: #434943;
+  cursor: pointer;
+}
+
+.todo-item__complete {
+  color: #131913;
+}
+
+.todo-item__grab-section {
+  cursor: grab;
+  display: flex;
+  justify-content: center;
+}
+
+.todo-item__drag {
+  cursor: grab;
+}
+
+.todo-item.being-dragged .todo-item__drag,
+.todo-item.being-dragged .todo-item__grab-section
+{
+  cursor: grabbing;
+}
+
+.todo-item__content {
+  margin: 0 24px;
+}
+
+.todo-item__content__field {
+  height: 100%;
+  padding: 12px 24px;
+  text-align: center;
+}
+
+.todo-item__content__field:read-only {
+  border: none;
+}
+
+.todo-item__controls, .todo-item__grab-section {
+  display: flex;
+  width: 60px;
+}
+
+.todo-item__controls__separator {
+  content: "";
+  width: 2px;
+  background-color: #cecace;
+  height: 42px;
+  margin: 0 9px;
+}
+
+.todo-item__controls__modify {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.todo-item__controls__complete {
+  display: flex;
+  align-items: center;
+}
