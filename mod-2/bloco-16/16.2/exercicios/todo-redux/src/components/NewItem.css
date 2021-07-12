@@ -1,0 +1,20 @@
+.h-new {
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.new-item-section form {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.new-item-section input[type="text"] {
+  padding: 12px 24px;
+}
+
+.new-item-section button {
+  padding: 12px 24px;
+}

@@ -1,0 +1,45 @@
+.h-section {
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+.todo-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.todo-header {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.todo-header > button {
+  font-size: 0.75rem;
+  width: 140px;
+  text-align: right;
+  color: #333933;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.todo-header > div {
+  content: "";
+  width: 140px;
+}
+
+.todo-list {
+  list-style: none;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
