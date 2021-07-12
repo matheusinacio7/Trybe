@@ -51,6 +51,15 @@
 [submodule "projects/bloco-12-movie-cards-library-stateful"]
 	path = projects/bloco-12-movie-cards-library-stateful
 	url = https://github.com/tryber/sd-011-project-movie-cards-library-stateful.git
+[submodule "mod-2/bloco-13/13.2/conteudo/comprehension-exercises-router"]
+	path = mod-2/bloco-13/13.2/conteudo/comprehension-exercises-router
+	url = https://github.com/heyset/comprehension-exercises-router.git
+[submodule "mod-2/bloco-13/13.1/conteudo/lifecycle"]
+	path = mod-2/bloco-13/13.1/conteudo/lifecycle
+	url = git@github.com:heyset/exercises-lifecycle-step-by-step.git
+[submodule "mod-2/bloco-13/13.1/exercicios/dog-image"]
+	path = mod-2/bloco-13/13.1/exercicios/dog-image
+	url = git@github.com:heyset/exercise-dog-image.git
 [submodule "projects/bloco-13-movie-cards-library-crud"]
 	path = projects/bloco-13-movie-cards-library-crud
 	url = https://github.com/tryber/sd-011-project-movie-card-library-crud.git
@@ -63,9 +72,36 @@
 [submodule "projects/bloco-14-frontend-online-store"]
 	path = projects/bloco-14-frontend-online-store
 	url = https://github.com/tryber/sd-011-project-frontend-online-store
+[submodule "mod-2/bloco-15/15.1/exercicios/exercise-todo-list"]
+	path = mod-2/bloco-15/15.1/exercicios/exercise-todo-list
+	url = https://github.com/heyset/exercise-todo-list
+[submodule "mod-2/bloco-15/15.1/exercicios/exercise-tic-tac-toe"]
+	path = mod-2/bloco-15/15.1/exercicios/exercise-tic-tac-toe
+	url = https://github.com/heyset/exercise-tic-tac-toe
+[submodule "mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web"]
+	path = mod-2/bloco-15/15.3/exercicios/exercise-portfolio-web
+	url = https://github.com/heyset/exercise-portfolio-web.git
+[submodule "mod-2/bloco-15/15.2/exercicios/exercise-digimon-finders"]
+	path = mod-2/bloco-15/15.2/exercicios/exercise-digimon-finders
+	url = https://github.com/heyset/exercise-digimon-finders
 [submodule "projects/bloco-15-react-testing-library"]
 	path = projects/bloco-15-react-testing-library
 	url = https://github.com/tryber/sd-011-project-react-testing-library.git
 [submodule "projects/bloco-16-trybewallet"]
 	path = projects/bloco-16-trybewallet
 	url = https://github.com/tryber/sd-011-project-trybewallet.git
+[submodule "mod-2/bloco-16/16.2/fixacao"]
+	path = mod-2/bloco-16/16.2/fixacao
+	url = https://github.com/heyset/exercises-redux-step-by-step.git
+[submodule "mod-2/bloco-16/16.2/exercicios/exercise-react-with-redux-intro"]
+	path = mod-2/bloco-16/16.2/exercicios/exercise-react-with-redux-intro
+	url = https://github.com/heyset/exercise-react-with-redux-intro.git
+[submodule "mod-2/bloco-16/16.9/sd-011-extra-activities-redux-grupo2"]
+	path = mod-2/bloco-16/16.9/sd-011-extra-activities-redux-grupo2
+	url = https://github.com/heyset/hubbusters
+[submodule "mod-2/bloco-16/16.4/exercicios/exercise-redux-thunk-gatinhos"]
+	path = mod-2/bloco-16/16.4/exercicios/exercise-redux-thunk-gatinhos
+	url = https://github.com/heyset/exercise-redux-thunk
+[submodule "mod-2/bloco-16/16.4/exercicios/exercise-game-of-thrones-characters"]
+	path = mod-2/bloco-16/16.4/exercicios/exercise-game-of-thrones-characters
+	url = https://github.com/heyset/exercise-game-of-thrones-characters

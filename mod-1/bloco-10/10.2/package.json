@@ -1,0 +1,17 @@
+{
+  "name": "10.2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "exercicio-1.js",
+  "dependencies": {
+    "jest": "^26.6.3",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
