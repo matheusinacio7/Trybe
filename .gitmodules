@@ -105,3 +105,6 @@
 [submodule "mod-2/bloco-16/16.4/exercicios/exercise-game-of-thrones-characters"]
 	path = mod-2/bloco-16/16.4/exercicios/exercise-game-of-thrones-characters
 	url = https://github.com/heyset/exercise-game-of-thrones-characters
+[submodule "projects/bloco-17-trivia"]
+	path = projects/bloco-17-trivia
+	url = https://github.com/tryber/sd-011-project-trivia-react-redux
