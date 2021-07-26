@@ -108,3 +108,6 @@
 [submodule "projects/bloco-17-trivia"]
 	path = projects/bloco-17-trivia
 	url = https://github.com/tryber/sd-011-project-trivia-react-redux
+[submodule "projects/bloco-18-star-wars-planet-search"]
+	path = projects/bloco-18-star-wars-planet-search
+	url = https://github.com/tryber/sd-011-project-starwars-planets-search.git
