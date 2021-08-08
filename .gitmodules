@@ -114,3 +114,12 @@
 [submodule "mod-2/bloco-18/18.1/exercise-contextAPI-refactoring"]
 	path = mod-2/bloco-18/18.1/exercise-contextAPI-refactoring
 	url = https://github.com/heyset/exercise-contextAPI-refactoring.git
+[submodule "mod-2/bloco-18/18.2/exercise-contextAPI-refactoring"]
+	path = mod-2/bloco-18/18.2/exercise-contextAPI-refactoring
+	url = https://github.com/heyset/exercise-contextAPI-refactoring.git
+[submodule "mod-2/bloco-18/18.2/--force"]
+	path = mod-2/bloco-18/18.2/--force
+	url = https://github.com/heyset/exercise-tryfood.git
+[submodule "mod-2/bloco-18/18.2/exercise-tryfood"]
+	path = mod-2/bloco-18/18.2/exercise-tryfood
+	url = https://github.com/heyset/exercise-tryfood.git
