@@ -111,3 +111,6 @@
 [submodule "projects/bloco-18-star-wars-planet-search"]
 	path = projects/bloco-18-star-wars-planet-search
 	url = https://github.com/tryber/sd-011-project-starwars-planets-search.git
+[submodule "mod-2/bloco-18/18.1/exercise-contextAPI-refactoring"]
+	path = mod-2/bloco-18/18.1/exercise-contextAPI-refactoring
+	url = https://github.com/heyset/exercise-contextAPI-refactoring.git
