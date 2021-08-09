@@ -34,7 +34,7 @@
 	branch = kikutii-trybewarts-project
 [submodule "projects/bloco-07-unit-tests"]
 	path = projects/bloco-07-unit-tests
-	url = git@github.com:tryber/sd-011-project-js-unit-tests.git
+	url = https://github.com/tryber/sd-011-project-js-unit-tests
 [submodule "projects/bloco-08-zoo-functions"]
 	path = projects/bloco-08-zoo-functions
 	url = https://github.com/tryber/sd-011-project-zoo-functions.git
@@ -55,10 +55,10 @@
 	url = https://github.com/heyset/comprehension-exercises-router.git
 [submodule "mod-2/bloco-13/13.1/conteudo/lifecycle"]
 	path = mod-2/bloco-13/13.1/conteudo/lifecycle
-	url = git@github.com:heyset/exercises-lifecycle-step-by-step.git
+	url = https://github.com/heyset/exercises-lifecycle-step-by-step.git
 [submodule "mod-2/bloco-13/13.1/exercicios/dog-image"]
 	path = mod-2/bloco-13/13.1/exercicios/dog-image
-	url = git@github.com:heyset/exercise-dog-image.git
+	url = https://github.com/heyset/exercise-dog-image.git
 [submodule "projects/bloco-13-movie-cards-library-crud"]
 	path = projects/bloco-13-movie-cards-library-crud
 	url = https://github.com/tryber/sd-011-project-movie-card-library-crud.git
