@@ -24,6 +24,8 @@ Content refers to smaller exercises developed during the content days, and they 
 
 Projects are longer works taking at least a full day, but most ranging from 3 to 5 days, and some spanning weeks. Some of them were group projects, and others were individual.
 
+All relevant sub sections have READMEs of their own.
+
 ## Repository Index
 
 Here you will find link to the content blocks, as well as links to the projects of each block. Some of those will have deployment links.
@@ -35,7 +37,7 @@ Here you will find link to the content blocks, as well as links to the projects 
 * [Repo](https://github.com/heyset/Trybe/tree/main/mod-1/bloco-01/)
 * No project
   
-#### Block 02 - Internet
+#### Block 02 - Internet & Git
 
 * [Repo](https://github.com/heyset/Trybe/tree/main/mod-1/bloco-02/)
 * No project
