@@ -46,7 +46,7 @@ Here you will find link to the content blocks, as well as links to the projects 
 
 * [Repo](https://github.com/heyset/Trybe/tree/main/mod-1/bloco-03/)
 * Project **Lessons Learned**
-  * [Repo] (https://github.com/heyset/sd011-project-lessons-learned)
+  * [Repo](https://github.com/heyset/sd011-project-lessons-learned)
   * [Deploy](https://heyset.github.io/sd011-project-lessons-learned/)
 
 #### Block 04 - Introduction to JavaScript
