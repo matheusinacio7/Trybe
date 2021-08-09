@@ -3,7 +3,7 @@
 	url = https://github.com/heyset/sd-011-project-playground-functions
 [submodule "projects/bloco-03-lessons-learned"]
 	path = projects/bloco-03-lessons-learned
-	url = https://github.com/heyset/sd-011-project-lessons-learned
+	url = https://github.com/heyset/sd011-project-lessons-learned.git
 [submodule "projects/bloco-05-pixel-art"]
 	path = projects/bloco-05-pixel-art
 	url = https://github.com/tryber/sd-011-project-pixels-art.git
