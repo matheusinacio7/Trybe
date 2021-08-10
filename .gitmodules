@@ -1,10 +1,9 @@
 [submodule "projects/bloco-04-playground-functions"]
 	path = projects/bloco-04-playground-functions
-	url = https://github.com/tryber/sd-011-project-playground-functions
+	url = https://github.com/heyset/sd-011-project-playground-functions
 [submodule "projects/bloco-03-lessons-learned"]
 	path = projects/bloco-03-lessons-learned
-	url = https://github.com/tryber/sd-011-project-lessons-learned
-	branch = inacio-project-lessons-learned
+	url = https://github.com/heyset/sd011-project-lessons-learned.git
 [submodule "projects/bloco-05-pixel-art"]
 	path = projects/bloco-05-pixel-art
 	url = https://github.com/tryber/sd-011-project-pixels-art.git
@@ -35,7 +34,7 @@
 	branch = kikutii-trybewarts-project
 [submodule "projects/bloco-07-unit-tests"]
 	path = projects/bloco-07-unit-tests
-	url = git@github.com:tryber/sd-011-project-js-unit-tests.git
+	url = https://github.com/tryber/sd-011-project-js-unit-tests
 [submodule "projects/bloco-08-zoo-functions"]
 	path = projects/bloco-08-zoo-functions
 	url = https://github.com/tryber/sd-011-project-zoo-functions.git
@@ -56,10 +55,10 @@
 	url = https://github.com/heyset/comprehension-exercises-router.git
 [submodule "mod-2/bloco-13/13.1/conteudo/lifecycle"]
 	path = mod-2/bloco-13/13.1/conteudo/lifecycle
-	url = git@github.com:heyset/exercises-lifecycle-step-by-step.git
+	url = https://github.com/heyset/exercises-lifecycle-step-by-step.git
 [submodule "mod-2/bloco-13/13.1/exercicios/dog-image"]
 	path = mod-2/bloco-13/13.1/exercicios/dog-image
-	url = git@github.com:heyset/exercise-dog-image.git
+	url = https://github.com/heyset/exercise-dog-image.git
 [submodule "projects/bloco-13-movie-cards-library-crud"]
 	path = projects/bloco-13-movie-cards-library-crud
 	url = https://github.com/tryber/sd-011-project-movie-card-library-crud.git
@@ -111,3 +110,15 @@
 [submodule "projects/bloco-18-star-wars-planet-search"]
 	path = projects/bloco-18-star-wars-planet-search
 	url = https://github.com/tryber/sd-011-project-starwars-planets-search.git
+[submodule "mod-2/bloco-18/18.1/exercise-contextAPI-refactoring"]
+	path = mod-2/bloco-18/18.1/exercise-contextAPI-refactoring
+	url = https://github.com/heyset/exercise-contextAPI-refactoring.git
+[submodule "mod-2/bloco-18/18.2/exercise-contextAPI-refactoring"]
+	path = mod-2/bloco-18/18.2/exercise-contextAPI-refactoring
+	url = https://github.com/heyset/exercise-contextAPI-refactoring.git
+[submodule "mod-2/bloco-18/18.2/--force"]
+	path = mod-2/bloco-18/18.2/--force
+	url = https://github.com/heyset/exercise-tryfood.git
+[submodule "mod-2/bloco-18/18.2/exercise-tryfood"]
+	path = mod-2/bloco-18/18.2/exercise-tryfood
+	url = https://github.com/heyset/exercise-tryfood.git
