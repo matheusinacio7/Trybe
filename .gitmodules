@@ -122,3 +122,6 @@
 [submodule "mod-2/bloco-18/18.2/exercise-tryfood"]
 	path = mod-2/bloco-18/18.2/exercise-tryfood
 	url = https://github.com/heyset/exercise-tryfood.git
+[submodule "projects/bloco-19-recipe-app"]
+	path = projects/bloco-19-recipe-app
+	url = https://github.com/tryber/sd-011-project-recipes-app.git
