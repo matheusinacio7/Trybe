@@ -125,3 +125,6 @@
 [submodule "projects/bloco-19-recipe-app"]
 	path = projects/bloco-19-recipe-app
 	url = https://github.com/tryber/sd-011-project-recipes-app.git
+[submodule "projects/bloco-20-all-for-one"]
+	path = projects/bloco-20-all-for-one
+	url = git@github.com:tryber/sd-011-project-mysql-all-for-one.git
