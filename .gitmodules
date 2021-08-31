@@ -128,3 +128,6 @@
 [submodule "projects/bloco-20-all-for-one"]
 	path = projects/bloco-20-all-for-one
 	url = git@github.com:tryber/sd-011-project-mysql-all-for-one.git
+[submodule "projects/bloco-21-vocabulary-booster"]
+	path = projects/bloco-21-vocabulary-booster
+	url = git@github.com:tryber/sd-011-mysql-vocabulary-booster.git
