@@ -29,8 +29,8 @@ CREATE TABLE animal(
 CREATE TABLE employee(
   employee_id INT PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
-  manager_id INT NOT NULL,
-  job_id INT NOT NULL
+  manager_id INT,
+  job_id INT NOT NULL,
 
   FOREIGN KEY (manager_id) REFERENCES employee (employee_id),
   FOREIGN KEY (job_id) REFERENCES job (job_id)
