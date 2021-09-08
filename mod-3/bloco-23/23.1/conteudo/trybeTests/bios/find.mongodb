@@ -1,0 +1,19 @@
+const database = 'trybeTests';
+const collection = 'bios';
+
+use(database);
+db.bios.find();
+
+db.bios.find({ _id: 5 });
+
+db.getSiblingDB('trybeTests').bios.find({ _id: 5 });
+
+db.getSiblingDB(database)[collection].find();
+
+~/Trybe/mod-3/bloco-23/23.1/conteudo/find.mongodb
+~/Trybe/mod-3/bloco-23/23.1/conteudo/trybeTests/bios/find.mongodb
+
+usdbc
+
+bios
+~/Trybe/mod-3/bloco-23/23.1/conteudo/trybeTests/bios
