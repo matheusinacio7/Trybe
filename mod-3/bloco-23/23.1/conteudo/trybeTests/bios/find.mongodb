@@ -8,12 +8,8 @@ db.bios.find({ _id: 5 });
 
 db.getSiblingDB('trybeTests').bios.find({ _id: 5 });
 
-db.getSiblingDB(database)[collection].find();
+db.getSiblingDB('trybeTests').bios.find({}, { _id: 0, name: 1 });
 
-~/Trybe/mod-3/bloco-23/23.1/conteudo/find.mongodb
-~/Trybe/mod-3/bloco-23/23.1/conteudo/trybeTests/bios/find.mongodb
+db.getSiblingDB('trybeTests').bios.find().limit(5);
 
-usdbc
-
-bios
-~/Trybe/mod-3/bloco-23/23.1/conteudo/trybeTests/bios
+db.getSiblingDB('trybeTests').bios.find().limit(10).skip(5);
