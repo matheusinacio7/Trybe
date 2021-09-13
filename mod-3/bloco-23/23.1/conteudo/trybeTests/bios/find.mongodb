@@ -1,0 +1,15 @@
+const database = 'trybeTests';
+const collection = 'bios';
+
+use(database);
+db.bios.find();
+
+db.bios.find({ _id: 5 });
+
+db.getSiblingDB('trybeTests').bios.find({ _id: 5 });
+
+db.getSiblingDB('trybeTests').bios.find({}, { _id: 0, name: 1 });
+
+db.getSiblingDB('trybeTests').bios.find().limit(5);
+
+db.getSiblingDB('trybeTests').bios.find().limit(10).skip(5);

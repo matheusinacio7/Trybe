@@ -1,0 +1,5 @@
+use firstTest
+
+db.justATest.insertOne({ name: 'Testing Johnson' })
+
+show dbs
