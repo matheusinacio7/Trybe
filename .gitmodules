@@ -134,3 +134,6 @@
 [submodule "projects/bloco-23-dataflights"]
 	path = projects/bloco-23-dataflights
 	url = git@github.com:tryber/sd-011-mongodb-dataflights.git
+[submodule "projects/bloco-24-mongodb-commerce"]
+	path = projects/bloco-24-mongodb-commerce
+	url = git@github.com:tryber/sd-010-a-mongodb-commerce.git
