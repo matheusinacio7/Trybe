@@ -26,3 +26,25 @@ db.getSiblingDB('trybe').transactions
     },
     { $limit: 3 }
   ]);
+
+
+// Selecione todos os bancos, ou seja, valores do campo bank ;
+db.getSiblingDB('trybe').transactions
+  .aggregate([
+    { $group: { _id: '$bank' } },
+    { $project: { _id: 0, bank: '$_id' } }
+  ]);
+
+// Selecione o valor total das transações em cada banco e quantas são;
+db.getSiblingDB('trybe').transactions
+  .aggregate([
+    { $group: { _id: '$bank', totalTransactions: { $sum: 1 }, totalTransactionValue: { $sum: "$value" } } }
+  ]);
+
+// Selecione os bancos que têm o valor total de transações maior que 1000.
+
+db.getSiblingDB('trybe').transactions
+  .aggregate([
+    { $group: { _id: '$bank', totalTransactionValue: { $sum: "$value" } } },
+    { $match: { totalTransactionValue: { $gt: 1000 } } }
+  ]);
