@@ -131,6 +131,9 @@
 [submodule "projects/bloco-21-vocabulary-booster"]
 	path = projects/bloco-21-vocabulary-booster
 	url = git@github.com:tryber/sd-011-mysql-vocabulary-booster.git
+[submodule "projects/bloco-22-one-for-all"]
+	path = projects/bloco-22-one-for-all
+	url = git@github.com:tryber/sd-011-mysql-one-for-all.git
 [submodule "projects/bloco-23-dataflights"]
 	path = projects/bloco-23-dataflights
 	url = git@github.com:tryber/sd-011-mongodb-dataflights.git

@@ -1,0 +1,10 @@
+// 1. Crie o banco de dados. Deve ter 37 documentos
+// obs: arquivo irmao
+db.getSiblingDB('trybe').filmes.count();
+
+// 2. Exclua
+db.getSiblingDB('trybe').filmes.drop();
+
+// 3. Crie de novo
+// obs: arquivo irmao
+
