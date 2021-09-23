@@ -140,3 +140,6 @@
 [submodule "projects/bloco-24-commerce"]
 	path = projects/bloco-24-commerce
 	url = git@github.com:tryber/sd-011-mongodb-commerce.git
+[submodule "projects/bloco-25-aggregations"]
+	path = projects/bloco-25-aggregations
+	url = git@github.com:tryber/sd-011-mongodb-aggregations.git
