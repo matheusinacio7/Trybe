@@ -1,0 +1,48 @@
+// Selecione todos os clientes com as suas respectivas transações feitas;
+db.getSiblingDB('trybe').clients.find(); // name
+db.getSiblingDB('trybe').transactions.find(); // from
+
+db.getSiblingDB('trybe').clients.aggregate([
+  { $lookup: {
+    from: 'transactions',
+    as: 'transactions',
+    let: { client_name: '$name' },
+    pipeline: [
+      { $match: { $expr: { $eq: ['$from', '$$client_name'] } } },
+      { $project: { _id: 0, to: 1, bank: 1, value: 1 } }
+    ]
+  } }
+]);
+
+// Selecione os quatro primeiros clientes com as suas respectivas transações recebidas ordenados pelo estado em ordem alfabética;
+db.getSiblingDB('trybe').clients.aggregate([
+  {
+    $lookup: {
+      from: 'transactions',
+      as: 'transactions_received',
+      let: { client_name: '$name' },
+      pipeline: [
+        { $match: { $expr: { $eq: ['$to', '$$client_name'] } } },
+        { $project: { _id: 0, from: 1, bank: 1, value: 1 } }
+      ]
+    }
+  },
+  { $limit: 4 },
+  { $sort: { State: 1 } }
+]);
+
+// Selecione todos os cliente do estado da "Florida" e suas respectivas transações recebidas.
+db.getSiblingDB('trybe').clients.aggregate([
+  { $match: { State: 'Florida' } },
+  {
+    $lookup: {
+      from: 'transactions',
+      as: 'transactions_received',
+      let: { client_name: '$name' },
+      pipeline: [
+        { $match: { $expr: { $eq: ['$to', '$$client_name'] } } },
+        { $project: { _id: 0, from: 1, bank: 1, value: 1 } }
+      ]
+    }
+  }
+]);
