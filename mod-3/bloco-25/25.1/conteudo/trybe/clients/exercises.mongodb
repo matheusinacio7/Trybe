@@ -1,0 +1,35 @@
+// Selecione todos os clientes com as suas respectivas transações feitas;
+db.getSiblingDB('trybe').clients
+  .aggregate([
+    { $lookup: {
+        from: 'transactions',
+        localField: 'name',
+        foreignField: 'from',
+        as: 'transactions',
+    }}
+  ]);
+
+// Selecione quatro clientes com as suas respectivas transações recebidas;
+db.getSiblingDB('trybe').clients
+  .aggregate(
+    { $lookup: {
+        from: 'transactions',
+        localField: 'name',
+        foreignField: 'from',
+        as: 'transactions',
+    }},
+    { $limit: 4 }
+  );
+
+// Selecione todos os cliente do estado da "Florida" e suas respectivas transações recebidas.
+db.getSiblingDB('trybe').clients
+  .aggregate(
+    { $lookup: {
+        from: 'transactions',
+        localField: 'name',
+        foreignField: 'from',
+        as: 'transactions',
+    }},
+    { $match: { State: 'Florida' } }
+  );
+
