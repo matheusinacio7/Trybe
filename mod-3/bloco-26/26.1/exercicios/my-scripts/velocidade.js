@@ -13,3 +13,5 @@ function prompt() {
   console.log('');
   console.log(`A velocidade é ${speed} m/s`);
 }
+
+prompt();

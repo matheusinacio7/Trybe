@@ -40,5 +40,5 @@ function playLoop() {
 playLoop();
 
 module.exports = {
-  getRandomInt,
+  getRandomInt
 };
