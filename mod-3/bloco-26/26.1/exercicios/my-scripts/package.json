@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "start": "node index.js",
     "imc": "node imc.js",
     "velocidade": "node velocidade.js",
     "sorteio": "node sorteio.js",
-    "start": "node index.js"
+    "fatorial": "node fatorial.js",
+    "fibonacci": "node fibonacci.js"
   },
   "keywords": [],
   "author": "",
