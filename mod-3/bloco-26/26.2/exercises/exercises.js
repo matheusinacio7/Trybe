@@ -69,7 +69,7 @@ function multipleFileRead() {
       return Promise.all(txtFiles.map((filePath) => fsp.readFile(`./exercises/${filePath}`, 'utf-8')));
     })
     .then((contentArray) => {
-      const fullString = contentArray.reduce((acc, string) => `${acc} ${string}`, '').slice(1);
+      const fullString = contentArray.join(' ');
       return fsp.writeFile('./exercises/fileAll.txt', fullString);
     })
     .then(() => {
