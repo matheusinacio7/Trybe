@@ -78,4 +78,86 @@ function multipleFileRead() {
     .catch(console.error);
 }
 
-multipleFileRead();
+// multipleFileRead();
+
+function printAllData() {
+  fsp.readFile('./exercises/simpsons.json', 'utf-8')
+    .then((characters) => JSON.parse(characters).forEach(({ id, name }) => console.log(`${id} - ${name}`)))
+    .catch(console.error);
+}
+
+// printAllData();
+
+const getCharacterById = (id) => new Promise((resolve, reject) => {
+  fsp.readFile('./exercises/simpsons.json', 'utf-8')
+    .then((characters) => {
+      const character = JSON.parse(characters).find((char) => char.id == id);
+      if (!character) {
+        return reject('id não encontrado');
+      }
+
+      resolve(character);
+    })
+    .catch(reject);
+});
+
+// getCharacterById(6).then(console.log).catch(console.error);
+// getCharacterById(24).then(console.log).catch(console.error);
+
+function removeCharactersByIds(ids) {
+  fsp.readFile('./exercises/simpsons.json', 'utf-8')
+    .then((characters) => {
+      const filteredArray = JSON.parse(characters).filter((char) => !ids.includes(parseInt(char.id, 10)));
+      return fsp.writeFile('./exercises/simpsons.json', JSON.stringify(filteredArray, null, '\t'));
+    })
+    .catch(console.error);
+}
+
+// removeCharactersByIds([10, 6]);
+
+function createSimpsonFamilyFile() {
+  fsp.readFile('./exercises/simpsons.json', 'utf-8')
+    .then((characters) => {
+      const family = JSON.parse(characters).filter((char) => {
+        const charId = parseInt(char.id, 10);
+        return [1, 2, 3, 4].includes(charId);
+      });
+      return fsp.writeFile('./exercises/simpsonFamily.json', JSON.stringify(family, null, '\t'));
+    })
+    .catch(console.error);
+}
+
+// createSimpsonFamilyFile();
+
+function addCharacterToFamilyByName(charName) {
+  Promise.all([
+    fsp.readFile('./exercises/simpsons.json', 'utf-8'),
+    fsp.readFile('./exercises/simpsonFamily.json', 'utf-8')
+  ])
+    .then(([characters, family]) => {
+      const character = JSON.parse(characters).find((char) => char.name === charName);
+      const parsedFamily = JSON.parse(family);
+      parsedFamily.push(character);
+      return fsp.writeFile('./exercises/simpsonFamily.json', JSON.stringify(parsedFamily, null, '\t'));
+    })
+    .catch(console.error);
+}
+
+// addCharacterToFamilyByName('Nelson Muntz');
+
+function substituteCharacterByName(charToBeSubstituted, charToSubsitute) {
+  Promise.all([
+    fsp.readFile('./exercises/simpsons.json', 'utf-8'),
+    fsp.readFile('./exercises/simpsonFamily.json', 'utf-8')
+  ])
+    .then(([characters, family]) => {
+      const character = JSON.parse(characters).find((char) => char.name === charToSubsitute);
+      const parsedFamily = JSON.parse(family);
+      const substitutedCharIndex = parsedFamily.findIndex((char) => char.name === charToBeSubstituted);
+      parsedFamily.splice(substitutedCharIndex, 1, character);
+      return fsp.writeFile('./exercises/simpsonFamily.json', JSON.stringify(parsedFamily, null, '\t'));
+    })
+    .catch(console.error);
+}
+
+// substituteCharacterByName('Nelson Muntz', 'Maggie Simpson');
