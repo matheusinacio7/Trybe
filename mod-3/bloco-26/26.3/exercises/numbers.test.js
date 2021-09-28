@@ -29,5 +29,17 @@ describe('A função checkPositive, ', () => {
       expect(checkPositive(-0.1)).to.equal(expectedReturn);
     });
   });
+
+  describe("quando recebe um valor não numérico:", () => {
+    it('retorna "o valor deve ser um número"', () => {
+      const expectedReturn = 'o valor deve ser um número';
+
+      expect(checkPositive(null)).to.equal(expectedReturn);
+      expect(checkPositive(undefined)).to.equal(expectedReturn);
+      expect(checkPositive('24')).to.equal(expectedReturn);
+      expect(checkPositive([20, 40])).to.equal(expectedReturn);
+      expect(checkPositive({ number: 10 })).to.equal(expectedReturn);
+    });
+  });
 });
 
