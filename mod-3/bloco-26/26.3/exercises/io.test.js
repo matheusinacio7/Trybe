@@ -14,18 +14,19 @@ describe('A função writeContentToFile', () => {
     const spies = [];
     spies.push(stub(fs, 'writeFile').returns(undefined));
     spies.push(stub(fs, 'writeFileSync').returns(undefined));
-    spies.push(stub(fsp, 'writeFile').returns(undefined));
-    spies[0].calledWithMatch(['', '', ''])
+    spies.push(stub(fsp, 'writeFile').resolves(undefined));
 
-    await writeContentToFile(targetFileName, targetContent);
+    const result = await writeContentToFile(targetFileName, targetContent);
 
     expect(true).to.satisfy(() => {
       for (let i = 0; i < spies.length; i += 1) {
-        if (spies[i].calledWithMatch(`io/${targetFileName}`), targetContent) {
-          return true
+        if (spies[i].calledWithMatch(`./io/${targetFileName}`), targetContent) {
+          return true;
         }
       }
-      return false
+      return false;
     });
+
+    expect(result).to.equal('ok');
   });
 });
