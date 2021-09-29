@@ -28,6 +28,28 @@ const sortAlphabetically = (a, b) => a.localeCompare(b);
 
 app.get('/:recipe', (req, res) => res.status(200).json(sortByField('name', recipes[req.params.recipe])(sortAlphabetically)));
 
+const combineFilters = ([head, ...tail]) => (data) => (head ? (head(data) && combineFilters(tail)(data)) : true);
+
+const filterCombined = (array, filterFuncs) => array.filter((el) => combineFilters(filterFuncs)(el));
+
+app.get('/:recipe/search', (req, res) => {
+  const queryParams = req.query;
+
+  const filterFuncs = {
+    name: (recipe) => new RegExp(req.query.name, 'i').test(recipe.name),
+    maxPrice: (recipe) => recipe.price <= parseFloat(queryParams.maxPrice, 10),
+    minPrice: (recipe) => recipe.price >= parseFloat(queryParams.minPrice, 10),
+  };
+
+  const filters = Object.keys(queryParams).map((query) => filterFuncs[query]);
+
+  const filteredRecipes = filterCombined(recipes[req.params.recipe], filters);
+
+  if (filteredRecipes.length === 0) return res.status(204).json({ message: 'Nenhuma receita encontrada com esses parâmetros de busca.' });
+
+  return res.status(200).json(filteredRecipes);
+});
+
 app.get('/:recipe/:id', (req, res) => {
   const recipe = recipes[req.params.recipe].find(({ id }) => req.params.id == id);
 
