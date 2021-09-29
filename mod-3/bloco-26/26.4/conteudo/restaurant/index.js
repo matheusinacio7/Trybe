@@ -17,26 +17,21 @@ const drinks = [
   { id: 6, name: 'Água Mineral 500 ml', price: 5.0 },
 ];
 
+const recipes = {
+  drinks,
+  foods
+};
+
 const sortByField = (fieldName, array) => (sortingFunction) => array.sort((a, b) => sortingFunction(a[fieldName], b[fieldName]));
 
 const sortAlphabetically = (a, b) => a.localeCompare(b);
 
-app.get('/foods', (_, res) => res.status(200).json(sortByField('name', foods)(sortAlphabetically)));
+app.get('/:recipe', (req, res) => res.status(200).json(sortByField('name', recipes[req.params.recipe])(sortAlphabetically)));
 
-app.get('/foods/:id', (req, res) => {
-  const recipe = foods.find(({ id }) => req.params.id == id);
+app.get('/:recipe/:id', (req, res) => {
+  const recipe = recipes[req.params.recipe].find(({ id }) => req.params.id == id);
 
-  if (!recipe ) return res.status(404).json({ message: `Comida de id ${req.params.id} não encontrada.` });
-
-  return res.status(200).json(recipe);
-});
-
-app.get('/drinks', (_, res) => res.status(200).json(sortByField('name', drinks)(sortAlphabetically)));
-
-app.get('/drinks/:id', (req, res) => {
-  const recipe = drinks.find(({ id }) => req.params.id == id);
-
-  if (!recipe ) return res.status(404).json({ message: `Bebida de id ${req.params.id} não encontrada.` });
+  if (!recipe ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
 
   return res.status(200).json(recipe);
 });
