@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express();
 
 const rootRouter = require('./routers/root');
+const simpsonsRouter = require('./routers/simpsons');
 
 const PORT = 3001;
 
@@ -17,7 +18,7 @@ function resetData() {
 
     readStream.pipe(writeStream);
   } catch (err) {
-    error = err;
+    error = err; // TODO conseguir lidar com o erro corretamente
   }
 }
 
@@ -36,5 +37,6 @@ app.use(
 );
 
 app.use('/', rootRouter);
+app.use('/simpsons', simpsonsRouter);
 
 app.listen(PORT, () => console.log('O servidor está ativo na porta', PORT));
