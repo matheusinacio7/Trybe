@@ -58,14 +58,6 @@ app.get('/:recipe/search', (req, res) => {
   return res.status(200).json(filteredRecipes);
 });
 
-app.get('/:recipe/:id', (req, res) => {
-  const recipe = recipes[req.params.recipe].find(({ id }) => req.params.id == id);
-
-  if (!recipe ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
-
-  return res.status(200).json(recipe);
-});
-
 app.post('/:recipe', (req, res) => {
   const { id, name, price } = req.body;
 
@@ -80,13 +72,26 @@ const getObjectWithoutUndefinedProps = (originalObject) => Object.fromEntries(
   Object.entries(originalObject).filter(([key, value]) =>  value !== undefined)
 );
 
+app.use('/:recipe/:id', (req, res, next) => {
+  const index = recipes[req.params.recipe].findIndex(({ id }) => req.params.id == id)
+  const recipe = recipes[req.params.recipe][index];
+
+  if (!recipe ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
+
+  req.targetRecipe = { recipe, index };
+  next();
+});
+
+app.get('/:recipe/:id', (req, res) => {
+  const recipe = req.targetRecipe.recipe;
+
+  return res.status(200).json(recipe);
+});
+
 app.put('/:recipe/:id', (req, res) => {
-  const id = req.params.id;
   const { id: newId, name, price } = req.body;
 
-  const recipeIndex = recipes[req.params.recipe].findIndex((recipe) => recipe.id == id);
-
-  if (recipeIndex === -1 ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
+  const recipeIndex = req.targetRecipe.index;
 
   if (!newId && !name && !price) return res.status(400).json({ message: 'É preciso alterar ao menos um atributo da receita.' });
 
@@ -99,11 +104,7 @@ app.put('/:recipe/:id', (req, res) => {
 });
 
 app.delete('/:recipe/:id', (req, res) => {
-  const id = req.params.id;
-
-  const recipeIndex = recipes[req.params.recipe].findIndex((recipe) => recipe.id == id);
-
-  if (recipeIndex === -1 ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
+  const recipeIndex = req.targetRecipe.index;
 
   recipes[req.params.recipe].splice(recipeIndex, 1);
 
