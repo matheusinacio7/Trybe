@@ -1,4 +1,12 @@
-const app = require('express')();
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+
+app.use(
+  cors(),
+  express.json(),
+);
 
 const PORT = 3001;
 
@@ -56,6 +64,16 @@ app.get('/:recipe/:id', (req, res) => {
   if (!recipe ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
 
   return res.status(200).json(recipe);
+});
+
+app.post('/:recipe', (req, res) => {
+  const { id, name, price } = req.body;
+
+  if (!id || !name || !price) return res.status(400).json({ message: 'Os atributos necessários não foram informados.' });
+
+  recipes[req.params.recipe].push({ id, name, price });
+
+  return res.status(201).json({ message: `Receita de id ${id} adicionada com sucesso.` });
 });
 
 app.listen(PORT, () => {
