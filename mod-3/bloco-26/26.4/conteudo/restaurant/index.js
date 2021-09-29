@@ -21,9 +21,25 @@ const sortByField = (fieldName, array) => (sortingFunction) => array.sort((a, b)
 
 const sortAlphabetically = (a, b) => a.localeCompare(b);
 
-app.get('/foods', (_, res) => res.json(sortByField('name', foods)(sortAlphabetically)));
+app.get('/foods', (_, res) => res.status(200).json(sortByField('name', foods)(sortAlphabetically)));
 
-app.get('/drinks', (_, res) => res.json(sortByField('name', drinks)(sortAlphabetically)));
+app.get('/foods/:id', (req, res) => {
+  const recipe = foods.find(({ id }) => req.params.id == id);
+
+  if (!recipe ) return res.status(404).json({ message: `Comida de id ${req.params.id} não encontrada.` });
+
+  return res.status(200).json(recipe);
+});
+
+app.get('/drinks', (_, res) => res.status(200).json(sortByField('name', drinks)(sortAlphabetically)));
+
+app.get('/drinks/:id', (req, res) => {
+  const recipe = drinks.find(({ id }) => req.params.id == id);
+
+  if (!recipe ) return res.status(404).json({ message: `Bebida de id ${req.params.id} não encontrada.` });
+
+  return res.status(200).json(recipe);
+});
 
 app.listen(PORT, () => {
   console.log('Servidor ativo na porta ', PORT);
