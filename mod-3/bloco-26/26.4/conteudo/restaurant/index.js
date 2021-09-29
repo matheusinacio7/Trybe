@@ -76,6 +76,44 @@ app.post('/:recipe', (req, res) => {
   return res.status(201).json({ message: `Receita de id ${id} adicionada com sucesso.` });
 });
 
+const getObjectWithoutUndefinedProps = (originalObject) => Object.fromEntries(
+  Object.entries(originalObject).filter(([key, value]) =>  value !== undefined)
+);
+
+app.put('/:recipe/:id', (req, res) => {
+  const id = req.params.id;
+  const { id: newId, name, price } = req.body;
+
+  const recipeIndex = recipes[req.params.recipe].findIndex((recipe) => recipe.id == id);
+
+  if (recipeIndex === -1 ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
+
+  if (!newId && !name && !price) return res.status(400).json({ message: 'É preciso alterar ao menos um atributo da receita.' });
+
+  recipes[req.params.recipe][recipeIndex] = {
+    ...recipes[req.params.recipe][recipeIndex],
+    ...getObjectWithoutUndefinedProps({ id: newId, name, price }),
+  };
+
+  return res.status(204).end();
+});
+
+app.delete('/:recipe/:id', (req, res) => {
+  const id = req.params.id;
+
+  const recipeIndex = recipes[req.params.recipe].findIndex((recipe) => recipe.id == id);
+
+  if (recipeIndex === -1 ) return res.status(404).json({ message: `Receita de id ${req.params.id} não encontrada.` });
+
+  recipes[req.params.recipe].splice(recipeIndex, 1);
+
+  return res.status(204).end();
+});
+
+app.all('*', (_, res) => {
+  return res.status(404).json({ message: 'Endpoint desconhecido.' });
+});
+
 app.listen(PORT, () => {
   console.log('Servidor ativo na porta ', PORT);
 });
