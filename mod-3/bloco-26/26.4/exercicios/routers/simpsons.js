@@ -14,6 +14,28 @@ router.get('/', (_, res) => {
     });
 });
 
+router.post('/', (req, res) => {
+  const { id, name } = req.body;
+
+  if (!id || !name) return res.status(400).json({ message: 'You need to inform an id and a name.'});
+
+  getFile()
+    .then((data) => {
+      const newSimpsonId = '' + id;
+      const index = data.findIndex((simpson) => simpson.id === id);
+
+      if (index !== -1) return res.status(409).json({ message: 'Id already exists.' });
+
+      data.push({ id: newSimpsonId, name });
+      return saveFile(data);
+    })
+    .then(() => res.status(204).end())
+    .catch((err) => {
+      console.log(err);
+      res.status(500).end();
+    });
+});
+
 router.get('/:id', (req, res) => {
   getFile()
     .then((data) => {
