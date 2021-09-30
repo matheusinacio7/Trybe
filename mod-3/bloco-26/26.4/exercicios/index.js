@@ -28,6 +28,7 @@ function resetData() {
       });
   } catch (err) {
     error = err; // TODO conseguir lidar com o erro corretamente
+    // possivel solucao: http://expressjs.com/en/advanced/best-practice-performance.html#use-promises
   }
 }
 
