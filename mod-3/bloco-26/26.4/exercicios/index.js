@@ -6,6 +6,9 @@ const app = express();
 
 const rootRouter = require('./routers/root');
 const simpsonsRouter = require('./routers/simpsons');
+const usersRouter = require('./routers/user');
+
+const { authentication } = require('./auth');
 
 const PORT = 3001;
 
@@ -17,6 +20,12 @@ function resetData() {
     const readStream = fs.createReadStream('assets/simpsons.json');
 
     readStream.pipe(writeStream);
+
+    fs.promises.access('db/users.json', fs.constants.R_OK | fs.constants.W_OK)
+      .then(() => undefined)
+      .catch(() => {
+        fs.promises.writeFile('db/users.json', '[]');
+      });
   } catch (err) {
     error = err; // TODO conseguir lidar com o erro corretamente
   }
@@ -30,6 +39,7 @@ const handleInternalError = (_, res, next) => {
   next();
 };
 
+
 app.use(
   cors(),
   express.json(),
@@ -37,6 +47,7 @@ app.use(
 );
 
 app.use('/', rootRouter);
-app.use('/simpsons', simpsonsRouter);
+app.use('/simpsons', authentication, simpsonsRouter);
+app.use('/users', usersRouter);
 
 app.listen(PORT, () => console.log('O servidor está ativo na porta', PORT));
