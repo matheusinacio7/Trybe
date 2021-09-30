@@ -8,6 +8,9 @@
 		"firstName": "Joao Corca",
 		"phone": "13 1337 1337",
 		"email": "joao@corca.com",
-		"password": "$2b$10$IScOw3gIalGXJ.G1DY/R9./cIKovqySrhADOLQjP8tTY/0NSMmOzO"
+		"password": "$2b$10$cwtraRWekkaFitUUFojz8u4PgEBUmnP5mClL9puzMen65qRSmsVge",
+		"tokens": [
+			"17ce754c018e73bd"
+		]
 	}
 ]
