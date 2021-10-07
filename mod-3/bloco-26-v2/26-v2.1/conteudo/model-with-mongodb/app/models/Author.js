@@ -36,15 +36,14 @@ class Author {
 
   save() {
     return new Promise((resolve, reject) => {
-      connection.execute(
-        `
-          INSERT INTO trybe_model_example.authors
-            (first_name, middle_name, last_name)
-          VALUES
-            (?, ?, ?);
-        `,
-        [this.firstName, this.middleName, this.lastName]
-      )
+      connection()
+        .then((db) => {
+          return db.collection('authors').insertOne({
+            firstName: this.firstName,
+            middleName: this.middleName,
+            lastName: this.lastName,
+          });
+        })
         .then((result) => {
           resolve(result);
         })
@@ -67,9 +66,13 @@ class Author {
 
   static getById(id) {
     return new Promise((resolve, reject) => {
-      connection.execute(`SELECT * FROM trybe_model_example.authors WHERE id = ?`, [id])
-        .then(([rows]) => {
-          resolve(serialize(rows[0]));
+      connection()
+        .then((db) => {
+          return db.collection('authors').findOne({ _id: parseInt(id, 10) });
+        })
+        .then((author) => {
+          console.log(author);
+          resolve(author);
         })
         .catch(reject);
     });
