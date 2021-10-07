@@ -3,7 +3,11 @@ import express from 'express';
 import Author from './models/Author.js';
 import Book from './models/Book.js';
 
+import ValidationError from './validator/ValidationError.js';
+
 const app = express();
+
+app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
@@ -29,6 +33,21 @@ app.get('/authors/:id', (req, res) => {
       console.log(err);
       res.status(500).end();
     })
+});
+
+app.post('/authors', (req, res) => {
+  try {
+    const newAuthor = new Author(req.body);
+    newAuthor.save()
+      .then((result) => {
+        res.status(200).json(result);
+      });
+  } catch (err) {
+    if (err instanceof ValidationError) {
+      return res.status(400).json({ message: 'dados invalidos' });
+    }
+    return res.status(500).end();
+  }
 });
 
 app.get('/books', (req, res) => {
