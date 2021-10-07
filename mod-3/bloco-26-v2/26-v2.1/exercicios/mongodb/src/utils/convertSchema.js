@@ -10,7 +10,7 @@ function getSchemaFileName() {
   return fileName;
 }
 
-const convertSchema = (fileName) => new Promise((resolve, reject) => {
+const convertSchema = (fileName) => {
   const srcFolder = `${process.cwd()}/src`;
   const targetFile = `${srcFolder}/validator/schemas/${fileName}.json`;
   
@@ -19,7 +19,7 @@ const convertSchema = (fileName) => new Promise((resolve, reject) => {
       return fs.writeFile(targetFile, JSON.stringify(jsSchema, null, '\t'));
     })
     .catch(console.error);
-});
+};
 
 console.log(process.cwd())
 
