@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+import ValidationError from '../validator/ValidationError.js';
 import connection from './connection.js';
 import validate from '../validator/validate.js';
 
@@ -11,6 +13,30 @@ const schema = {
   additionalProperties: false,
 };
 
+const projectAuthorPipeline = [
+  {
+    $lookup: {
+      from: 'authors',
+      localField: 'author_id',
+      foreignField: '_id',
+      as: 'authors'
+    },
+  },
+  {
+    $project: {
+      title: 1,
+      author: { $first: '$authors' }
+    }
+  },
+];
+
+const projectAuthorFullName = {
+  $project: {
+    title: 1,
+    author: { $concat: ['$author.firstName', ' ', '$author.middleName', ' ','$author.lastName'] }
+  }
+};
+
 class Book {
   constructor(bookData) {
     validate(schema, bookData);
@@ -18,21 +44,28 @@ class Book {
     const { title, author_id: authorId } = bookData;
 
     this.title = title;
-    this.authorId = authorId;
+    this.authorId = parseInt(authorId, 10);
   }
 
   save() {
     return new Promise((resolve, reject) => {
-      connection.execute(
-        `
-          INSERT INTO trybe_model_example.books
-            (title, author_id)
-          VALUES
-            (?, ?);
-        `, [this.title, this.authorId]
-      )
-        .then(([rows]) => {
-          resolve(rows);
+      connection()
+        .then((db) => {
+          return Promise.all([
+            db.collection('authors').findOne({ _id: this.authorId }),
+            Promise.resolve(db),
+          ]);
+        })
+        .then(([author, db]) => {
+          if (!author) throw new ValidationError('dados invalidos');
+
+          return db.collection('books').insertOne({
+            title: this.title,
+            author_id: this.authorId,
+          });
+        })
+        .then((result) => {
+          resolve(result);
         })
         .catch(reject);
     });
@@ -42,29 +75,7 @@ class Book {
     return new Promise((resolve, reject) => {
       connection()
         .then((db) => {
-          return db.collection('books').aggregate([
-            {
-              $lookup: {
-                from: 'authors',
-                localField: 'author_id',
-                foreignField: '_id',
-                as: 'authors'
-              },
-            },
-            {
-              $project: {
-                _id: 0,
-                title: 1,
-                author: { $first: '$authors' }
-              }
-            },
-            {
-              $project: {
-                title: 1,
-                author: { $concat: ['$author.firstName', ' ', '$author.middleName', ' ','$author.lastName'] }
-              }
-            }
-          ]).toArray()
+          return db.collection('books').aggregate([...projectAuthorPipeline, projectAuthorFullName]).toArray()
         })
         .then((books) => {
           resolve(books);
@@ -75,22 +86,12 @@ class Book {
 
   static getById(id) {
     return new Promise((resolve, reject) => {
-      connection.execute(
-        `
-          SELECT
-            b.title,
-            CONCAT(a.first_name, ' ', a.middle_name, ' ', a.last_name) AS author
-          FROM
-            books AS b
-          INNER JOIN
-            authors AS a
-            ON a.id = b.author_id
-          WHERE
-            b.id = ?
-        `, [id]
-      )
-        .then(([rows]) => {
-          resolve(rows[0]);
+      connection()
+        .then((db) => {
+          return db.collection('books').findOne(new ObjectId(id));
+        })
+        .then((book) => {
+          resolve(book);
         })
         .catch(reject);
     });
@@ -98,22 +99,20 @@ class Book {
 
   static getByAuthorId(authorId) {
     return new Promise((resolve, reject) => {
-      connection.execute(
-        `
-          SELECT
-            b.title,
-            CONCAT(a.first_name, ' ', a.middle_name, ' ', a.last_name) AS author
-          FROM
-            books AS b
-          INNER JOIN
-            authors AS a
-            ON a.id = b.author_id
-          WHERE
-            a.id = ?
-        `, [authorId]
-      )
-        .then(([rows]) => {
-          resolve(rows);
+      connection()
+        .then((db) => {
+          return db.collection('books').aggregate([
+            {
+              $match: {
+                author_id: parseInt(authorId, 10),
+              }
+            },
+            ...projectAuthorPipeline,
+            projectAuthorFullName,
+          ]).toArray();
+        })
+        .then((books) => {
+          resolve(books);
         })
         .catch(reject);
     });
