@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node -r dotenv/config index.js",
-    "dev": "nodemon -r dotenv/config index.js"
+    "dev": "nodemon -r dotenv/config index.js",
+    "convert_schema": "node src/utils/convertSchema.js"
   },
   "dependencies": {
     "ajv": "^8.6.3",
