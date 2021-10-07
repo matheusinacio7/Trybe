@@ -143,3 +143,6 @@
 [submodule "projects/bloco-25-aggregations"]
 	path = projects/bloco-25-aggregations
 	url = git@github.com:tryber/sd-011-mongodb-aggregations.git
+[submodule "projects/bloco-26-talker-manager"]
+	path = projects/bloco-26-talker-manager
+	url = git@github.com:tryber/sd-011-project-talker-manager.git
