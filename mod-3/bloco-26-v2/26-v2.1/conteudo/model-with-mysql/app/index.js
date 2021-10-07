@@ -40,7 +40,7 @@ app.post('/authors', (req, res) => {
     const newAuthor = new Author(req.body);
     newAuthor.save()
       .then((result) => {
-        res.status(200).json(result);
+        res.status(201).json(result);
       });
   } catch (err) {
     if (err instanceof ValidationError) {
@@ -70,6 +70,22 @@ app.get('/books', (req, res) => {
       console.log(err);
       res.status(500).end();
     });
+});
+
+app.post('/books', (req, res) => {
+  try {
+    const newBook = new Book(req.body);
+    newBook.save()
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json({ message: 'dados invalidos' });
+      })
+  } catch (err) {
+    return res.status(400).json({ message: 'dados invalidos' });
+  }
 });
 
 app.get('/books/:id', (req, res) => {
