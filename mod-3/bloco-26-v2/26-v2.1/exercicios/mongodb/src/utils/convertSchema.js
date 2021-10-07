@@ -21,8 +21,6 @@ const convertSchema = (fileName) => {
     .catch(console.error);
 };
 
-console.log(process.cwd())
-
 const fileName = getSchemaFileName();
 
 convertSchema(fileName)
