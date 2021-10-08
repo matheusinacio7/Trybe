@@ -6,7 +6,7 @@ export default class ValidationError extends HttpError {
     const status = 400;
     let finalMessage = message;
     if (slug === 'missing') {
-      finalMessage = `O campo ${field} é obrigatório e não foi informado.`;
+      finalMessage = `The field ${field} is required and was not informed.`;
     }
 
     super({ message: finalMessage, status });

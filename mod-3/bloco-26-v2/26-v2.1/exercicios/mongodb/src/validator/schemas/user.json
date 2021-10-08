@@ -31,8 +31,8 @@
 			"password": "missing password"
 		},
 		"properties": {
-			"email": "É preciso informar um email válido.",
-			"password": "A senha precisa ter no mínimo 6 caracteres."
+			"email": "You must use a valid email.",
+			"password": "Password must be at least 6 characters long."
 		}
 	}
 }
