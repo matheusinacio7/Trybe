@@ -1,6 +1,12 @@
 import connection from './connection.js';
 import InternalError from '../errors/InternalError.js';
 
+const externalToInternalMap = {
+  firstName: 'first_name',
+  lastName: 'last_name',
+  email: 'email',
+};
+
 const externalInfoMap = (user) => {
   if (!user) return user;
 
@@ -29,7 +35,7 @@ const createNew = ({ firstName, lastName, email, password }) => new Promise((res
 const getAll = () => new Promise((resolve, reject) => {
   connection.execute(
     `
-      SELECT first_name, last_name, email FROM users
+      SELECT id, first_name, last_name, email FROM users
     `
   )
     .then((users) => {
@@ -45,7 +51,7 @@ const getAll = () => new Promise((resolve, reject) => {
 const getById = (id) => new Promise((resolve, reject) => {
   connection.execute(
     `
-      SELECT first_name, last_name, email FROM users WHERE id = ?
+      SELECT id, first_name, last_name, email FROM users WHERE id = ?
     `, [id]
   )
     .then(([rows]) => {
@@ -59,13 +65,28 @@ const getById = (id) => new Promise((resolve, reject) => {
 });
 
 const updateUser = (id, newData) => new Promise((resolve, reject) => {
-  connection()
-    .then((db) => {
-      return db.collection('users').findOneAndUpdate({ _id: new ObjectId(id) }, { $set: newData }, { returnDocument: 'after' });
+  let executeString = 'UPDATE users SET ';
+  const newValues = [];
+  
+  Object.entries(newData)
+    .forEach(([key, value]) => {
+      executeString += `${externalToInternalMap[key]} = ?, `;
+      newValues.push(value);
+    });
+
+  executeString = executeString.slice(0, -2);
+  executeString += ' WHERE id = ?';
+  newValues.push(id);
+
+  connection.execute(executeString, newValues)
+    .then(([rows]) => {
+      if (!rows.affectedRows) {
+        resolve(null);
+      } else {
+        return getById(id);
+      }
     })
-    .then(({ value }) => {
-      resolve(externalInfoMap(value));
-    })
+    .then(resolve)
     .catch((err) => {
       const error = new InternalError('Error while trying to update user with id ' + id);
       error.reason = err;
