@@ -74,12 +74,13 @@ const updateUser = (id, newData) => new Promise((resolve, reject) => {
 });
 
 const deleteUser = (id) => new Promise((resolve, reject) => {
-  connection()
-    .then((db) => {
-      return db.collection('users').deleteOne({ _id: new ObjectId(id) });
-    })
-    .then((result) => {
-      resolve(result);
+  connection.execute(
+    `
+      DELETE FROM users WHERE id = ? 
+    `, [id]
+  )
+    .then(([{affectedRows}]) => {
+      resolve({ deletedCount: affectedRows });
     })
     .catch((err) => {
       const error = new InternalError('Error while trying to delete user with id ' + id);

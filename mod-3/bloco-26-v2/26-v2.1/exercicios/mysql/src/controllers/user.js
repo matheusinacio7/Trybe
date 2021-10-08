@@ -4,7 +4,7 @@ import validate from '../validator/validate.js';
 
 import NotFoundError from '../errors/NotFoundError.js';
 
-const userNotFoundMessage = 'Usuário não encontrado.';
+const userNotFoundMessage = 'User not found.';
 
 const SALT_ROUNDS = 10;
 
