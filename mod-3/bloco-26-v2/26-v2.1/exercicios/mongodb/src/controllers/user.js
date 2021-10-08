@@ -13,5 +13,4 @@ export const createNewUser = (userData) => new Promise((resolve, reject) => {
         .then(resolve)
         .catch(reject);
     })
-    .catch(reject);
 });
