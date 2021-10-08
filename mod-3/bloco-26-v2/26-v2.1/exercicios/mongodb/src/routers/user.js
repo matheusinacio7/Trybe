@@ -1,6 +1,5 @@
 import express from 'express';
-import InternalError from '../errors/InternalError.js';
-import { createNewUser, getAllUsers } from '../controllers/user.js';
+import { createNewUser, getAllUsers, getUserById } from '../controllers/user.js';
 
 const router = express.Router();
 
@@ -16,6 +15,14 @@ router.post('/', (req, res, next) => {
   createNewUser(req.body)
     .then((result) => {
       res.status(201).json(result);
+    })
+    .catch(next);
+});
+
+router.get('/:id', (req, res, next) => {
+  getUserById(req.params.id)
+    .then((result) => {
+      res.status(200).json(result);
     })
     .catch(next);
 });
