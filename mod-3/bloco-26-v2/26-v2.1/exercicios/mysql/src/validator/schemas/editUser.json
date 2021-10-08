@@ -1,0 +1,32 @@
+{
+	"type": "object",
+	"properties": {
+		"firstName": {
+			"type": "string"
+		},
+		"lastName": {
+			"type": "string"
+		},
+		"email": {
+			"type": "string",
+			"pattern": ".+@.+\\..+"
+		},
+		"password": {
+			"type": "string",
+			"minLength": 6
+		}
+	},
+	"additionalProperties": false,
+	"errorMessage": {
+		"required": {
+			"firstName": "missing firstName",
+			"lastName": "missing lastName",
+			"email": "missing email",
+			"password": "missing password"
+		},
+		"properties": {
+			"email": "You must use a valid email.",
+			"password": "Password must be at least 6 characters long."
+		}
+	}
+}
