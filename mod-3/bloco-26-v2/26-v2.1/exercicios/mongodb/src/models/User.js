@@ -13,7 +13,7 @@ const externalInfoMap = (user) => {
 const createNew = (userData) => new Promise((resolve, reject) => {
   connect()
     .then((db) => {
-      return db.collection('user').insertOne(userData);
+      return db.collection('users').insertOne(userData);
     })
     .then(({ insertedId }) => {
       resolve({
@@ -33,7 +33,7 @@ const createNew = (userData) => new Promise((resolve, reject) => {
 const getAll = () => new Promise((resolve, reject) => {
   connect()
     .then((db) => {
-      return db.collection('user').find().toArray();
+      return db.collection('users').find().toArray();
     })
     .then((users) => {
       resolve(users.map(externalInfoMap));
@@ -48,7 +48,7 @@ const getAll = () => new Promise((resolve, reject) => {
 const getById = (id) => new Promise((resolve, reject) => {
   connect()
     .then((db) => {
-      return db.collection('user').findOne(new ObjectId(id));
+      return db.collection('users').findOne(new ObjectId(id));
     })
     .then((user) => {
       resolve(externalInfoMap(user));
@@ -60,8 +60,24 @@ const getById = (id) => new Promise((resolve, reject) => {
     })
 });
 
+const updateUser = (id, newData) => new Promise((resolve, reject) => {
+  connect()
+    .then((db) => {
+      return db.collection('users').findOneAndUpdate({ _id: new ObjectId(id) }, { $set: newData }, { returnDocument: 'after' });
+    })
+    .then(({ value }) => {
+      resolve(externalInfoMap(value));
+    })
+    .catch((err) => {
+      const error = new InternalError('Error while trying to update user with id ' + id);
+      error.reason = err;
+      reject(err);
+    });
+});
+
 export default {
   createNew,
   getAll,
   getById,
-}
+  updateUser,
+};

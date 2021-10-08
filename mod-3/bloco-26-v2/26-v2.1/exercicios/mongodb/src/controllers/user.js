@@ -4,10 +4,12 @@ import validate from '../validator/validate.js';
 
 import NotFoundError from '../errors/NotFoundError.js';
 
+const userNotFoundMessage = 'Usuário não encontrado.';
+
 const SALT_ROUNDS = 10;
 
 export const createNewUser = (userData) => new Promise((resolve, reject) => {
-  validate('user', userData);
+  validate('createUser', userData);
 
   bcrypt.hash(userData.password, SALT_ROUNDS)
     .then((hashedPassword) => {
@@ -24,8 +26,6 @@ export const getAllUsers = () => new Promise((resolve, reject) => {
 });
 
 export const getUserById = (id) => new Promise((resolve, reject) => {
-  const userNotFoundMessage = 'Usuário não encontrado.';
-
   if (id.length !== 24) {
     reject(new NotFoundError(userNotFoundMessage));
   }
@@ -36,6 +36,31 @@ export const getUserById = (id) => new Promise((resolve, reject) => {
         reject(new NotFoundError(userNotFoundMessage));
       } else {
         resolve(user);
+      }
+    })
+    .catch(reject);
+});
+
+export const updateUser = (id, newData) => new Promise((resolve, reject) => {
+  validate('editUser', newData);
+
+  const { password, ...updatedData } = newData;
+
+  const hashPasword = () => password ?  bcrypt.hash(newData.password, SALT_ROUNDS) : Promise.resolve('');
+
+  hashPasword()
+    .then((hashedPassword) => {
+      if (hashedPassword) {
+        updatedData.password = hashedPassword;
+      }
+
+      return User.updateUser(id, updatedData);
+    })
+    .then((updatedUser) => {
+      if (!updatedUser) {
+        reject(new NotFoundError(userNotFoundMessage));
+      } else {
+        resolve(updatedUser);
       }
     })
     .catch(reject);

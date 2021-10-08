@@ -3,18 +3,21 @@ import ajvErrors from 'ajv-errors';
 
 import ValidationError from '../errors/ValidationError.js';
 
-import userSchema from './schemas/user.json';
+import createUserSchema from './schemas/createUser.json';
+import editUserSchema from './schemas/editUser.json'
 
 const ajv = new Ajv({ allErrors: true });
 
 ajvErrors(ajv);
 
 const schemas = {
-  user: userSchema,
+  createUser: createUserSchema,
+  editUser: editUserSchema,
 };
 
 const compiledSchemas = {
-  user: null,
+  createUser: null,
+  editUser: null,
 };
 
 export default function validate(schema, data) {
