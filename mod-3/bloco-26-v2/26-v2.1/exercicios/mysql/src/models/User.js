@@ -1,5 +1,3 @@
-import { ObjectId } from 'mongodb';
-
 import connect from './connect.js';
 import InternalError from '../errors/InternalError.js';
 
@@ -10,18 +8,16 @@ const externalInfoMap = (user) => {
   return { id: _id, ...rest };
 };
 
-const createNew = (userData) => new Promise((resolve, reject) => {
-  connect()
-    .then((db) => {
-      return db.collection('users').insertOne(userData);
-    })
-    .then(({ insertedId }) => {
-      resolve({
-        id: insertedId,
-        firstName: userData.firstName,
-        lastName: userData.lastName,
-        email: userData.lastName
-      });
+const createNew = ({ firstName, lastName, email, password }) => new Promise((resolve, reject) => {
+  connect.execute(
+    `
+      INSERT INTO users
+        (first_name, last_name, email, password)
+      VALUES
+        (?, ?, ?, ?)
+    `, [firstName, lastName, email, password]
+  ).then(([{ insertedId }]) => {
+      resolve({ id: insertedId, firstName, lastName, email });
     })
     .catch((err) => {
       const error = new InternalError('Error creating an user.');
