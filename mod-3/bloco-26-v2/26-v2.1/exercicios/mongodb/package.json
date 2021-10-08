@@ -5,8 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node -r dotenv/config index.js",
-    "dev": "nodemon -r dotenv/config index.js",
+    "start": "node -r dotenv/config --experimental-json-modules index.js",
+    "dev": "nodemon -r dotenv/config --experimental-json-modules index.js",
     "convert_schema": "node src/utils/convertSchema.js"
   },
   "dependencies": {

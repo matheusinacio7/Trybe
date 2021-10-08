@@ -1,4 +1,4 @@
-import HttpError from './HttpError';
+import HttpError from './HttpError.js';
 
 export default class InternalError extends HttpError {
   constructor(message) {

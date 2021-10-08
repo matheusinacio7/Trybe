@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 import ajvErrors from 'ajv-errors';
 
-import ValidationError from '../errors/ValidationError';
+import ValidationError from '../errors/ValidationError.js';
 
 import userSchema from './schemas/user.json';
 
