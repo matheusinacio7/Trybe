@@ -75,9 +75,25 @@ const updateUser = (id, newData) => new Promise((resolve, reject) => {
     });
 });
 
+const deleteUser = (id) => new Promise((resolve, reject) => {
+  connect()
+    .then((db) => {
+      return db.collection('users').deleteOne({ _id: new ObjectId(id) });
+    })
+    .then((result) => {
+      resolve(result);
+    })
+    .catch((err) => {
+      const error = new InternalError('Error while trying to delete user with id ' + id);
+      error.reason = err;
+      reject(err);
+    });
+});
+
 export default {
   createNew,
   getAll,
   getById,
   updateUser,
+  deleteUser,
 };

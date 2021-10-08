@@ -1,5 +1,5 @@
 import express from 'express';
-import { createNewUser, getAllUsers, getUserById, updateUser } from '../controllers/user.js';
+import { createNewUser, getAllUsers, getUserById, updateUser, deleteUser } from '../controllers/user.js';
 
 const router = express.Router();
 
@@ -29,6 +29,14 @@ router.get('/:id', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
   updateUser(req.params.id, req.body)
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch(next);
+});
+
+router.delete('/:id', (req, res, next) => {
+  deleteUser(req.params.id)
     .then((result) => {
       res.status(200).json(result);
     })

@@ -65,3 +65,15 @@ export const updateUser = (id, newData) => new Promise((resolve, reject) => {
     })
     .catch(reject);
 });
+
+export const deleteUser = (id) => new Promise((resolve, reject) => {
+  User.deleteUser(id)
+    .then(({ deletedCount }) => {
+      if (!deletedCount) {
+        reject(new NotFoundError(userNotFoundMessage));
+      } else {
+        resolve({ message: `User with id ${id} deleted successfully` })
+      }
+    })
+    .catch(reject);
+});
