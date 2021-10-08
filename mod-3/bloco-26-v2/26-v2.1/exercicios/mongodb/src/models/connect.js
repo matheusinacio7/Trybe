@@ -2,8 +2,6 @@ import { MongoClient } from 'mongodb';
 
 let db = null;
 
-console.log(process.env.CONNECTION_STRING);
-
 const connect = () => db
   ? Promise.resolve(db)
   : MongoClient.connect(process.env.CONNECTION_STRING, { useNewUrlParser: true, useUnifiedTopology: true})

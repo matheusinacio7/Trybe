@@ -21,6 +21,22 @@ const createNew = (userData) => new Promise((resolve, reject) => {
     });
 });
 
+const getAll = () => new Promise((resolve, reject) => {
+  connect()
+    .then((db) => {
+      return db.collection('user').find().toArray();
+    })
+    .then((users) => {
+      resolve(users.map(({ password, _id, ...rest }) => ({ id: _id, ...rest })));
+    })
+    .catch((err) => {
+      const error = new InternalError('Erro ao recuperar todos os usuarios.');
+      error.reason = err;
+      reject(err);
+    });
+});
+
 export default {
   createNew,
-};
+  getAll,
+}

@@ -10,7 +10,13 @@ export const createNewUser = (userData) => new Promise((resolve, reject) => {
   bcrypt.hash(userData.password, SALT_ROUNDS)
     .then((hashedPassword) => {
       return User.createNew({ ...userData, password: hashedPassword })
-        .then(resolve)
     })
+    .then(resolve)
+    .catch(reject);
+});
+
+export const getAllUsers = () => new Promise((resolve, reject) => {
+  User.getAll()
+    .then(resolve)
     .catch(reject);
 });
