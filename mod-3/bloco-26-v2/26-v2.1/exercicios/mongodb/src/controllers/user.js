@@ -11,6 +11,6 @@ export const createNewUser = (userData) => new Promise((resolve, reject) => {
     .then((hashedPassword) => {
       return User.createNew({ ...userData, password: hashedPassword })
         .then(resolve)
-        .catch(reject);
     })
+    .catch(reject);
 });
