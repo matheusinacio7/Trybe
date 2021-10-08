@@ -6,8 +6,13 @@ const createNew = (userData) => new Promise((resolve, reject) => {
     .then((db) => {
       return db.collection('user').insertOne(userData);
     })
-    .then((result) => {
-      resolve(result);
+    .then(({ insertedId }) => {
+      resolve({
+        id: insertedId,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.lastName
+      });
     })
     .catch((err) => {
       const error = new InternalError('Erro ao criar usuário');
