@@ -1,15 +1,15 @@
-import connect from './connect.js';
+import connection from './connection.js';
 import InternalError from '../errors/InternalError.js';
 
 const externalInfoMap = (user) => {
   if (!user) return user;
 
-  const { password, _id, ...rest } = user;
-  return { id: _id, ...rest };
+  const { id, first_name, last_name, email } = user;
+  return { id, firstName: first_name, lastName: last_name, email };
 };
 
 const createNew = ({ firstName, lastName, email, password }) => new Promise((resolve, reject) => {
-  connect.execute(
+  connection.execute(
     `
       INSERT INTO users
         (first_name, last_name, email, password)
@@ -27,12 +27,13 @@ const createNew = ({ firstName, lastName, email, password }) => new Promise((res
 });
 
 const getAll = () => new Promise((resolve, reject) => {
-  connect()
-    .then((db) => {
-      return db.collection('users').find().toArray();
-    })
+  connection.execute(
+    `
+      SELECT first_name, last_name, email FROM users
+    `
+  )
     .then((users) => {
-      resolve(users.map(externalInfoMap));
+      resolve(users[0].map(externalInfoMap));
     })
     .catch((err) => {
       const error = new InternalError('Error while trying to get all users.');
@@ -42,7 +43,7 @@ const getAll = () => new Promise((resolve, reject) => {
 });
 
 const getById = (id) => new Promise((resolve, reject) => {
-  connect()
+  connection()
     .then((db) => {
       return db.collection('users').findOne(new ObjectId(id));
     })
@@ -57,7 +58,7 @@ const getById = (id) => new Promise((resolve, reject) => {
 });
 
 const updateUser = (id, newData) => new Promise((resolve, reject) => {
-  connect()
+  connection()
     .then((db) => {
       return db.collection('users').findOneAndUpdate({ _id: new ObjectId(id) }, { $set: newData }, { returnDocument: 'after' });
     })
@@ -72,7 +73,7 @@ const updateUser = (id, newData) => new Promise((resolve, reject) => {
 });
 
 const deleteUser = (id) => new Promise((resolve, reject) => {
-  connect()
+  connection()
     .then((db) => {
       return db.collection('users').deleteOne({ _id: new ObjectId(id) });
     })
