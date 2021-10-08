@@ -10,9 +10,10 @@ const createNew = (userData) => new Promise((resolve, reject) => {
       resolve(result);
     })
     .catch((err) => {
-      console.log(err);
-      reject(new InternalError());
-    })
+      const error = new InternalError('Erro ao criar usuário');
+      error.reason = err;
+      reject(err);
+    });
 });
 
 export default {

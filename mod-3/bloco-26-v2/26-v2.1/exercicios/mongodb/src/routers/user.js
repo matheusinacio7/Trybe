@@ -1,4 +1,5 @@
 import express from 'express';
+import InternalError from '../errors/InternalError.js';
 import { createNewUser } from '../controllers/user.js';
 
 const router = express.Router();
