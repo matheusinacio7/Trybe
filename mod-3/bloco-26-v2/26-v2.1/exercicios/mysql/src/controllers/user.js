@@ -26,10 +26,6 @@ export const getAllUsers = () => new Promise((resolve, reject) => {
 });
 
 export const getUserById = (id) => new Promise((resolve, reject) => {
-  if (id.length !== 24) {
-    reject(new NotFoundError(userNotFoundMessage));
-  }
-
   User.getById(id)
     .then((user) => {
       if (!user) {

@@ -43,12 +43,13 @@ const getAll = () => new Promise((resolve, reject) => {
 });
 
 const getById = (id) => new Promise((resolve, reject) => {
-  connection()
-    .then((db) => {
-      return db.collection('users').findOne(new ObjectId(id));
-    })
-    .then((user) => {
-      resolve(externalInfoMap(user));
+  connection.execute(
+    `
+      SELECT first_name, last_name, email FROM users WHERE id = ?
+    `, [id]
+  )
+    .then(([rows]) => {
+      resolve(externalInfoMap(rows[0]));
     })
     .catch((err) => {
       const error = new InternalError('Error while trying to get one user by Id.');
