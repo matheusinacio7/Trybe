@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon -r dotenv/config index.js",
     "start": "node -r dotenv/config index.js",
-    "test": "mocha __tests__/**/*.spec.js -r dotenv/config"
+    "test": "mocha __tests__/**/*.spec.js -r dotenv/config dotenv_config_path=./__tests__/.test.env"
   },
   "dependencies": {
     "cors": "^2.8.5",

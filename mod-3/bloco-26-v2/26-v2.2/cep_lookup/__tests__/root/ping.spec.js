@@ -6,6 +6,7 @@ import startServer from '../helpers/startServer.js';
 describe('GET /ping', () => {
   let server = null;
   const baseUrl = `http://localhost:${process.env.PORT}`;
+  console.log(baseUrl);
 
   before(async () => {
     server = await startServer();
