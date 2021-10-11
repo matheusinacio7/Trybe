@@ -9,7 +9,7 @@ const getDetailsByCep = (cep) => new Promise((resolve, reject) => {
     WHERE cep = ?
   `, [cep])
     .then(([rows]) => {
-      resolve(rows[0]);
+      resolve(rows[0] || null);
     })
     .catch((err) => {
       const error = new InternalError('Error trying to get details by CEP');
