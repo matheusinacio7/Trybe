@@ -2,7 +2,6 @@ import connection from './connection.js';
 import InternalError from '../errors/InternalError.js';
 
 const getDetailsByCep = (cep) => new Promise((resolve, reject) => {
-  console.log('MODEL', cep);
   connection.execute(
   `
     SELECT cep, logradouro, bairro, localidade, uf
