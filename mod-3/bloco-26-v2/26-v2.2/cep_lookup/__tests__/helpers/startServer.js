@@ -1,9 +1,9 @@
 import cp from 'child_process';
 import { promises as fs } from 'fs';
 
-const startServer = () => new Promise((resolve, reject) => {
+const startServer = () => new Promise(async (resolve, reject) => {
   const { scripts } = await fs.readFile('package.json', 'utf-8')
-  .then((jsonPackage) => JSON.parse(jsonPackage));
+    .then((jsonPackage) => JSON.parse(jsonPackage));
   
   const [command, ...args] = scripts.start.split(' ');
   const server = cp.spawn(command, args);
@@ -14,3 +14,5 @@ const startServer = () => new Promise((resolve, reject) => {
     }
   })
 });
+
+export default startServer;

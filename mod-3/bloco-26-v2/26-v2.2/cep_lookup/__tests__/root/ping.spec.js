@@ -16,10 +16,10 @@ describe('GET /ping', () => {
   });
 
   it('returns "pong"', () => {
-    fetch(`${baseUrl}/ping`)
+    return fetch(`${baseUrl}/ping`)
       .then((response) => response.json())
       .then((result) => {
-        expect(result).to.equal('pong');
+        expect(result.message).to.equal('pong');
       });
   });
 });
