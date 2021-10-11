@@ -25,7 +25,7 @@ export default async function validate(schema, data) {
   const compiledSchema = SCHEMAS[schema];
 
   try {
-    await compiledSchema.validateAsync(data, {  });
+    await compiledSchema.validateAsync(data);
   } catch (err) {
     throw new ValidationError(err.details[0].message);
   }
