@@ -6,7 +6,6 @@ const startServer = () => new Promise(async (resolve, _reject) => {
     .then((jsonPackage) => JSON.parse(jsonPackage));
   
   const [command, ...args] = scripts.start.split(' ');
-  args.push('DOTENV_CONFIG_PORT=3030');
   const server = cp.spawn(command, args);
   server.stdout.on('data', (dataBuf) => {
     const message = dataBuf.toString('utf-8');
