@@ -11,9 +11,11 @@ describe('GET /cep/:id', () => {
   before(async () => {
     server = await startServer();
   });
-
-  after(() => {
+  
+  after(async () => {
     server.kill();
+    await connection.execute(`TRUNCATE ceps`);
+    connection.end();
   });
 
   it('When the CEP is invalid, returns an error message', () => {
@@ -42,7 +44,7 @@ describe('GET /cep/:id', () => {
 
   it('When the CEP is valid, returns the details', () => {
     const validCepInfo = {
-      cep: '74365-050',
+      cep: '74365050',
       logradouro: 'Rua A4',
       bairro: 'Setor Novo Horizonte',
       localidade: 'Goiânia',
@@ -57,15 +59,15 @@ describe('GET /cep/:id', () => {
           (?, ?, ?, ?, ?)
       `, [...Object.values(validCepInfo)])
       .then(() => {
-        return fetch(`${baseUrl}/cep/${validCepInfo.cep}`);
+        return fetch(`${baseUrl}/${validCepInfo.cep}`);
       })
       .then((response) => {
         expect(response.status).to.equal(200);
         return response.json()
       })
       .then((result) => {
-        expect(result.error).to.be.false;
-        expect(result.message).to.equal(validCepInfo);
+        expect(result.error).to.be.undefined;
+        expect(result).to.deep.equal(validCepInfo);
       });
   });
 });

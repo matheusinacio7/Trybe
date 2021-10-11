@@ -11,8 +11,9 @@ const startServer = () => new Promise(async (resolve, reject) => {
   server.stdout.on('data', (dataBuf) => {
     const message = dataBuf.toString('utf-8');
     if (message.includes('Server is up')) {
-      resolve(server);
+      return resolve(server);
     }
+    console.log(message);
   })
 });
 
