@@ -22,8 +22,9 @@ describe('GET /cep/:id', () => {
         expect(response.status).to.equal(400);
         return response.json();
       })
-      .then((response) => {
-        expect(response.message).to.equal('CEP inválido');
+      .then((result) => {
+        expect(result.error).to.be.true;
+        expect(result.message).to.equal('CEP inválido');
       });
   });
 
@@ -33,8 +34,9 @@ describe('GET /cep/:id', () => {
         expect(response.status).to.equal(404);
         return response.json();
       })
-      .then((response) => {
-        expect(response.message).to.equal('CEP não encontrado');
+      .then((result) => {
+        expect(result.error).to.be.true;
+        expect(result.message).to.equal('CEP não encontrado');
       });
   });
 
@@ -62,6 +64,7 @@ describe('GET /cep/:id', () => {
         return response.json()
       })
       .then((result) => {
+        expect(result.error).to.be.false;
         expect(result.message).to.equal(validCepInfo);
       });
   });
