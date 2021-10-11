@@ -7,7 +7,18 @@ const SCHEMAS = {
     .pattern(/\d{5}-?\d{3}/)
     .messages({
       'string.pattern.base': 'CEP inválido',
+    }),
+  insert_address: Joi
+    .object({
+      cep: Joi.string().pattern(/\d{5}-?\d{3}/).required(),
+      logradouro: Joi.string().required(),
+      bairro: Joi.string().required(),
+      localidade: Joi.string().required(),
+      uf: Joi.string().length(2).uppercase().required(),
     })
+    .messages({
+      'string.pattern.base': 'CEP inválido',
+    }),
 };
 
 export default async function validate(schema, data) {

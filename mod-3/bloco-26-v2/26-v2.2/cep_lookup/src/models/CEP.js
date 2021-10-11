@@ -18,6 +18,29 @@ const getDetailsByCep = (cep) => new Promise((resolve, reject) => {
     });
 });
 
+const insertNewAddress = (details) => new Promise((resolve, reject) => {
+  connection.execute(
+    `
+      INSERT INTO ceps
+        (cep, logradouro, bairro, localidade, uf)
+      VALUES
+        (?, ?, ?, ?, ?)
+    `, [...Object.values(details)])
+    .then(() => {
+      resolve(details);
+    })
+    .catch((err) => {
+      if (err.message.includes('Duplicate entry')) {
+        reject({ error: true, message: 'Duplicated data' });
+      } else {
+        const error = new InternalError('Error trying to insert new details at the DB.');
+        error.reason = err;
+        reject(err);
+      }
+    });
+});
+
 export default {
   getDetailsByCep,
+  insertNewAddress,
 };

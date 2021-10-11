@@ -83,14 +83,14 @@ describe('POST /cep', () => {
       const invalidCepInfo = { ...validCepInfo };
       delete invalidCepInfo[deletedField];
 
-      return fetch(baseUrl, { method: 'POST', body: JSON.stringify(invalidCepInfo) })
+      return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(invalidCepInfo) })
         .then((response) => {
           expect(response.status).to.equal(400);
           return response.json();
         })
         .then((result) => {
           expect(result.error).to.be.true;
-          expect(result.message).to.equal(`O campo ${deletedField} é obrigatório e não foi informado.`);
+          expect(result.message).to.equal(`O campo "${deletedField}" é obrigatório e não foi informado.`);
         });
     });
     
@@ -100,14 +100,14 @@ describe('POST /cep', () => {
       const invalidCepInfo = { ...validCepInfo };
       delete invalidCepInfo[deletedField];
 
-      return fetch(baseUrl, { method: 'POST', body: JSON.stringify(invalidCepInfo) })
+      return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(invalidCepInfo) })
         .then((response) => {
           expect(response.status).to.equal(400);
           return response.json();
         })
         .then((result) => {
           expect(result.error).to.be.true;
-          expect(result.message).to.equal(`O campo ${deletedField} é obrigatório e não foi informado.`);
+          expect(result.message).to.equal(`O campo "${deletedField}" é obrigatório e não foi informado.`);
         });
     });
     
@@ -117,14 +117,14 @@ describe('POST /cep', () => {
       const invalidCepInfo = { ...validCepInfo };
       delete invalidCepInfo[deletedField];
 
-      return fetch(baseUrl, { method: 'POST', body: JSON.stringify(invalidCepInfo) })
+      return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(invalidCepInfo) })
         .then((response) => {
           expect(response.status).to.equal(400);
           return response.json();
         })
         .then((result) => {
           expect(result.error).to.be.true;
-          expect(result.message).to.equal(`O campo ${deletedField} é obrigatório e não foi informado.`);
+          expect(result.message).to.equal(`O campo "${deletedField}" é obrigatório e não foi informado.`);
         });
     });
     
@@ -134,14 +134,14 @@ describe('POST /cep', () => {
       const invalidCepInfo = { ...validCepInfo };
       delete invalidCepInfo[deletedField];
 
-      return fetch(baseUrl, { method: 'POST', body: JSON.stringify(invalidCepInfo) })
+      return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(invalidCepInfo) })
         .then((response) => {
           expect(response.status).to.equal(400);
           return response.json();
         })
         .then((result) => {
           expect(result.error).to.be.true;
-          expect(result.message).to.equal(`O campo ${deletedField} é obrigatório e não foi informado.`);
+          expect(result.message).to.equal(`O campo "${deletedField}" é obrigatório e não foi informado.`);
         });
     });
     
@@ -151,14 +151,14 @@ describe('POST /cep', () => {
       const invalidCepInfo = { ...validCepInfo };
       delete invalidCepInfo[deletedField];
 
-      return fetch(baseUrl, { method: 'POST', body: JSON.stringify(invalidCepInfo) })
+      return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(invalidCepInfo) })
         .then((response) => {
           expect(response.status).to.equal(400);
           return response.json();
         })
         .then((result) => {
           expect(result.error).to.be.true;
-          expect(result.message).to.equal(`O campo ${deletedField} é obrigatório e não foi informado.`);
+          expect(result.message).to.equal(`O campo "${deletedField}" é obrigatório e não foi informado.`);
         });
     });
   });
@@ -166,14 +166,14 @@ describe('POST /cep', () => {
   it('When the CEP is invalid, returns an error', () => {
     const invalidCepInfo = { ...validCepInfo, cep: '7589823' };
 
-    return fetch(baseUrl, { method: 'POST', body: JSON.stringify(invalidCepInfo) })
+    return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(invalidCepInfo) })
       .then((response) => {
         expect(response.status).to.equal(400);
         return response.json();
       })
       .then((result) => {
         expect(result.error).to.be.true;
-        expect(result.message).to.equal(`O campo ${deletedField} é obrigatório e não foi informado.`);
+        expect(result.message).to.equal(`CEP inválido`);
       });
   });
 
@@ -186,7 +186,7 @@ describe('POST /cep', () => {
           (?, ?, ?, ?, ?)
       `, [...Object.values(validCepInfo)])
       .then(() => {
-        return fetch(baseUrl, { method: 'POST', body: JSON.stringify(validCepInfo) });
+        return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(validCepInfo) });
       })
       .then((response) => {
         expect(response.status).to.equal(409);
@@ -194,12 +194,12 @@ describe('POST /cep', () => {
       })
       .then((result) => {
         expect(result.error).to.be.true;
-        expect(result).to.deep.equal({ message: 'CEP já cadastrado no banco' });
+        expect(result.message).to.deep.equal('CEP já cadastrado no banco');
       });
   });
 
   it('With valid data, registers on the DB and returns the new data', () => {
-    return fetch(baseUrl, { method: 'POST', body: JSON.stringify(validCepInfo) })
+    return fetch(baseUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(validCepInfo) })
       .then((response) => {
         expect(response.status).to.equal(201);
         return response.json();
