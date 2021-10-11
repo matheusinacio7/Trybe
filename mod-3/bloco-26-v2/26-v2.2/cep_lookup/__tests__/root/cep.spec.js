@@ -44,16 +44,25 @@ describe('GET /cep/:id', () => {
       });
   });
 
-  it('When the CEP is not registered, returns a not found message', () => {
+  it('When the CEP is not registered, finds details in an external API and inserts into the DB, returning the results', () => {
     return fetch(`${baseUrl}/75804800`)
       .then((response) => {
-        expect(response.status).to.equal(404);
+        expect(response.status).to.equal(200);
         return response.json();
       })
       .then((result) => {
-        expect(result.error).to.be.true;
-        expect(result.message).to.equal('CEP não encontrado');
-      });
+        expect(result.error).to.be.undefined;
+        expect(result).to.deep.equal({ ...validCepInfo, cep: '74365-050'});
+        return connection.execute(
+          `
+            SELECT cep, logradouro, bairro, localidade, uf
+            FROM ceps
+            WHERE cep = ?
+          `, [validCepInfo.cep])
+      })
+      .then(([rows]) => {
+        expect(rows[0]).to.deep.equal(validCepInfo);
+      })
   });
 
   it('When the CEP is valid, returns the details', () => {
