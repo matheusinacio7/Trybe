@@ -10,7 +10,7 @@ export const getDetailsByCep = (cep) => new Promise((resolve, _reject) => {
             cep: details.cep.slice(0, 5) + '-' + details.cep.slice(5),
         });
       } else {
-        resolve(details)
+        resolve(details);
       }
     });
 });
