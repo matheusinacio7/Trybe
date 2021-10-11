@@ -45,7 +45,7 @@ describe('GET /cep/:id', () => {
   });
 
   it('When the CEP is not registered, finds details in an external API and inserts into the DB, returning the results', () => {
-    return fetch(`${baseUrl}/75804800`)
+    return fetch(`${baseUrl}/74365050`)
       .then((response) => {
         expect(response.status).to.equal(200);
         return response.json();

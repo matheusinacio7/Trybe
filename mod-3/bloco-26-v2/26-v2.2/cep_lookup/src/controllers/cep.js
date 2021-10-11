@@ -1,6 +1,7 @@
 import CEP from '../models/CEP.js';
 import validate from '../validator/validate.js';
 import HttpError from '../errors/HttpError.js';
+import viacep from '../services/viacep.js';
 
 const mapInternalToExternal = (details) => ({
   ...details,
@@ -11,11 +12,21 @@ export const getDetailsByCep = (cep) => new Promise((resolve, reject) => {
   const parsedCep = cep.replace('-', '');
   CEP.getDetailsByCep(parsedCep)
     .then((details) => {
-      if (details !== null) {        
-        resolve(mapInternalToExternal(details));
-      } else {
-        resolve(details);
-      }
+      if (!details) return viacep.getAddressByCep(cep);
+
+      resolve(mapInternalToExternal(details));
+    })
+    .then((externalDetails) => {
+      return CEP.insertNewAddress({
+        cep: externalDetails.cep.replace('-', ''),
+        logradouro: externalDetails.logradouro,
+        bairro: externalDetails.bairro,
+        localidade: externalDetails.localidade,
+        uf: externalDetails.uf,
+      });
+    })
+    .then((insertedDetails) => {
+      resolve(mapInternalToExternal(insertedDetails));
     })
     .catch(reject);
 });
