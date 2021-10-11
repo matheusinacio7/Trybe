@@ -4,31 +4,34 @@ import fetch from 'node-fetch';
 import connection from "../db/connection.js";
 import startServer from '../helpers/startServer.js';
 
-let server = null;
-const baseUrl = `http://localhost:${process.env.PORT}/cep`;
-
-const validCepInfo = {
-  cep: '74365050',
-  logradouro: 'Rua A4',
-  bairro: 'Setor Novo Horizonte',
-  localidade: 'Goiânia',
-  uf: 'GO',
-};
-
-before(async () => {
-  server = await startServer();
-});
-
-afterEach(async () => {
-  await connection.execute(`TRUNCATE ceps`);
-});
-
 after(() => {
-  server.kill();
   connection.end();
 });
 
 describe('GET /cep/:id', () => {
+  let server = null;
+  const baseUrl = `http://localhost:${process.env.PORT}/cep`;
+
+  const validCepInfo = {
+    cep: '74365050',
+    logradouro: 'Rua A4',
+    bairro: 'Setor Novo Horizonte',
+    localidade: 'Goiânia',
+    uf: 'GO',
+  };
+
+  before(async () => {
+    server = await startServer();
+  });
+
+  afterEach(async () => {
+    await connection.execute(`TRUNCATE ceps`);
+  });
+
+  after(() => {
+    server.kill();
+  });
+
   it('When the CEP is invalid, returns an error message', () => {
     return fetch(`${baseUrl}/934849`)
       .then((response) => {
@@ -76,6 +79,29 @@ describe('GET /cep/:id', () => {
 });
 
 describe('POST /cep', () => {
+  let server = null;
+  const baseUrl = `http://localhost:${process.env.PORT}/cep`;
+
+  const validCepInfo = {
+    cep: '74365050',
+    logradouro: 'Rua A4',
+    bairro: 'Setor Novo Horizonte',
+    localidade: 'Goiânia',
+    uf: 'GO',
+  };
+
+  before(async () => {
+    server = await startServer();
+  });
+
+  afterEach(async () => {
+    await connection.execute(`TRUNCATE ceps`);
+  });
+
+  after(() => {
+    server.kill();
+  });
+
   describe('When a field is missing, returns an error', () => {
     it('missing cep', () => {
       const deletedField = 'cep';
