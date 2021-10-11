@@ -1,8 +1,8 @@
 import { describe, it } from "mocha";
 import { expect } from "chai";
 import fetch from 'node-fetch';
-import connection from "../db/connection.js";
-import startServer from '../helpers/startServer.js';
+import connection from "./db/connection.js";
+import startServer from './helpers/startServer.js';
 
 after(() => {
   connection.end();

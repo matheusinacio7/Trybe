@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
-import startServer from '../helpers/startServer.js';
+import startServer from './helpers/startServer.js';
 
 describe('GET /ping', () => {
   let server = null;
