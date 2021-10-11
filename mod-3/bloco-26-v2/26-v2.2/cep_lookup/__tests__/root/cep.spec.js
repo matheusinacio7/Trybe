@@ -67,7 +67,7 @@ describe('GET /cep/:id', () => {
       })
       .then((result) => {
         expect(result.error).to.be.undefined;
-        expect(result).to.deep.equal(validCepInfo);
+        expect(result).to.deep.equal({ ...validCepInfo, cep: '74365-050'});
       });
   });
 });
