@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS rest_exercicios;
-CREATE DATABASE IF NOT EXISTS rest_exercicios;
-USE rest_exercicios;
+DROP DATABASE IF EXISTS trybe_rest_exercicios;
+CREATE DATABASE IF NOT EXISTS trybe_rest_exercicios;
+USE trybe_rest_exercicios;
 
 CREATE TABLE IF NOT EXISTS products (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,

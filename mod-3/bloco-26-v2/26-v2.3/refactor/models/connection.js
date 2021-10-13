@@ -1,9 +1,10 @@
 const mysql = require('mysql2/promise');
 
 const connection = mysql.createPool({
-  host: 'localhost', // Se necessário, substitua pelo seu host, `localhost` é o comum
-  user: 'root', // Se necessário, substitua pelo seu usuário para conectar ao banco na sua máquina
-  password: 'senha123', // Se necessário, substitua pela sua senha para conectar ao banco na sua máquina
-  database: 'rest_exercicios'});
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+});
 
 module.exports = connection;
