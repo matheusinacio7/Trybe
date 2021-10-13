@@ -1,11 +1,13 @@
-const { ObjectId } = require('mongodb');
-const connect = require('./connect');
+const connection = require('./connection');
 
 const add = async (name, brand) => {
   try {
-    const result = await connect().then((db) => {
-      return db.collection('products').insertOne({ name, brand });
-    });
+    const [
+      result,
+    ] = await connection.query(
+      `INSERT INTO products (name, brand) VALUES (?, ?);`,
+      [name, brand]
+    );
 
     return { id: result.insertId, name, brand };
   } catch (err) {
@@ -16,8 +18,8 @@ const add = async (name, brand) => {
 
 const getAll = async () => {
   try {
-    const result = await connect().then((db) => db.collection('products').find().toArray());
-    return result;
+    const [rows] = await connection.query('SELECT * FROM products');
+    return rows;
   } catch (err) {
     console.error(err);
     return process.exit(1);
@@ -26,9 +28,9 @@ const getAll = async () => {
 
 const getById = async (id) => {
   try {
-    const [result] = await connect().then((db) => db.collection('products').find(new ObjectId(id)).toArray());
-    if (!result) return null
-    return result;
+    const [result] = await connection.query('SELECT * FROM products WHERE id = ?', [id]);
+    if (!result.length) return null
+    return result[0];
   } catch (err) {
     console.error(err);
     return process.exit(1);
@@ -37,7 +39,7 @@ const getById = async (id) => {
 
 const update = async (id, name, brand) => {
   try {
-    await connect().then((db) => db.collection('products').updateOne({_id: new ObjectId(id)}, { $set: { name, brand } }));
+    await connection.query('UPDATE products SET name = ?, brand = ? WHERE id = ?', [name, brand, id])
   } catch (err) {
     console.error(err);
     return process.exit(1);
@@ -48,7 +50,7 @@ const exclude = async (id) => {
   try {
     const product = await getById(id);
     if (!product) return {};
-    await connect().then((db) => db.collection('products').deleteOne({_id: new ObjectId(id)}));
+    await connection.query('DELETE FROM products WHERE id = ?', [id])
     return product;
   } catch (err) {
     console.error(err);
