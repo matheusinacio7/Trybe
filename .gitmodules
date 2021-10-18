@@ -146,3 +146,6 @@
 [submodule "projects/bloco-26-talker-manager"]
 	path = projects/bloco-26-talker-manager
 	url = git@github.com:tryber/sd-011-project-talker-manager.git
+[submodule "projects/bloco-26-v2-store-manager"]
+	path = projects/bloco-26-v2-store-manager
+	url = git@github.com:tryber/sd-011-store-manager.git
