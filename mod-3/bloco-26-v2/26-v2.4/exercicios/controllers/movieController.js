@@ -31,8 +31,18 @@ const create = async (req, res) => {
     .json({ message: 'Filme criado com sucesso!' });
 };
 
+const deleteById = async (req, res) => {
+  try {
+    const objMessage = await MovieService.deleteById(req.params.id);
+    res.status(200).json(objMessage);
+  } catch (err) {
+    res.status(404).json({ message: 'Movie not found' });
+  }
+}
+
 module.exports = {
   getAll,
   create,
   getById,
+  deleteById,
 };
