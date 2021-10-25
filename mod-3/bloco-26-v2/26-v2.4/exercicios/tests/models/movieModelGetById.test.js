@@ -1,15 +1,16 @@
 const { stub } = require('sinon');
 const { describe, it } = require('mocha');
 const { expect } = require('chai');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
 const mongoConnection = require('../../models/connection');
 const MovieModel = require('../../models/movieModel');
 
 describe('O modelo Movie, no comando getById', () => {
+  const movieId = '604cb554311d68f491ba5781';
+
   const existingMovie = {
-    id: '604cb554311d68f491ba5781',
     title: 'Kung Fury',
     directedBy: 'David Sandberg',
     releaseYear: 2015,
@@ -24,7 +25,7 @@ describe('O modelo Movie, no comando getById', () => {
       useUnifiedTopology: true
     }).then((connection) => connection.db('model_test'));
 
-    await db.collection('movies').insertOne(existingMovie);
+    await db.collection('movies').insertOne({ ...existingMovie, _id: new ObjectId(movieId) });
 
     stub(mongoConnection, 'getConnection').resolves(db);
   });
@@ -34,9 +35,9 @@ describe('O modelo Movie, no comando getById', () => {
   });
 
   it('com um id existente, retorna o filme correto', async () => {
-    const foundMovie = await MovieModel.getById(existingMovie.id);
+    const foundMovie = await MovieModel.getById(movieId);
 
-    expect(foundMovie).to.deep.equal(existingMovie);
+    expect(foundMovie).to.deep.equal({ id: new ObjectId(movieId), ...existingMovie });
   });
 
   it('com um id inexistente, retorna nulo', async () => {
