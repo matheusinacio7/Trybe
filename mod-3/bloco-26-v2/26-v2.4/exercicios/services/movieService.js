@@ -21,6 +21,18 @@ const getAll = async () => {
   return moviesData.map(getNewMovie);
 };
 
+const getById = async (id) => {
+  const movie = await MoviesModel.getById(id);
+
+  if (!movie) {
+    const err = new Error('Movie not found');
+    err.code = 'not_found';
+    throw err;
+  }
+
+  return getNewMovie(movie);
+}
+
 const create = async ({ title, directedBy, releaseYear }) => {
   const isMovieValid = isValid(title, directedBy, releaseYear);
 
@@ -37,4 +49,5 @@ const create = async ({ title, directedBy, releaseYear }) => {
 module.exports = {
   create,
   getAll,
+  getById,
 };

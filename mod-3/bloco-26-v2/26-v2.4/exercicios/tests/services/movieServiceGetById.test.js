@@ -25,7 +25,7 @@ describe('movieService no getById', () => {
   });
 
   it('Com um id correto, retorna o movie', async () => {
-    const foundMovie = movieService.getById(movieId);
+    const foundMovie = await movieService.getById(movieId);
     expect(foundMovie).to.deep.equal({ id: movieId, ...existingMovie });
   });
 
