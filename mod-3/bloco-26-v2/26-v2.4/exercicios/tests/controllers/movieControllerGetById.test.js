@@ -9,11 +9,6 @@ describe('movieController, no comando getById', () => {
   const request = {};
   const response = {};
 
-  response.status = stub().returns(response);
-  response.json = stub().returns(undefined);
-  response.end = stub().returns(undefined);
-  response.send = stub().returns(response);
-
   const movieId = '604cb554311d68f491ba5781';
 
   const existingMovie = {
@@ -24,6 +19,11 @@ describe('movieController, no comando getById', () => {
 
   beforeEach(() => {
     const serviceStub = stub(movieService, 'getById');
+
+    response.status = stub().returns(response);
+    response.json = stub().returns(undefined);
+    response.end = stub().returns(undefined);
+    response.send = stub().returns(response);
 
     serviceStub.withArgs(movieId).resolves({ id: movieId, ...existingMovie });
 
@@ -36,19 +36,19 @@ describe('movieController, no comando getById', () => {
     movieService.getById.restore();
   });
 
-  it('com um id correto, traz a resposta com o filme', () => {
+  it('com um id correto, traz a resposta com o filme', async () => {
     request.params = { id: movieId };
 
-    movieController.getById(request, response);
+    await movieController.getById(request, response);
 
-    expect(response.status.calledWith(200)).to.be.true;
-    expect(response.json.calledWith(match({ id: existingId, ...existingMovie }))).to.be.true;
+    expect(response.status.getCalls()[0].firstArg).to.equal(200);
+    expect(response.json.getCalls()[0].firstArg).to.deep.equal({ id: movieId, ...existingMovie });
   });
 
-  it('com um id inexistente, traz uma resposta de 404', () => {
+  it('com um id inexistente, traz uma resposta de 404', async () => {
     request.params = { id: 'ugabuga' };
 
-    movieController.getById(request, response);
+    await movieController.getById(request, response);
 
     expect(response.status.calledWith(404)).to.be.true;
     expect(response.json.calledWith(match({ message: 'Movie not found' }))).to.be.true;
