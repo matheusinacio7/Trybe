@@ -12,6 +12,8 @@ app.get('/movies/:id', MovieController.getById);
 
 app.post('/movies', MovieController.create);
 
+app.delete('/movies/:id', MovieController.deleteById);
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
