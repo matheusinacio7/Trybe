@@ -37,9 +37,9 @@ describe('O modelo Movie, no comando deleteById', () => {
   });
 
   it('com um id existente, deleta o filme, retornando uma mensagem de sucesso', async () => {
-    const foundMovie = await MovieModel.deleteById(movieId);
+    const deletedMessage = await MovieModel.deleteById(movieId);
 
-    expect(foundMovie).to.deep.equal({ message: 'Movie deleted sucessfully' });
+    expect(deletedMessage).to.deep.equal({ message: 'Movie deleted sucessfully' });
 
     const allMovies = await db.collection('movies').find().toArray();
 
@@ -47,9 +47,9 @@ describe('O modelo Movie, no comando deleteById', () => {
   });
 
   it('com um id inexistente, retorna nulo, mantendo o db intacto', async () => {
-    const deleteMovie = await MovieModel.getById('ugabuga');
+    const deletedMovie = await MovieModel.getById('ugabuga');
 
-    expect(foundMovie).to.be.null;
+    expect(deletedMovie).to.be.null;
     const allMovies = await db.collection('movies').find().toArray();
 
     expect(allMovies).to.deep.equal([{ _id: new ObjectId(movieId), ...existingMovie }]);

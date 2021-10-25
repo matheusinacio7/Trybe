@@ -40,9 +40,20 @@ const create = async ({ title, directedBy, releaseYear }) => {
     releaseYear
   };
 };
+  
+const deleteById = async (id) => {
+  const moviesCollection = await getMoviesCollection();
+
+  const { deletedCount } = await moviesCollection.deleteOne({ _id: new ObjectId(id) });
+
+  if (!deletedCount) return null;
+
+  return { message: 'Movie deleted sucessfully' };
+};
 
 module.exports = {
   create,
   getAll,
   getById,
+  deleteById,
 };
