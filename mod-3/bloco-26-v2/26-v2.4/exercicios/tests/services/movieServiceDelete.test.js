@@ -21,7 +21,7 @@ describe('movieService no deleteById', () => {
   });
 
   afterEach(() => {
-    MovieModel.getById.restore();
+    MovieModel.deleteById.restore();
   });
 
   it('Com um id correto, retorna uma mensagem de sucesso', async () => {

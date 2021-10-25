@@ -33,6 +33,18 @@ const getById = async (id) => {
   return getNewMovie(movie);
 }
 
+const deleteById = async (id) => {
+  const objMessage = await MoviesModel.deleteById(id);
+
+  if (!objMessage) {
+    const err = new Error('Movie not found');
+    err.code = 'not_found';
+    throw err;
+  }
+
+  return objMessage;
+}
+
 const create = async ({ title, directedBy, releaseYear }) => {
   const isMovieValid = isValid(title, directedBy, releaseYear);
 
@@ -50,4 +62,5 @@ module.exports = {
   create,
   getAll,
   getById,
+  deleteById,
 };
