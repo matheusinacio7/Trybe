@@ -146,3 +146,6 @@
 [submodule "projects/bloco-26-talker-manager"]
 	path = projects/bloco-26-talker-manager
 	url = git@github.com:tryber/sd-011-project-talker-manager.git
+[submodule "mod-3/bloco-27/27.1/nodejs-jwt-base-project"]
+	path = mod-3/bloco-27/27.1/nodejs-jwt-base-project
+	url = git@github.com:tryber/nodejs-jwt-base-project.git
