@@ -13,6 +13,7 @@ addFormats(ajv);
 
 const schemas = {
   createUser: userSchemas.create,
+  loginUser: userSchemas.login,
 };
 
 type CompiledSchemas = {

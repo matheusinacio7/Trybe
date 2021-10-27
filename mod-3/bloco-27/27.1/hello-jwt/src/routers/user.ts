@@ -7,9 +7,22 @@ const router = Router();
 
 const MINUTE_IN_MS = 1000 * 60;
 
+router.post('/login', (req, res, next) => {
+  User.login(req.body)
+    .then(({ token }) => {
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 7 * 24 * 60 * MINUTE_IN_MS,
+      });
+      res.status(200).json({ message: 'Logged in.' });
+    })
+    .catch(next);
+});
+
 router.post('/signup', (req, res, next) => {
   User.create(req.body)
-    .then((token) => {
+    .then(({ token }) => {
       res.cookie('token', token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',

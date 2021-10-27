@@ -1,16 +1,13 @@
 import { MongoClient } from 'mongodb';
 import type { Db } from 'mongodb';
 
-const CONNECTION_STRING = process.env.CONNECTION_STRING || 'mongodb://localhost:27017';
-const DB_NAME = process.env.DB_NAME || 'cnaTestDb';
-
 let db : Db;
 
 const connect = () => (db
   ? Promise.resolve(db)
-  : MongoClient.connect(CONNECTION_STRING)
+  : MongoClient.connect((process.env.CONNECTION_STRING as string))
       .then((connection) => {
-        db = connection.db(DB_NAME);
+        db = connection.db((process.env.DB_NAME as string));
         return db;
       }));
 

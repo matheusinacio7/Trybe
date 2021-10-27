@@ -3,6 +3,8 @@ import { validate } from 'src/services/validation';
 
 import { sign } from '@token';
 
+const mapPrivateInfo = ({ email, username, admin }: Record<string, unknown>) => ({ email, username, admin });
+
 const create = (userData: any) => {
   validate('createUser', userData);
 
@@ -15,10 +17,32 @@ const create = (userData: any) => {
 };
 
 const getByUsername = (username: string) => {
-  return Promise.resolve({ username, admin: false });
+  return User.getByUsername(username)
+    .then((user) => mapPrivateInfo(user));
 };
+
+const getByEmail = (email: string) => {
+  return User.getByEmail(email)
+  .then((user) => mapPrivateInfo(user));
+}
+
+const login = (userData: any) => {
+  validate('loginUser', userData);
+
+  const { email, username, password } = userData;
+
+  const getUser = () => email ? User.getByEmail(email) : User.getByUsername(username);
+
+  return getUser()
+    .then((user) => {
+      // bcrypt compare password
+      const newToken = sign({ username: user.username, admin: user.admin });
+      return { token: newToken };
+    })
+}
 
 export default {
   create,
   getByUsername,
+  login,
 };
