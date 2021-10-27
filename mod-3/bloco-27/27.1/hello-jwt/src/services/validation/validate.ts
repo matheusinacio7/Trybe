@@ -1,5 +1,6 @@
 import Ajv from 'ajv';
-import ajvErrors from 'ajv-errors';
+import addErrors from 'ajv-errors';
+import addFormats from 'ajv-formats';
 
 import { ValidationError } from '@errors';
 
@@ -7,7 +8,8 @@ import { user as userSchemas } from './schemas';
 
 const ajv = new Ajv({ allErrors: true });
 
-ajvErrors(ajv);
+addErrors(ajv);
+addFormats(ajv);
 
 const schemas = {
   createUser: userSchemas.create,
@@ -29,8 +31,10 @@ export default function validate(schema: keyof typeof schemas, data: any) {
   }
 
   const valid = compiledSchemas[schema](data);
-
+  
   if (!valid) {
-    throw new ValidationError(compiledSchemas[schema].errors[0].message);
+    const error = compiledSchemas[schema].errors[0];
+    const message = `"${error.instancePath.replace('/', '')}" ${error.message}`;
+    throw new ValidationError(message);
   }
 }
