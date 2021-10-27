@@ -8,7 +8,7 @@ const mapPrivateInfo = ({ email, username, admin }: Record<string, unknown>) => 
 const create = (userData: any) => {
   validate('createUser', userData);
 
-  return User.insertOne(userData)
+  return User.insertOne({ ...userData, admin: false })
     .then(() => {
       const { username } = userData;
       const newToken = sign({ username, admin: false });
@@ -20,11 +20,6 @@ const getByUsername = (username: string) => {
   return User.getByUsername(username)
     .then((user) => mapPrivateInfo(user));
 };
-
-const getByEmail = (email: string) => {
-  return User.getByEmail(email)
-  .then((user) => mapPrivateInfo(user));
-}
 
 const login = (userData: any) => {
   validate('loginUser', userData);
