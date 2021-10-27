@@ -10,7 +10,7 @@ const create = (userData: any) => {
     .then(() => {
       const { username } = userData;
       const newToken = token.sign({ username, admin: false });
-      return { token: newToken }
+      return { token: newToken };
     });
 };
 
