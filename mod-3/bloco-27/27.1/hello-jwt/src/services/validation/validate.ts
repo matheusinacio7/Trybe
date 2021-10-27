@@ -3,13 +3,14 @@ import ajvErrors from 'ajv-errors';
 
 import { ValidationError } from '@errors';
 
+import { user as userSchemas } from './schemas';
+
 const ajv = new Ajv({ allErrors: true });
 
 ajvErrors(ajv);
 
 const schemas = {
-  // add your schemas here
-  oneSchema: {},
+  createUser: userSchemas.create,
 };
 
 type CompiledSchemas = {

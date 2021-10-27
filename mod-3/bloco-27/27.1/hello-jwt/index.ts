@@ -17,6 +17,7 @@ app.use(
 // Insert your routers here;
 
 app.use('/', routers.root);
+app.use('/users', routers.user);
 
 app.use(catchInvalidEndpoint);
 
