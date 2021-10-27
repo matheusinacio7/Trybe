@@ -1,14 +1,15 @@
 import { User } from '@models';
-import { validate } from 'src/services/validation';
-
+import { validate } from '@validation';
 import { sign } from '@token';
+import { compare, hash } from '@crypto';
 
 const mapPrivateInfo = ({ email, username, admin }: Record<string, unknown>) => ({ email, username, admin });
 
 const create = (userData: any) => {
   validate('createUser', userData);
 
-  return User.insertOne({ ...userData, admin: false })
+  return hash(userData.password)
+    .then((hashedPassword) => User.insertOne({ ...userData, password: hashedPassword, admin: false }))
     .then(() => {
       const { username } = userData;
       const newToken = sign({ username, admin: false });
@@ -30,7 +31,9 @@ const login = (userData: any) => {
 
   return getUser()
     .then((user) => {
-      // bcrypt compare password
+      return Promise.all([Promise.resolve(user), compare(password, user.password)]);
+    })
+    .then(([user]) => {
       const newToken = sign({ username: user.username, admin: user.admin });
       return { token: newToken };
     })
