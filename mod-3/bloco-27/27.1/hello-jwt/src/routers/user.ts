@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import { User } from '@controllers';
+import { validateToken } from '@middlewares';
 
 const router = Router();
 
@@ -17,6 +18,13 @@ router.post('/signup', (req, res, next) => {
       res.status(201).json({ message: 'User created successfully.' });
     })
     .catch(next);
+});
+
+router.get('/me', validateToken, (_req, res, next) => {
+  User.getByUsername(res.locals.username).then((info) => {
+    res.status(200).json(info);
+  })
+  .catch(next);
 });
 
 export default router;
