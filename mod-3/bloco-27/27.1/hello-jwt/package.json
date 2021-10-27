@@ -7,7 +7,8 @@
 	"scripts": {
 		"build": "tsc && cp ./tsconfig.json ./dist/",
 		"dev": "ts-node-dev -r dotenv/config -r tsconfig-paths/register index.ts",
-		"start": "npm run build && TS_NODE_PROJECT=dist/tsconfig.json node -r tsconfig-paths/register ./dist/index.js"
+		"start": "npm run build && TS_NODE_PROJECT=dist/tsconfig.json node -r tsconfig-paths/register ./dist/index.js",
+		"dba_setup": "node src/models/dba/setup.js"
 	},
 	"dependencies": {
 		"ajv": "^8.6.3",
