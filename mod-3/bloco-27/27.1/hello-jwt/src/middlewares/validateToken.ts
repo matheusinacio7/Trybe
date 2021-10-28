@@ -1,21 +1,24 @@
 import type { Handler } from 'express';
 
-import { ValidationError } from '@errors';
+import { AuthorizationError } from '@errors';
 
-import { verify } from '@token';
+import { verifyAccessToken } from '@token';
 
 const validateToken : Handler = (req, res, next) => {
   const token = req.headers.authorization;
 
-  if (!token) return next(new ValidationError('Token not found.'));
+  if (!token) return next(new AuthorizationError('Token not found.'));
+
+  const tokenBody = token.replace('Bearer ', '');
 
   try {
-    const { username, admin } = verify(token.replace('Bearer ', ''));
+    const { username, admin } = verifyAccessToken(tokenBody);
     res.locals.username = username;
     res.locals.admin = admin;
+    res.locals.token = tokenBody;
     next();
   } catch {
-    next(new ValidationError('Invalid token.'));
+    next(new AuthorizationError('Invalid token.'));
   }
 };
 

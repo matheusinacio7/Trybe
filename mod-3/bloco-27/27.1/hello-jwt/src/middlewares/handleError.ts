@@ -1,6 +1,7 @@
 import type { ErrorRequestHandler } from 'express';
 
 import {
+  AuthorizationError,
   ConflictError,
   HttpError,
   InternalError,
@@ -17,6 +18,8 @@ const handleError : ErrorRequestHandler = (err, _req, res, _next) => {
     case InternalError:
       console.log(err); // TODO create a server-side log file;
       return res.status(500).json({ error: { message: err.message, code: err.code } });
+    case AuthorizationError:
+      return res.status(401).json({ error: { message: err.message, code: err.code } });
     case ConflictError:
       return res.status(409).json({ error: { message: err.message, code: err.code } });
     case NotFoundError:
