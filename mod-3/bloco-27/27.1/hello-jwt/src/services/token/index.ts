@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import type { JwtPayload, SignOptions } from 'jsonwebtoken';
+import { createClient } from 'redis';
 import fs from 'fs';
 import { nanoid } from 'nanoid';
 
@@ -59,42 +60,51 @@ const sign = (data: Object, type: TokenType, id: string, expiresIn?: string) => 
 };
 class Blacklist {
   #tree: Record<string, { r: number, a: number, invalid: boolean }>;
+  #client;
 
   constructor() {
     this.#tree = {};
+    this.#client = createClient({ })
   }
 
-  add(branch: string, type: 'a' | 'r', counter: number) {
-    if (!this.#tree[branch]) {
-      this.#tree[branch] = { a: -1, r: -1, invalid: false };
+  async connect() {
+    await this.#client.connect();
+  }
+
+  async add(branch: string, type: 'a' | 'r', counter: number) {
+
+    if (!await this.#client.EXISTS(branch)) {
+      await this.#client.HSET(branch, 'r', '-1');
+      await this.#client.HSET(branch, 'a', '-1');
+      await this.#client.HSET(branch, 'i', '0');
     }
 
-    this.#tree[branch][type] = counter;
+    await this.#client.HSET(branch, type, counter.toString());
   }
 
-  checkAndInvalidateOnReuse(branch: string, type: 'a' | 'r', counter: number) {
+  async checkAndInvalidateOnReuse(branch: string, type: 'a' | 'r', counter: number) {
     // if the base is not on the tree, the token is valid
-    if (!this.#tree[branch]) return;
+    if (!await this.#client.EXISTS(branch)) return;
 
     // if the invalid property is set to true, reuse was detected and the whole branch is invalid
-    if (this.#tree[branch].invalid) {
+    if (await this.#client.HGET(branch, 'i') === '1') {
       throw new AuthorizationError('Invalid token.');
     }
 
     // if a refresh token is used while invalid, it means a reuse, so the whole branch is invalidated
-    if (this.#tree[branch].r >= counter) {
-      this.#tree[branch].invalid = true;
+    if (parseInt(await this.#client.HGET(branch, 'r') as string) >= counter) {
+      await this.#client.HSET(branch, 'i', '1');
       throw new AuthorizationError('Invalid token.');
     }
 
     // access tokens can be invalid while the refresh token is not
-    if (type === 'a' && this.#tree[branch].a >= counter) {
+    if (type === 'a' && parseInt(await this.#client.HGET(branch, 'a') as string) >= counter) {
       throw new AuthorizationError('Invalid token.');
     }
   }
 
   get tree() {
-    return this.#tree;
+    return this.#client.KEYS('*');
   }
 }
 
@@ -124,14 +134,18 @@ const getNewIdPair = (refreshToken?: string) => {
 
 const blacklist = new Blacklist();
 
-export const verifyAccessToken = (token: string) : JwtPayload => {
+(async () => {
+  blacklist.connect();
+})();
+
+export const verifyAccessToken = async (token: string) : Promise<JwtPayload> => {
   const payload = (jwt.verify(token, ec_keys.public) as JwtPayload);
 
   if (payload.type !== 'access') {
     throw new AuthorizationError('Invalid token.');
   }
 
-  blacklist.checkAndInvalidateOnReuse(...getBranchData(token));
+  await blacklist.checkAndInvalidateOnReuse(...getBranchData(token));
 
   return payload;
 };
@@ -144,7 +158,7 @@ export const getTokenPair = (data: Object, refreshExp?: string, token?: string) 
   return { refreshToken, accessToken };
 };
 
-export const refreshTokenPair = (refreshToken: string) => {
+export const refreshTokenPair = async (refreshToken: string) => {
   let payload : JwtPayload = {};
 
   try {
@@ -158,8 +172,8 @@ export const refreshTokenPair = (refreshToken: string) => {
   }
 
   const branchData = getBranchData(refreshToken);
-  blacklist.checkAndInvalidateOnReuse(...branchData);
-  blacklist.add(...branchData);
+  await blacklist.checkAndInvalidateOnReuse(...branchData);
+  await blacklist.add(...branchData);
 
   // if token doesn't have an originally issued at, set it
   if (!payload.oiat) {
@@ -195,8 +209,8 @@ const typeDict = {
   r: 'refresh',
 };
 
-export const revoke = (token: string) => {
+export const revoke = async (token: string) => {
   const branchData = getBranchData(token)
-  blacklist.add(...branchData);
+  await blacklist.add(...branchData);
   return typeDict[branchData[1]];
 };

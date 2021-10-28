@@ -45,8 +45,7 @@ const logout = (authorization: string | undefined) => {
 
   try {
     const token = authorization.replace('Bearer ', '');
-    const type = revoke(token);
-    return Promise.resolve(type);
+    return revoke(token);
   } catch {
     // does not matter if token is invalid
     return Promise.resolve('refresh');
@@ -59,8 +58,7 @@ const refresh = (authorization: string | undefined) => {
   const token = authorization.replace('Bearer ', '');
 
   try {
-    const tokenPair = refreshTokenPair(token);
-    return Promise.resolve(tokenPair);
+    return refreshTokenPair(token);
   } catch (err) {
     return Promise.reject(err);
   }

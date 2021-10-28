@@ -4,7 +4,7 @@ import { AuthorizationError } from '@errors';
 
 import { verifyAccessToken } from '@token';
 
-const validateToken : Handler = (req, res, next) => {
+const validateToken : Handler = async (req, res, next) => {
   const token = req.headers.authorization;
 
   if (!token) return next(new AuthorizationError('Token not found.'));
@@ -12,7 +12,7 @@ const validateToken : Handler = (req, res, next) => {
   const tokenBody = token.replace('Bearer ', '');
 
   try {
-    const { username, admin } = verifyAccessToken(tokenBody);
+    const { username, admin } = await verifyAccessToken(tokenBody);
     res.locals.username = username;
     res.locals.admin = admin;
     res.locals.token = tokenBody;
