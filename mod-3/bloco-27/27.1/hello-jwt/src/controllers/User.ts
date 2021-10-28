@@ -41,7 +41,7 @@ const login = (userData: any) => {
 };
 
 const logout = (authorization: string | undefined) => {
-  if (!authorization) return Promise.resolve();
+  if (!authorization) return Promise.resolve('refresh');
 
   try {
     const token = authorization.replace('Bearer ', '');
@@ -49,7 +49,7 @@ const logout = (authorization: string | undefined) => {
     return Promise.resolve(type);
   } catch {
     // does not matter if token is invalid
-    return Promise.resolve();
+    return Promise.resolve('refresh');
   }
 };
 
