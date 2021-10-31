@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "tsc && cp ./tsconfig.json ./dist/",
-		"dev": "ts-node-dev -r dotenv/config -r tsconfig-paths/register index.ts",
+		"dev": "yarn gen_ec_keys && ts-node-dev -r dotenv/config -r tsconfig-paths/register index.ts",
 		"start": "yarn gen_ec_keys && npm run build && TS_NODE_PROJECT=dist/tsconfig.json node -r tsconfig-paths/register ./dist/index.js",
 		"gen_ec_keys": "openssl ecparam -genkey -name prime256v1 -noout -out ec_private.pem && openssl ec -in ec_private.pem -pubout -out ec_public.pem",
 		"dba_setup": "node src/models/dba/setup.js"
