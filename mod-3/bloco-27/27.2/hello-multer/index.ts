@@ -11,10 +11,8 @@ const PORT = process.env.PORT || 3030;
 app.use(
   express.json(),
   helmet(),
-  cors(),
+  cors()
 );
-
-// Insert your routers here;
 
 app.use('/', routers.root);
 app.use('/users', routers.user);
