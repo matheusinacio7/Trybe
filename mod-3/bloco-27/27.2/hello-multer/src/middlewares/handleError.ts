@@ -1,5 +1,7 @@
 import type { ErrorRequestHandler } from 'express';
 
+import { MulterError } from 'multer';
+
 import {
   AuthorizationError,
   ConflictError,
@@ -22,6 +24,8 @@ const handleError : ErrorRequestHandler = (err, _req, res, _next) => {
       return res.status(401).json({ error: { message: err.message, code: err.code } });
     case ConflictError:
       return res.status(409).json({ error: { message: err.message, code: err.code } });
+    case MulterError:
+      return res.status(400).json({ error: { message: 'There was an error uploading a file', code: 'upload_error' } });
     case NotFoundError:
       return res.status(404).json({ error: { message: err.message, code: err.code } });
     case ValidationError:

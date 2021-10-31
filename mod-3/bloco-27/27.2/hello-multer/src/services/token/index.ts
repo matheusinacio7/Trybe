@@ -13,7 +13,7 @@ import ms from 'ms';
 type TokenType = 'access' | 'refresh';
 
 export const SETTINGS = {
-  access_token_lifetime: '1m',
+  access_token_lifetime: '1d',
   refresh_token_absolute_lifetime: '30d',
   refresh_token_inactivity_lifetime: '7d',
 };
