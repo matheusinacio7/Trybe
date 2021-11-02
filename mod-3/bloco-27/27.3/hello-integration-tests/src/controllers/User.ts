@@ -37,7 +37,7 @@ const login = (userData: any) => {
     .then(([user]) => {
       const tokens = getTokenPair({ username: user.username, admin: user.admin });
       return { ...tokens };
-    })
+    });
 };
 
 const logout = (authorization: string | undefined) => {

@@ -3,6 +3,7 @@ import type { ErrorRequestHandler } from 'express';
 import {
   AuthorizationError,
   ConflictError,
+  ForbiddenError,
   HttpError,
   InternalError,
   NotFoundError,
@@ -22,6 +23,8 @@ const handleError : ErrorRequestHandler = (err, _req, res, _next) => {
       return res.status(401).json({ error: { message: err.message, code: err.code } });
     case ConflictError:
       return res.status(409).json({ error: { message: err.message, code: err.code } });
+    case ForbiddenError:
+      return res.status(403).json({ error: { message: err.message, code: err.code } });
     case NotFoundError:
       return res.status(404).json({ error: { message: err.message, code: err.code } });
     case ValidationError:

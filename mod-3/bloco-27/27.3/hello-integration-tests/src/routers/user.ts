@@ -22,7 +22,7 @@ const setTokensOnCookies = ({ accessToken, refreshToken } : Record<string, strin
   });
 };
 
-router.post('/login', (req, res, next) => {
+router.post('/session', (req, res, next) => {
   User.login(req.body)
     .then((tokens) => {
       setTokensOnCookies(tokens, res);
@@ -31,7 +31,7 @@ router.post('/login', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/logout', (req, res, next) => {
+router.delete('/session', (req, res, next) => {
   User.logout(req.headers.authorization)
     .then((tokenType: string) => {
       if (tokenType === 'access') {
@@ -43,7 +43,7 @@ router.post('/logout', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/refresh', (req, res, next) => {
+router.put('/session', (req, res, next) => {
   User.refresh(req.headers.authorization)
     .then((tokens) => {
       setTokensOnCookies(tokens, res);
@@ -52,7 +52,7 @@ router.post('/refresh', (req, res, next) => {
     .catch(next);
 });
 
-router.post('/signup', (req, res, next) => {
+router.post('/', (req, res, next) => {
   User.create(req.body)
     .then((tokens) => {
       setTokensOnCookies(tokens, res);

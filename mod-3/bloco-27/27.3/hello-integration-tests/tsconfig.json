@@ -53,6 +53,8 @@
       "@middlewares": ["src/middlewares"],
       "@models": ["src/models"],
       "@routers": ["src/routers"],
+      "@test/helpers": ["__tests__/helpers"],
+      "@test/config/*": ["__tests__/config/*"],
       "@token": ["src/services/token"],
       "@utils": ["src/utils"],
       "@validation": ["src/services/validation"],
@@ -78,5 +80,9 @@
     /* Advanced Options */
     "skipLibCheck": true,                           /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true        /* Disallow inconsistently-cased references to the same file. */
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "**/__mocks__/**/*.*"
+  ]
 }

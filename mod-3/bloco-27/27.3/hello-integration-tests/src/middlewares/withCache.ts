@@ -13,6 +13,10 @@ export const configureCache = (res: Response, next: NextFunction, options : Cach
   next();
 };
 
+export const closeCacheServer = async () => {
+  await client.quit();
+};
+
 export const withCache : Handler = async (req, res, next) => {
   const cacheKey = `${req.method}:${req.url}:${JSON.stringify(req.params)}:${JSON.stringify(req.query)}:${req.headers.authorization}:${JSON.stringify(req.body)}`;
 

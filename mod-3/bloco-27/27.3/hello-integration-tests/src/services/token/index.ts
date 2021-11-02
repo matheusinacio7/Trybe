@@ -15,7 +15,7 @@ type TokenType = 'access' | 'refresh';
 export const SETTINGS = {
   access_token_lifetime: '1m',
   refresh_token_absolute_lifetime: '30d',
-  refresh_token_inactivity_lifetime: '7d',
+  refresh_token_inactivity_lifetime: '15d',
 };
 
 const getIat = () => Math.round(new Date().getTime() / 1000);
@@ -39,7 +39,7 @@ const ec_keys = {
   }
 }
 
-const getSignConfig = (type: TokenType, id: string, expiresIn?: string) : SignOptions => {
+const getSignConfig = (type: TokenType, id: string, expiresIn?: number) : SignOptions => {
   const SIGN_CONFIG : Record<TokenType, SignOptions> = {
     'access': {
       algorithm: 'ES256',
@@ -54,7 +54,7 @@ const getSignConfig = (type: TokenType, id: string, expiresIn?: string) : SignOp
   return { ...SIGN_CONFIG[type], jwtid: id };
 };
 
-const sign = (data: Object, type: TokenType, id: string, expiresIn?: string) => {
+const sign = (data: Object, type: TokenType, id: string, expiresIn?: number) => {
   // console.log(getSignConfig(type, id));
   return jwt.sign(data, ec_keys.private, getSignConfig(type, id, expiresIn));
 };
@@ -67,6 +67,10 @@ class Blacklist {
 
   async connect() {
     await this.#client.connect();
+  }
+
+  async disconnect() {
+    await this.#client.quit();
   }
 
   async add(branch: string, type: 'a' | 'r', counter: number) {
@@ -91,7 +95,7 @@ class Blacklist {
 
     // if a refresh token is used while invalid, it means a reuse, so the whole branch is invalidated
     if (parseInt(await this.#client.HGET(branch, 'r') as string) >= counter) {
-      await this.#client.HSET(branch, 'i', '1');
+      await this.invalidateTree(branch);
       throw new AuthorizationError('Invalid token.');
     }
 
@@ -99,6 +103,10 @@ class Blacklist {
     if (type === 'a' && parseInt(await this.#client.HGET(branch, 'a') as string) >= counter) {
       throw new AuthorizationError('Invalid token.');
     }
+  }
+
+  async invalidateTree(branch: string) {
+    await this.#client.HSET(branch, 'i', '1');
   }
 
   get tree() {
@@ -131,24 +139,29 @@ const getNewIdPair = (refreshToken?: string) => {
 
 
 const blacklist = new Blacklist();
+blacklist.connect();
 
-(async () => {
-  blacklist.connect();
-})();
-
-export const verifyAccessToken = async (token: string) : Promise<JwtPayload> => {
-  const payload = (jwt.verify(token, ec_keys.public) as JwtPayload);
-
-  if (payload.type !== 'access') {
-    throw new AuthorizationError('Invalid token.');
-  }
-
-  await blacklist.checkAndInvalidateOnReuse(...getBranchData(token));
-
-  return payload;
+export const closeBlacklistServer = async () => {
+  await blacklist.disconnect();
 };
 
-export const getTokenPair = (data: Object, refreshExp?: string, token?: string) => {
+export const verifyAccessToken = async (token: string) : Promise<JwtPayload> => {
+  try {
+    const payload = (jwt.verify(token, ec_keys.public) as JwtPayload);
+
+    if (payload.type !== 'access') {
+      throw new AuthorizationError('Invalid token.');
+    }
+  
+    await blacklist.checkAndInvalidateOnReuse(...getBranchData(token));
+  
+    return payload;
+  } catch (err) {
+    throw new AuthorizationError('Invalid token.');
+  }
+};
+
+export const getTokenPair = (data: Object, refreshExp?: number, token?: string) => {
   const [rtid, atid] = getNewIdPair(token);
   const refreshToken = sign({ ...data, type: 'refresh'}, 'refresh', rtid, refreshExp);
   const accessToken = sign({ ...data, type: 'access' }, 'access', atid);
@@ -174,7 +187,7 @@ export const refreshTokenPair = async (refreshToken: string) => {
   await blacklist.add(...branchData);
 
   // if token doesn't have an originally issued at, set it
-  if (!payload.oiat) {
+  if (payload.oiat === undefined) {
     payload.oiat = payload.iat;
   }
 
@@ -187,11 +200,11 @@ export const refreshTokenPair = async (refreshToken: string) => {
 
   const nextExp = getIat() + (ms(SETTINGS.refresh_token_inactivity_lifetime) / 1000);
 
-  let refreshExp : string | undefined = undefined;
+  let refreshExp : number | undefined = undefined;
 
   // if the absolute max exp is larger than the next inactivity exp, reduce inactivity lifetime
   if (nextExp > maxExp) {
-    refreshExp = ms(maxExp - getIat());
+    refreshExp = maxExp - getIat();
   }
   
   delete payload.jti;
@@ -208,7 +221,14 @@ const typeDict = {
 };
 
 export const revoke = async (token: string) => {
-  const branchData = getBranchData(token)
-  await blacklist.add(...branchData);
-  return typeDict[branchData[1]];
+  try {
+    const branchData = getBranchData(token);
+    await blacklist.add(...branchData);
+    if (typeDict[branchData[1]] === 'r') {
+      await blacklist.invalidateTree(branchData[0]);
+    }
+    return typeDict[branchData[1]];
+  } catch {
+    throw new AuthorizationError('Invalid token.');
+  } 
 };
