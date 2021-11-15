@@ -149,3 +149,6 @@
 [submodule "projects/bloco-26-v2-store-manager"]
 	path = projects/bloco-26-v2-store-manager
 	url = git@github.com:tryber/sd-011-store-manager.git
+[submodule "mod-3/bloco-28/28.1/hello_heroku"]
+	path = mod-3/bloco-28/28.1/hello_heroku
+	url = https://github.com/heyset/hello_heroku
