@@ -1,0 +1,23 @@
+{
+  "name": "mongodb",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node -r dotenv/config --experimental-json-modules index.js",
+    "dev": "nodemon -r dotenv/config --experimental-json-modules index.js",
+    "convert_schema": "node src/utils/convertSchema.js"
+  },
+  "dependencies": {
+    "ajv": "^8.6.3",
+    "ajv-errors": "^3.0.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
