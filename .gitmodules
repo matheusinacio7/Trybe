@@ -155,3 +155,6 @@
 [submodule "projects/bloco-27-cookmaster"]
 	path = projects/bloco-27-cookmaster
 	url = git@github.com:tryber/sd-011-cookmaster.git
+[submodule "mod-3/bloco-28/28.2/hello_pm2"]
+	path = mod-3/bloco-28/28.2/hello_pm2
+	url = git@github.com:heyset/hello_pm2.git
