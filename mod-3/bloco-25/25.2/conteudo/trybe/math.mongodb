@@ -1,0 +1,107 @@
+// Calcule qual o custo total de cada produto, considerando o preço de compra e os impostos.
+
+db.getSiblingDB('trybe').products.find();
+
+db.getSiblingDB('trybe').products.aggregate([
+  { $project: { _id: 0, name: 1, cost: { $add: ['$purchase_price', '$taxes'] } } }
+]);
+
+// Calcule qual o lucro total de cada produto, considerando o preço de compra, os impostos e seu valor de venda.
+
+db.getSiblingDB('trybe').products.aggregate([
+  { $project: { 
+      _id: 0,
+      name: 1,
+      profit: { $subtract: [
+        '$sale_price',
+        { $sum: ['$purchase_price', '$taxes'] }
+      ] }
+    } }
+]);
+
+// Retorne o menor número inteiro relativo ao preço de venda de cada produto;
+db.getSiblingDB('trybe').products.aggregate([
+  { $project: {
+      _id: 0,
+      name: 1,
+      floor_sale_price: { $floor: '$sale_price' }
+  } }
+]);
+
+// Retorne o maior número inteiro relativo ao lucro total sobre cada produto. Nota: Desconsiderar taxas (taxes)
+db.getSiblingDB('trybe').products.aggregate([
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      ceil_profit: { $ceil: { $subtract: ['$sale_price', '$purchase_price'] } }
+    }
+  }
+]);
+
+// Calcule o valor absoluto do lucro total de cada produto.
+db.getSiblingDB('trybe').products.aggregate([
+  { $project: { 
+      _id: 0,
+      name: 1,
+      profit: {
+        $abs: { $subtract: [
+          '$sale_price',
+          { $sum: ['$purchase_price', '$taxes'] }
+        ] }
+      }
+    } }
+]);
+
+// Calcule qual o valor total em estoque de cada produto, considerando o preço de venda e a quantidade;
+db.getSiblingDB('trybe').products.find();
+
+db.getSiblingDB('trybe').products.aggregate([
+  { $project: {
+      _id: 0,
+      name: 1,
+      stock_value: { $multiply: ['$sale_price', '$quantity'] }
+  } }
+]);
+
+db.getSiblingDB('trybe').products.find({}, {
+  _id: 0,
+  name: 1,
+  stock_value: { $multiply: ['$sale_price', '$quantity'] }
+});
+
+// Calcule qual será o lucro total de cada produto caso todo o estoque seja vendido.
+db.getSiblingDB('trybe').products.find({}, {
+  _id: 0,
+  name: 1,
+  stock_profit: {
+    $multiply: [
+      '$quantity',
+      { $subtract: [
+          '$sale_price',
+          { $sum: ['$purchase_price', '$taxes'] }
+      ] }
+    ]
+  }
+});
+
+
+// Calcule qual será o preço de venda de cada produto caso haja uma promoção de 50% de desconto.
+
+db.getSiblingDB('trybe').products.find({}, {
+  _id: 0,
+  name: 1,
+  discount_price: {
+    $divide: ['$sale_price', 2]
+  }
+});
+
+// Calcule o valor total do estoque, considerando que cada produto valha o mesmo que seu preço de venda. Lembre-se da quantidade.
+
+db.getSiblingDB('trybe').products.aggregate([
+  {
+    $addFields: {
+      stock_value: { $multiply: ['$quantity', '$sale_price'] }
+    }
+  }
+]);

@@ -1,0 +1,16 @@
+{
+  "name": "restaurant",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "nodemon": "^2.0.13"
+  },
+  "scripts": {
+    "dev": "nodemon ./index.js"
+  }
+}

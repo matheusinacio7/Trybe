@@ -1,0 +1,11 @@
+use('trybe');
+db.clients.insertMany([
+  { name: "Dave America", State: "Florida" },
+  { name: "Ned Flanders", State: "Alasca" },
+  { name: "Mark Zuck", State: "Texas" },
+  { name: "Edna Krabappel", State: "Montana" },
+  { name: "Arnold Schuz", State: "California" },
+  { name: "Lisa Simpson", State: "Florida" },
+  { name: "Barney Gumble", State: "Texas" },
+  { name: "Homer Simpson", State: "Florida" },
+]);

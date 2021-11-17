@@ -1,0 +1,292 @@
+// Você continuará utilizando o banco de dados erp do dia anterior. Nos exercícios 1 a 8 , você utilizará o mesmo pipeline . A ideia é começar com um pipeline pequeno e ir adicionando estágios à medida que você for evoluindo nos exercícios. Vamos lá?
+
+// Exercício 1 : Utilize uma combinação das expressões aritméticas e adicione um campo chamado idade à coleção clientes . Algumas dicas:
+//     arredonde para baixo o valor da idade;
+//     calcule a idade usando a diferença entre a data corrente e a data de nascimento;
+//     1 dia é igual a 86400000 milissegundos.
+
+
+db.getSiblingDB('trybe').clientes.find();
+db.getSiblingDB('trybe').produtos.find();
+db.getSiblingDB('trybe').vendas.find();
+
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+db.getSiblingDB('trybe').clientes.aggregate([
+  {
+    $addFields: {
+      idade: { 
+        $divide: [
+          { $subtract: [new Date(), '$dataNascimento'] },
+          oneYear
+        ]
+      }
+    }
+  }
+]);
+
+
+// Exercício 2 : Utilizando o novo campo idade , conte quantos clientes têm entre 18 e 25 anos.
+
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+db.getSiblingDB('trybe').clientes.aggregate([
+  {
+    $addFields: {
+      idade: { 
+        $divide: [
+          { $subtract: [new Date(), '$dataNascimento'] },
+          oneYear
+        ]
+      }
+    }
+  },
+  { $match: { idade: { $gte: 18, $lte: 25 } } },
+  { $count: 'clientes_idade_selecionada' }
+]);
+
+// Exercício 3 : Remova os estágios $count e $match do exercício anterior e adicione um estágio no pipeline que coloque as compras do cliente no campo compras .
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+db.getSiblingDB('trybe').clientes.aggregate([
+  {
+    $addFields: {
+      idade: { 
+        $divide: [
+          { $subtract: [new Date(), '$dataNascimento'] },
+          oneYear
+        ]
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'vendas',
+      as: 'compras',
+      localField: 'clienteId',
+      foreignField: 'clienteId',
+    }
+  }
+]);
+
+// Exercício 4 : Selecione TODOS os clientes que compraram entre Junho de 2019 e Março de 2020 .
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+db.getSiblingDB('trybe').clientes.aggregate([
+  {
+    $addFields: {
+      idade: { 
+        $divide: [
+          { $subtract: [new Date(), '$dataNascimento'] },
+          oneYear
+        ]
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'vendas',
+      as: 'compras',
+      localField: 'clienteId',
+      foreignField: 'clienteId',
+    }
+  },
+  {
+    $match: {
+      compras: { $elemMatch: {
+        dataVenda: { $gte: ISODate('2019-06-01'), $lt: ISODate('2020-04-01') }
+      } }
+    }
+  }
+]);
+
+// Exercício 5 : Confira o número de documentos retornados pelo pipeline com o método itcount() . Até aqui, você deve ter 486 documentos sendo retornados.
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+db.getSiblingDB('trybe').clientes.aggregate([
+  {
+    $addFields: {
+      idade: { 
+        $divide: [
+          { $subtract: [new Date(), '$dataNascimento'] },
+          oneYear
+        ]
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'vendas',
+      as: 'compras',
+      localField: 'clienteId',
+      foreignField: 'clienteId',
+    }
+  },
+  {
+    $match: {
+      compras: { $elemMatch: {
+        dataVenda: { $gte: ISODate('2019-06-01'), $lt: ISODate('2020-04-01') }
+      } }
+    }
+  }
+]).itcount();
+
+// Exercício 6 : Ainda nesse pipeline , descubra os 5 estados com mais compras.
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+db.getSiblingDB('trybe').clientes.aggregate([
+  {
+    $addFields: {
+      idade: { 
+        $divide: [
+          { $subtract: [new Date(), '$dataNascimento'] },
+          oneYear
+        ]
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'vendas',
+      as: 'compras',
+      localField: 'clienteId',
+      foreignField: 'clienteId',
+    }
+  },
+  {
+    $match: {
+      compras: { $elemMatch: {
+        dataVenda: { $gte: ISODate('2019-06-01'), $lt: ISODate('2020-04-01') }
+      } }
+    }
+  },
+  {
+    $unwind: '$compras'
+  },
+  {
+    $group: {
+      _id: '$endereco.uf',
+      total_compras: { $sum: 1 }
+    }
+  },
+  {
+    $sort: {
+      total_compras: -1,
+    }
+  },
+  {
+    $limit: 5
+  }
+]);
+
+// Exercício 7 : Descubra o cliente que mais consumiu QUEIJO PRATO . Retorne um documento com a seguinte estrutura: 
+
+/*
+{
+  "nomeCliente": "NOME",
+  "uf": "UF DO CLIENTE",
+  "totalConsumido": 100
+}
+*/
+
+const oneYear = 1000 * 60 * 60 * 24 * 365;
+db.getSiblingDB('trybe').clientes.aggregate([
+  {
+    $addFields: {
+      idade: { 
+        $divide: [
+          { $subtract: [new Date(), '$dataNascimento'] },
+          oneYear
+        ]
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: 'vendas',
+      as: 'compras_queijo_prato',
+      let: { id_cliente: '$clienteId' },
+      pipeline: [
+        {
+          $match: {
+            $and: [
+              { $expr: { $eq: ['$clienteId', '$$id_cliente'] } },
+              { itens: { $elemMatch: { nome: 'QUEIJO PRATO' } } }
+            ]
+        } },
+        {
+          $project: { _id: 1 }
+        } 
+      ]
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      nomeCliente: '$nome',
+      uf: '$endereco.uf',
+      totalConsumido: { $size: '$compras_queijo_prato' }
+    }
+  },
+  {
+    $sort: { totalConsumido: -1 }
+  },
+  {
+    $limit: 1
+  }
+]);
+
+// Exercício 8 : Selecione todas as vendas do mês de Março de 2020 , com status EM SEPARACAO . Acrescente um campo chamado dataEntregaPrevista com valor igual a três dias após a data da venda. Retorne apenas os campos clienteId , dataVenda e dataEntregaPrevista . 
+
+const oneDay = 1000 * 60 * 60 * 24;
+db.getSiblingDB('trybe').vendas.aggregate([
+  {
+    $match: {
+      dataVenda: { $lt: ISODate('2020-04-01'), $gte: ISODate('2020-03-01') },
+      status: 'EM SEPARACAO',
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      clienteId: 1,
+      dataVenda: 1,
+      dataEntregaPrevista: { $add: ['$dataVenda', 3 * oneDay] }
+    }
+  }
+]);
+
+
+//  Exercício 9 : Calcule a diferença absoluta em dias entre a data da primeira entrega prevista e a última, considerando o pipeline do exercício 8. 
+
+const oneDay = 1000 * 60 * 60 * 24;
+db.getSiblingDB('trybe').vendas.aggregate([
+  {
+    $match: {
+      dataVenda: { $lt: ISODate('2020-04-01'), $gte: ISODate('2020-03-01') },
+      status: 'EM SEPARACAO',
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      clienteId: 1,
+      dataVenda: 1,
+      dataEntregaPrevista: { $add: ['$dataVenda', 3 * oneDay] }
+    }
+  },
+  {
+    $group: {
+      _id: null,
+      maxDataPrevista: { $max: '$dataEntregaPrevista' },
+      minDataPrevista: { $min: '$dataEntregaPrevista' },
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      deltaDataPrevista: {
+        $abs: {
+          $divide: [
+            { $subtract: ['$maxDataPrevista', '$minDataPrevista'] },
+            oneDay
+          ]
+        }
+      }
+    }
+  }
+]);
