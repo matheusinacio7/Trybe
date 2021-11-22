@@ -146,9 +146,15 @@
 [submodule "projects/bloco-26-talker-manager"]
 	path = projects/bloco-26-talker-manager
 	url = git@github.com:tryber/sd-011-project-talker-manager.git
+[submodule "mod-3/bloco-27/27.1/nodejs-jwt-base-project"]
+	path = mod-3/bloco-27/27.1/nodejs-jwt-base-project
+	url = git@github.com:tryber/nodejs-jwt-base-project.git
 [submodule "projects/bloco-26-v2-store-manager"]
 	path = projects/bloco-26-v2-store-manager
 	url = git@github.com:tryber/sd-011-store-manager.git
 [submodule "mod-3/bloco-28/28.1/hello_heroku"]
 	path = mod-3/bloco-28/28.1/hello_heroku
 	url = https://github.com/heyset/hello_heroku
+[submodule "projects/bloco-27-cookmaster"]
+	path = projects/bloco-27-cookmaster
+	url = git@github.com:tryber/sd-011-cookmaster.git
