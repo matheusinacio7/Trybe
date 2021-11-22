@@ -152,6 +152,9 @@
 [submodule "projects/bloco-26-v2-store-manager"]
 	path = projects/bloco-26-v2-store-manager
 	url = git@github.com:tryber/sd-011-store-manager.git
+[submodule "mod-3/bloco-28/28.1/hello_heroku"]
+	path = mod-3/bloco-28/28.1/hello_heroku
+	url = https://github.com/heyset/hello_heroku
 [submodule "projects/bloco-27-cookmaster"]
 	path = projects/bloco-27-cookmaster
 	url = git@github.com:tryber/sd-011-cookmaster.git
@@ -161,3 +164,6 @@
 [submodule "projects/bloco-28-stranger-things-frontend"]
 	path = projects/bloco-28-stranger-things-frontend
 	url = git@github.com:tryber/sd-011-stranger-things-frontend.git
+[submodule "mod-3/bloco-28/28.2/hello_pm2"]
+	path = mod-3/bloco-28/28.2/hello_pm2
+	url = git@github.com:heyset/hello_pm2.git
