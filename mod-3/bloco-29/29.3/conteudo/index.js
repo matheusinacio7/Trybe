@@ -4,6 +4,8 @@ const { Address, Employee, Book, User } = require('./src/models');
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/employees', async (_req, res) => {
   try {
     const employees = await Employee.findAll({
@@ -15,6 +17,21 @@ app.get('/employees', async (_req, res) => {
     console.log(e.message);
     res.status(500).json({ message: 'Ocorreu um erro' });
   };
+});
+
+app.post('/employees', async (req, res) => {
+  try {
+    const { firstName, lastName, age, city, street, number } = req.body;
+
+    const employee = await Employee.create({ firstName, lastName, age });
+
+    await Address.create({ city, street, number, employeeId: employee.id });
+
+    return res.status(201).json({ message: 'Cadastrado com sucesso' });
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ message: 'Algo deu errado' });
+  }
 });
 
 app.get('/employees/:id', async (req, res) => {
