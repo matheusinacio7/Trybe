@@ -4,7 +4,9 @@ const express = require('express');
 const { Address, Employee, Book, User } = require('./src/models');
 const config = require('./config/config');
 
-const sequelize = new Sequelize(config.development);
+const sequelize = new Sequelize(
+  process.env.NODE_ENV === 'test' ? config.test : config.development
+);
 
 const app = express();
 
@@ -46,7 +48,10 @@ app.post('/employees', async (req, res) => {
     // Com isso, podemos finalizar a transação usando a função `commit`.
     await t.commit();
 
-    return res.status(201).json({ message: 'Cadastrado com sucesso' });
+    return res.status(201).json({
+      id: employee.id, // esse dado será nossa referência para validar a transação
+      message: 'Cadastrado com sucesso'
+    });
   } catch (e) {
     // Se entrou nesse bloco é porque alguma operação falhou.
     // Nesse caso, o sequelize irá reverter as operações anteriores com a função rollback, não sendo necessário fazer manualmente

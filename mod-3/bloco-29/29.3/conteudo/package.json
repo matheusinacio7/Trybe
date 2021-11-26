@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "NODE_ENV=test mocha ./tests/**/*$NAME*.test.js --exit"
+    "test": "NODE_ENV=test mocha ./__tests__/**/*$NAME*.test.js --exit"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
