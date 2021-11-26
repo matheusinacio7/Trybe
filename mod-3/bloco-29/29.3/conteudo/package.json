@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "NODE_ENV=test mocha ./tests/**/*$NAME*.test.js --exit"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
@@ -14,6 +15,10 @@
     "sequelize": "^6.12.0-alpha.1"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.3.0"
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.1.3",
+    "sequelize-cli": "^6.3.0",
+    "sinon": "^12.0.1"
   }
 }
