@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const express = require('express');
 
 const { Address, Employee, Book, User } = require('./src/models');
-const config = require('./config/config');
+const config = require('./src/config/config');
 
 const sequelize = new Sequelize(
   process.env.NODE_ENV === 'test' ? config.test : config.development
