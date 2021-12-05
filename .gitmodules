@@ -167,3 +167,6 @@
 [submodule "mod-3/bloco-28/28.2/hello_pm2"]
 	path = mod-3/bloco-28/28.2/hello_pm2
 	url = git@github.com:heyset/hello_pm2.git
+[submodule "projects/bloco-29-blogs-api"]
+	path = projects/bloco-29-blogs-api
+	url = https://github.com/tryber/sd-011-project-blogs-api.git
