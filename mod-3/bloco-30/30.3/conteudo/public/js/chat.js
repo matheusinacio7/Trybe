@@ -18,3 +18,8 @@ const appendNewMessage = (message) => {
 }
 
 socket.on('clientMessage', appendNewMessage);
+socket.on('serverMessage', appendNewMessage);
+
+window.onbeforeunload = function(event) {
+  socket.disconnect();
+};
