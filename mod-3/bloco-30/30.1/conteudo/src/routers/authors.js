@@ -15,7 +15,13 @@ router.get('/new', (_req, res) => {
 });
 
 router.post('/', (req, res) => {
-
+  Controller.create(req.body)
+    .then(() => {
+      res.redirect('authors');
+    })
+    .catch(() => {
+      res.status(400).render('authors/new', { message: 'Dados inválidos' });
+    });
 });
 
 router.get('/:id', (req, res) => {

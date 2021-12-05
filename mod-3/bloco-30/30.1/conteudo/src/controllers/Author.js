@@ -17,4 +17,5 @@ const create = (newAuthorInput) => {
 module.exports = {
   getAll,
   getById,
+  create,
 }
