@@ -1,7 +1,10 @@
 const Model = require('../models/Author');
 
-const listAuthors = () => Model.getAll();
+const getAll = () => Model.getAll();
+
+const getById = (id) => Model.findById(id);
 
 module.exports = {
-  listAuthors
+  getAll,
+  getById,
 }
