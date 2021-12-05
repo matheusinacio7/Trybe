@@ -4,9 +4,14 @@
     <title>Socket.IO - Trybe</title>
   </head>
   <body>
+    <button onClick="ping()">PING</button>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
+
+      function ping() {
+        socket.emit('ping');
+      }
     </script>
   </body>
 </html>
