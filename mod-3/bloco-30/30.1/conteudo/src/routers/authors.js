@@ -10,6 +10,14 @@ router.get('/', (_req, res) => {
     });
 });
 
+router.get('/new', (_req, res) => {
+
+});
+
+router.post('/', (req, res) => {
+
+});
+
 router.get('/:id', (req, res) => {
   Controller.getById(req.params.id)
     .then((author) => {

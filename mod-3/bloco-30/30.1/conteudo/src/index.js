@@ -4,6 +4,7 @@ const express = require('express');
 const authorsRouter = require('./routers/authors');
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.set('views', 'src/views');
