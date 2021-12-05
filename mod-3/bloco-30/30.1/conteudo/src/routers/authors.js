@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', (_req, res) => {
   Controller.getAll()
     .then((authors) => {
-      res.status(200).render('author/index', { authors });
+      res.status(200).render('authors/index', { authors });
     });
 });
 
@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
     .then((author) => {
       if (!author) return res.status(404).render('404');
 
-      res.status(200).render('author/single');
+      res.status(200).render('authors/single');
     });
 })
 

@@ -1,14 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 
-const authorRouter = require('./routers/author');
+const authorsRouter = require('./routers/authors');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', 'src/views');
 
-app.use('/author', authorRouter);
+app.use('/authors', authorsRouter);
 
 const PORT = process.env.PORT || 3000;
 
