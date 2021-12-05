@@ -11,7 +11,7 @@ router.get('/', (_req, res) => {
 });
 
 router.get('/new', (_req, res) => {
-
+  res.render('authors/new', { message: null });
 });
 
 router.post('/', (req, res) => {
