@@ -64,7 +64,7 @@ const isValid = (firstName, middleName, lastName) => {
 };
 
 const create = async (firstName, middleName, lastName) => connection.execute(
-  'INSERT INTO mvc_example.authors (first_name, middle_name, last_name) VALUES (?,?,?)',
+  'INSERT INTO trybe_mvc_example.authors (first_name, middle_name, last_name) VALUES (?,?,?)',
   [firstName, middleName, lastName],
 );
 

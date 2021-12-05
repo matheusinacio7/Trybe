@@ -4,15 +4,15 @@ const getAll = () => Model.getAll();
 
 const getById = (id) => Model.findById(id);
 
-const create = (newAuthorInput) => {
+const create = (newAuthorInput) => new Promise((resolve, reject) => {
   const { first_name, middle_name, last_name } = newAuthorInput;
 
   if (!Model.isValid(first_name, middle_name, last_name)) {
-    throw new Error('Invalid data');
+    return reject(new Error('Invalid data'));
   }
 
-  return Model.create(first_name, middle_name, last_name);
-};
+  resolve(Model.create(first_name, middle_name, last_name));
+});
 
 module.exports = {
   getAll,
