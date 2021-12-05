@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Address.associate = (models) => {
     Address.belongsTo(models.Employee,
-      { foreignKey: 'employee_id', as: 'employees' });
+      { foreignKey: 'employee_id', as: 'addresses' });
   };
 
   return Address;
