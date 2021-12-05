@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
     .then((author) => {
       if (!author) return res.status(404).render('404');
 
-      res.status(200).render('authors/single');
+      res.status(200).render('authors/single', { author });
     });
 })
 
