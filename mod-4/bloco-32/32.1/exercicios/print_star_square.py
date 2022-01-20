@@ -3,6 +3,7 @@ def print_star_square(n):
         star_line = '*' * n
         print(star_line)
 
+
 if (__name__ == '__main__'):
     print_star_square(5)
     print_star_square(3)
