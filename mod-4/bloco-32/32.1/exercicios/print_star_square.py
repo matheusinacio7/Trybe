@@ -1,8 +1,6 @@
 def print_star_square(n):
     for line in range(0, n):
-        star_line = ''
-        for column in range(0, n):
-            star_line += '*'
+        star_line = '*' * n
         print(star_line)
 
 if (__name__ == '__main__'):
