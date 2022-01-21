@@ -1,14 +1,8 @@
 from random import sample, choice
 
 
-word_list = [
-    'clandestine',
-    'picturesque',
-    'tectonic',
-    'blasphemy',
-    'exquisite',
-    'serpentine',
-]
+with (open('word_list.txt')) as file:
+    word_list = file.read().splitlines()
 
 
 chosen_word = choice(word_list)
