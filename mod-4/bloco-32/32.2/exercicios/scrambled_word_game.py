@@ -5,11 +5,10 @@ with (open('word_list.txt')) as file:
     word_list = file.read().splitlines()
 
 
-chosen_word = choice(word_list)
-scrambled_word = ''.join(sample(chosen_word, len(chosen_word)))
-
-
 def main_loop():
+    chosen_word = choice(word_list)
+    scrambled_word = ''.join(sample(chosen_word, len(chosen_word)))
+
     print('\n\n==== Scrambled word guesser! ====\n\n')
     print(f'Your word is:   {scrambled_word}\n')
 
