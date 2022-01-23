@@ -1,5 +1,6 @@
 import json
 from random import choice, sample
+from math import ceil
 
 
 with open('pokemons.json') as file:
@@ -33,7 +34,7 @@ def main_loop():
     scrambled_indexes = sample(indexes, len(indexes))
     revealed_indexes = []
 
-    for chance in range(len(name) - 3 if len(name) > 3 else 1, 0, -1):
+    for chance in range(ceil(len(name) / 2) + 1, 0, -1):
         print(f'You have {chance} chance{"s" if chance > 1 else ""} left\n')
         revealed = substitute_with_underscores_except(name, revealed_indexes)
         print(f'Pokemon {number}:   {get_with_spaces(revealed)}\n')
