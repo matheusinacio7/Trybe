@@ -170,3 +170,6 @@
 [submodule "projects/bloco-31-delivery-app"]
 	path = projects/bloco-31-delivery-app
 	url = git@github.com:tryber/sd-011-project-delivery-app.git
+[submodule "projects/bloco-32-job-insights"]
+	path = projects/bloco-32-job-insights
+	url = git@github.com:tryber/sd-011-project-job-insights.git
