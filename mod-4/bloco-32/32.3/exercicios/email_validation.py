@@ -14,3 +14,4 @@ def validate_format(email):
 
 def validate(email):
     validate_format(email)
+    return True
