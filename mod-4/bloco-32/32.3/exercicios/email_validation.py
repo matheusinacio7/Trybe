@@ -8,7 +8,7 @@ class ValidationError(Exception):
 
 
 def validate_format(email):
-    if fullmatch(r'.+@.+\..+', email) is None:
+    if fullmatch(r'[a-zA-Z][\w-]+@[a-zA-Z\d]+\..{1,3}', email) is None:
         raise ValidationError("Wrong email format.")
 
 

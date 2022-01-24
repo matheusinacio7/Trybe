@@ -9,3 +9,11 @@ def test_throws_validation_error_if_not_in_correct_format():
         validate('uga@buga')
     with raises(ValidationError, match="Wrong email format"):
         validate('uga@buga.')
+    with raises(ValidationError, match="Wrong email format"):
+        validate('uga@&uga.com')
+    with raises(ValidationError, match="Wrong email format"):
+        validate('uga@_buga.com')
+    with raises(ValidationError, match="Wrong email format"):
+        validate('uga@buga.cooom')
+    with raises(ValidationError, match="Wrong email format"):
+        validate('uga@buga.')
