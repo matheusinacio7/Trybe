@@ -58,3 +58,21 @@ def test_changes_channel_correctly(my_tv: TV):
     for channel in allowed_channels:
         my_tv.change_channel(channel)
         assert(my_tv._channel) == channel
+
+
+def test_toggle_on_turns_on_when_its_off(my_tv: TV):
+    assert(my_tv._isOn) is False
+
+    my_tv.toggle_on()
+
+    assert(my_tv._isOn) is True
+
+
+def test_toggle_on_turns_off_when_its_on(my_tv: TV):
+    my_tv.toggle_on()
+
+    assert(my_tv._isOn) is True
+
+    my_tv.toggle_on()
+
+    assert(my_tv._isOn) is False
