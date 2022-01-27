@@ -1,4 +1,4 @@
-from pytest import fixture
+from pytest import fixture, raises
 from tv import TV
 
 @fixture
@@ -13,7 +13,7 @@ def test_initalizes_with_correct_values(my_tv: TV):
     assert(my_tv._isOn) is False
 
 
-def test_increases_volume(my_tv):
+def test_increases_volume(my_tv: TV):
     assert(my_tv._volume) == 50
 
     my_tv.increase_volume()
@@ -21,14 +21,14 @@ def test_increases_volume(my_tv):
     assert(my_tv._volume) == 51
 
 
-def test_volume_cant_get_over_99(my_tv):
+def test_volume_cant_get_over_99(my_tv: TV):
     for i in range(100):
         my_tv.increase_volume()
 
     assert(my_tv._volume) == 99
 
 
-def test_decreases_volume(my_tv):
+def test_decreases_volume(my_tv: TV):
     assert(my_tv._volume) == 50
 
     my_tv.decrease_volume()
@@ -36,8 +36,25 @@ def test_decreases_volume(my_tv):
     assert(my_tv._volume) == 49
 
 
-def test_volume_cant_get_under_0(my_tv):
+def test_volume_cant_get_under_0(my_tv: TV):
     for i in range(100):
         my_tv.decrease_volume()
 
     assert(my_tv._volume) == 0
+
+
+def test_cant_change_channel_to_value_outside_range(my_tv: TV):
+    disallowed_channels = [0, -10, 100]
+
+    for channel in disallowed_channels:
+        with raises(ValueError,
+                    match=f'Channel must be between 1 and 99. Received: {channel}'):
+            my_tv.change_channel(channel)
+
+
+def test_changes_channel_correctly(my_tv: TV):
+    allowed_channels = list(range(1, 100))
+
+    for channel in allowed_channels:
+        my_tv.change_channel(channel)
+        assert(my_tv._channel) == channel
