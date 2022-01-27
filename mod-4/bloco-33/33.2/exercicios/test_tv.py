@@ -26,3 +26,18 @@ def test_volume_cant_get_over_99(my_tv):
         my_tv.increase_volume()
 
     assert(my_tv._volume) == 99
+
+
+def test_decreases_volume(my_tv):
+    assert(my_tv._volume) == 50
+
+    my_tv.decrease_volume()
+
+    assert(my_tv._volume) == 49
+
+
+def test_volume_cant_get_under_0(my_tv):
+    for i in range(100):
+        my_tv.decrease_volume()
+
+    assert(my_tv._volume) == 0
