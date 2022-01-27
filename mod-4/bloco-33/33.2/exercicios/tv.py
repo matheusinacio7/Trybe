@@ -7,3 +7,6 @@ class TV:
 
     def increase_volume(self):
         self._volume = min(99, self._volume + 1)
+
+    def decrease_volume(self):
+        self._volume = max(0, self._volume - 1)
