@@ -1,4 +1,4 @@
-from circle import Circle
+from circle_coin import Circle
 from pytest import approx
 
 
