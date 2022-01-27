@@ -2,3 +2,4 @@ mod-1/bloco-02/2.2/
 node_modules
 **/*.env
 **/*.pem
+**/*.venv
