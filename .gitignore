@@ -3,3 +3,5 @@ node_modules
 **/*.env
 **/*.pem
 **/*.venv
+**/__pycache__
+**/.pytest_cache
