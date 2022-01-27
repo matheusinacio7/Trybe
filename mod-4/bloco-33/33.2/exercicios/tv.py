@@ -10,3 +10,9 @@ class TV:
 
     def decrease_volume(self):
         self._volume = max(0, self._volume - 1)
+
+    def change_channel(self, channel: str):
+        raise NotImplementedError
+
+    def toggle_on():
+        raise NotImplementedError
