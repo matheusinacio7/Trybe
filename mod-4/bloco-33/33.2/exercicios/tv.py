@@ -6,4 +6,4 @@ class TV:
         self.isOn: bool = False
 
     def increase_volume(self):
-        self.volume += 1
+        self.volume = min(99, self.volume + 1)
