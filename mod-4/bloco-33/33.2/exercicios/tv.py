@@ -17,5 +17,5 @@ class TV:
         
         self._channel = channel
 
-    def toggle_on():
-        raise NotImplementedError
+    def toggle_on(self):
+        self._isOn = not self._isOn
