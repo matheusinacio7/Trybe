@@ -14,7 +14,7 @@ class EventBus():
 
     def add_logger(logger: Logger) -> None:
         raise NotImplementedError
-    
+
     def debug(message: str) -> None:
         raise NotImplementedError
 
@@ -26,4 +26,3 @@ class EventBus():
 
     def warn(message: str) -> None:
         raise NotImplementedError
-

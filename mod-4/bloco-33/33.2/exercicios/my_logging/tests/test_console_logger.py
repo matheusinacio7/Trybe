@@ -1,4 +1,4 @@
-from ...logging import ConsoleLogger
+from ...my_logging import ConsoleLogger
 
 
 def test_prints_to_the_console(capsys):
