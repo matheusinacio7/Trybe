@@ -13,8 +13,9 @@ class TV:
 
     def change_channel(self, channel: int):
         if not 1 <= channel <= 99:
-            raise ValueError(f'Channel must be between 1 and 99. Received: {channel}')
-        
+            raise ValueError(f'Channel must be between 1 and 99.\
+                             Received: {channel}')
+
         self._channel = channel
 
     def toggle_on(self):
