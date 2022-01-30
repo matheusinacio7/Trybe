@@ -1,6 +1,7 @@
 from pytest import fixture, raises
 from tv import TV
 
+
 @fixture
 def my_tv():
     return TV('24 inches')
@@ -48,7 +49,8 @@ def test_cant_change_channel_to_value_outside_range(my_tv: TV):
 
     for channel in disallowed_channels:
         with raises(ValueError,
-                    match=f'Channel must be between 1 and 99. Received: {channel}'):
+                    match=('Channel must be between 1 and 99. '
+                           f'Received: {channel}')):
             my_tv.change_channel(channel)
 
 
