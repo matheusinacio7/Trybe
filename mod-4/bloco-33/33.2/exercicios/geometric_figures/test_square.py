@@ -1,5 +1,5 @@
 from pytest import approx
-from geometric_figures.square import Square
+from .square import Square
 
 
 def test_has_correct_perimeter():

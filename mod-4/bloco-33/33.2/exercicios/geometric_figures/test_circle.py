@@ -1,5 +1,5 @@
 from pytest import approx
-from geometric_figures.circle import Circle
+from .circle import Circle
 
 
 def test_has_correct_perimeter():

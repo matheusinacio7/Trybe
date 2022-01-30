@@ -1,5 +1,5 @@
 from pytest import approx
-from geometric_figures.rectangle import Rectangle
+from .rectangle import Rectangle
 
 
 def test_has_correct_perimeter():

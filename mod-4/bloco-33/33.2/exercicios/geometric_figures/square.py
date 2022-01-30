@@ -1,4 +1,4 @@
-from geometric_figures.geometric_figure import GeometricFigure
+from .geometric_figure import GeometricFigure
 
 
 class Square(GeometricFigure):
