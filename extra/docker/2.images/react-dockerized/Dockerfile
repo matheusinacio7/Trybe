@@ -1,7 +1,7 @@
 FROM node:14-alpine AS build
 WORKDIR /app
-RUN npm install
 COPY . .
+RUN npm install
 RUN npm run build
 
 FROM nginx:1.16.0-alpine AS prod
