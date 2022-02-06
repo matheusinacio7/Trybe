@@ -182,3 +182,6 @@
 [submodule "projects/bloco-33-inventory-report"]
 	path = projects/bloco-33-inventory-report
 	url = git@github.com:tryber/sd-011-inventory-report.git
+[submodule "projects/extra-docker-todo-list"]
+	path = projects/extra-docker-todo-list
+	url = git@github.com:tryber/sd-011-project-docker-todo-list.git
