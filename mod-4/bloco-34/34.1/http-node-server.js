@@ -22,7 +22,7 @@ const sendResponse = (res, message) => {
   res.end(JSON.stringify(message));
 }
 
-const handleGetAllTasks = (req, res) => getTasks()
+const handleGetAllTasks = (_req, res) => getTasks()
   .then((tasks) => {
     res.statusCode = 200;
     sendResponse(res, { tasks });
@@ -40,17 +40,22 @@ const handleCreateTask = (req, res) => {
     });
 };
 
+const handleNotFound = (_req, res) => {
+  res.statusCode = 404;
+  res.setHeader('Content-Type', 'application/json');
+  res.end();
+}
 
 const server = http.createServer((req, res) => {
-  if (req.method === 'POST' && req.url === '/tasks') {
-    handleCreateTask(req, res);
-  } else if (req.method === 'GET' && req.url === '/tasks') {
-    handleGetAllTasks(req, res);
-  } else {
-    res.statusCode = 404;
-    res.setHeader('Content-Type', 'application/json');
-    res.end();
-  }
+  const handlerMap = new Map([
+    ['POST /tasks', handleCreateTask],
+    ['GET /tasks', handleGetAllTasks],
+  ]);
+
+  const rest = `${req.method} ${req.url}`;
+
+  const handler = handlerMap.has(rest) ? handlerMap.get(rest) : handleNotFound;
+  handler(req, res);
 });
 
 server.listen(8080);
