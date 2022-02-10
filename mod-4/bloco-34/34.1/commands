@@ -1,0 +1,9 @@
+curl http://localhost:8080/tasks 
+
+curl -H "Content-Type: application/json" -d '{ "title": "clear the trash" }' http://localhost:8080/tasks
+
+curl https://google.com
+
+curl https://google.com -L
+
+wget https://betrybe.com
