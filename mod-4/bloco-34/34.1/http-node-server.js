@@ -1,5 +1,4 @@
 const http = require('http');
-const path = require('path');
 const fs = require('fs').promises;
 
 const saveTasks = (tasks) => fs.writeFile('./tasks.json', JSON.stringify(tasks));
