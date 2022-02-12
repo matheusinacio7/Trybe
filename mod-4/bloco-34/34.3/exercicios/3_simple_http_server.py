@@ -1,10 +1,13 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        print('idk')
-        print(f'GET request\
+        logging.info(f'\
+                     \nGET request\
                      \nPath: {str(self.path)}\
                      \nHeaders:{str(self.headers)}')
         self.send_response(200)
