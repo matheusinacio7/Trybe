@@ -176,3 +176,6 @@
 [submodule "projects/bloco-33-inventory-report"]
 	path = projects/bloco-33-inventory-report
 	url = git@github.com:tryber/sd-011-inventory-report.git
+[submodule "projects/bloco-34-tech-news"]
+	path = projects/bloco-34-tech-news
+	url = git@github.com:tryber/sd-011-tech-news.git
