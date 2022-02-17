@@ -185,3 +185,6 @@
 [submodule "projects/extra-docker-todo-list"]
 	path = projects/extra-docker-todo-list
 	url = git@github.com:tryber/sd-011-project-docker-todo-list.git
+[submodule "projects/bloco-34-tech-news"]
+	path = projects/bloco-34-tech-news
+	url = git@github.com:tryber/sd-011-tech-news.git
