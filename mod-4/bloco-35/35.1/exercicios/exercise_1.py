@@ -24,3 +24,4 @@ def contains_duplicate(numbers):
 #   Pior caso: O(n^2). É preciso percorrer o array uma vez para ordená-lo, e depois mais uma vez até o final para encontrar um número não duplicado. Este caso acontece tanto quando não há duplicatas quanto quando o número duplicado é o maior do conjunto. # noqa: E501
 #   Caso médio: O(n + n/2)?
 #   Melhor caso: O(n) -> ordenar o array e depois encontrar o número duplicado na primeira posição # noqa: E501
+# Resposta: O algoritmo de ordenação do python tem complexidade n log(n)
