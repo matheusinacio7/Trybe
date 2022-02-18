@@ -3,7 +3,6 @@ from math import floor
 
 
 def get_maximum_common_divisor_recursion(smaller, larger, max, last_try):
-    """"""
     if (floor(smaller / 2) in {max, last_try}):
         return max
 
