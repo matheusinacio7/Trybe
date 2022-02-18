@@ -13,3 +13,5 @@
 // .reduce((acc, n) => acc + n)
 
 // Complexidade de tempo: O(n^3). Espaço: O(n)
+
+// Resposta: na verdade é O(n). O algoritmo não percorre o array 3x para cada elemento, em cada array. Apenas 3x o array inteiro. Então seria O(3n)
