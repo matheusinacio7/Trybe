@@ -12,3 +12,5 @@ print(kids_with_candies([2, 3, 5, 1, 3], 3))
 
 # Tempo: O(n^2) para todos os casos. Sempre é preciso percorrer o array duas vezes. # noqa: E501
 # Espaço: O(n) é criado sempre um novo array do mesmo tamanho do original. # noqa: E501
+
+# Resposta: na verdade, é O(n). Pois o array é percorrido duas vezes apenas (seria O(2n), que é simplificado para O(n)) # noqa: E501
