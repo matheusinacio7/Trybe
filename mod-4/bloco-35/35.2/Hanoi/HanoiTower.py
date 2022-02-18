@@ -1,4 +1,6 @@
 from typing import List, TypedDict
+from Renderer import Renderer
+from LogRenderer import LogRenderer
 
 
 class Peg(TypedDict):
@@ -7,7 +9,7 @@ class Peg(TypedDict):
 
 
 class HanoiTower:
-    def __init__(self, number_of_disks: int):
+    def __init__(self, number_of_disks: int, *, renderer: Renderer):
         self.A: Peg = {
             'name': 'A',
             'list': list(range(number_of_disks, 0, -1)),
@@ -21,6 +23,7 @@ class HanoiTower:
             'list': [],
         }
         self.number_of_disks = number_of_disks
+        self.renderer = renderer
 
     def solve(self):
         self.move(self.A, self.C, self.B, self.number_of_disks)
@@ -40,18 +43,14 @@ class HanoiTower:
         self.move(spare, target, source, disks - 1)
 
     def log(self, message):
-        print(f'=== {message} ===')
+        self.renderer.log(message)
 
     def render(self):
-        print(self.A['list'],
-              self.B['list'],
-              self.C['list'],
-              '==================================',
-              sep='\n')
+        self.renderer.render(self)
 
 
 if __name__ == '__main__':
-    my_tower = HanoiTower(5)
+    my_tower = HanoiTower(4, renderer=LogRenderer())
     my_tower.solve()
 
 # print('k')
