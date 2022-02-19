@@ -1,7 +1,5 @@
 from typing import List, TypedDict
 from Renderer import Renderer
-# from LogRenderer import LogRenderer
-from ConsoleRenderer import ConsoleRenderer
 
 
 class Peg(TypedDict):
@@ -49,10 +47,3 @@ class HanoiTower:
 
     def render(self):
         self.renderer.render(self)
-
-
-if __name__ == '__main__':
-    my_tower = HanoiTower(4, renderer=ConsoleRenderer())
-    my_tower.solve()
-
-# print('k')

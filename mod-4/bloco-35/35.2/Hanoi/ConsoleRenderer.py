@@ -2,6 +2,7 @@ from Renderer import Renderer
 from typing import TextIO, List
 from sys import stdout
 from time import sleep
+from HanoiTower import HanoiTower
 import os
 
 
@@ -14,7 +15,7 @@ class ConsoleRenderer(Renderer):
     def log(self, message: str) -> None:
         self.current_message = message
 
-    def render(self, tower) -> None:
+    def render(self, tower: HanoiTower) -> None:
         if (self.should_clear):
             self.clear()
 
