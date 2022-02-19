@@ -1,6 +1,7 @@
 from typing import List, TypedDict
 from Renderer import Renderer
-from LogRenderer import LogRenderer
+# from LogRenderer import LogRenderer
+from ConsoleRenderer import ConsoleRenderer
 
 
 class Peg(TypedDict):
@@ -26,6 +27,7 @@ class HanoiTower:
         self.renderer = renderer
 
     def solve(self):
+        self.render()
         self.move(self.A, self.C, self.B, self.number_of_disks)
 
     def move(self, source: Peg, target: Peg, spare: Peg, disks: int):
@@ -50,7 +52,7 @@ class HanoiTower:
 
 
 if __name__ == '__main__':
-    my_tower = HanoiTower(4, renderer=LogRenderer())
+    my_tower = HanoiTower(4, renderer=ConsoleRenderer())
     my_tower.solve()
 
 # print('k')
