@@ -182,3 +182,6 @@
 [submodule "projects/bloco-35-algorithms"]
 	path = projects/bloco-35-algorithms
 	url = git@github.com:tryber/sd-011-project-algorithms.git
+[submodule "projects/bloco-36-restaurant-orders"]
+	path = projects/bloco-36-restaurant-orders
+	url = git@github.com:tryber/sd-011-restaurant-orders.git
